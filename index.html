@@ -1,50 +1,295 @@
 <title>Colin Calnan / Selected work</title>
 <style>
   /* ============================================================
-     Built on the Bold Talks Design System (projects/sfii-design-system).
-     Same tokens as the June 18 deck: near-black ground, cobalt and
-     electric blue, peach, cyan, orange, yellow. Zero radii, no shadows,
-     because that is what the system says. Committed dark, single theme,
-     the way the deck is. Every colour is painted explicitly.
+     Built on Ground, Colin's design system, whose night theme is the
+     Bold Talks palette: near-black ground, cobalt and electric blue,
+     peach, cyan, orange, yellow. Zero radii, no shadows, because that
+     is what the system says.
 
-     Bebas Neue cannot load here (no external requests), so the display
-     role is a heavy, tightly tracked uppercase grotesk, which is the
-     same energy the system is reaching for.
+       Judgment:  projects/ground/design.md
+       Mechanics: projects/ground/ground.css + themes/
+       Values:    projects/ground/themes/night.css
+
+     Nothing below declares a colour. If you need one it belongs in a
+     theme file. Bebas Neue cannot load here (no external requests), so
+     the display role is a heavy, tightly tracked uppercase grotesk,
+     which is the same energy the system is reaching for.
 
      Source of truth is index.src.html. Build with:
        node scripts/portfolio/build.mjs
      ============================================================ */
 
-  :root {
-    --ground:    #0A0A14;
-    --ground-2:  #101020;
-    --rule:      #22223a;
-    --rule-soft: #191930;
-    --panel:     #EFEFEF;
+  
 
-    --ink:       #FFFFFF;
-    --ink-2:     #C9C9D8;
-    --ink-3:     #7C7C98;
+:root,
+:root[data-theme="night"] {
+  
+  --gr-ground:     #0A0A14;   
+  --gr-ground-2:   #101020;
+  --gr-surface:    #16162A;
+  --gr-panel:      #EFEFEF;   
 
-    --cobalt:    #1E2BD6;
-    --electric:  #2547FF;
-    --violet:    #6B2FCC;
-    --peach:     #F4A672;
-    --cyan:      #22D3EE;
-    --orange:    #E8472B;
-    --yellow:    #FFE100;
+  --gr-ink:        #FFFFFF;   
+  --gr-ink-2:      #C9C9D8;
+  --gr-muted:      #7C7C98;
 
-    --blocks: linear-gradient(110deg,
-      #1E2BD6 0%, #1E2BD6 28%, #B5258F 28%, #B5258F 48%,
-      #E8472B 48%, #E8472B 68%, #B5258F 68%, #B5258F 88%, #1E2BD6 88%);
+  --gr-rule:       #22223A;
+  --gr-rule-soft:  #191930;
 
-    --display: "Helvetica Neue", "Arial Narrow", Inter, system-ui, sans-serif;
-    --body:    Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
-    --mono:    "SF Mono", "JetBrains Mono", Menlo, ui-monospace, monospace;
+  
+  --gr-accent:     #22D3EE;   
+  --gr-accent-ink: #22D3EE;
+  --gr-warm:       #FFE100;   
 
-    --gutter: clamp(1.25rem, 5vw, 5.5rem);
-    --measure: 60ch;
+  
+  --gr-accent-1:   #22D3EE;   
+  --gr-accent-2:   #2547FF;   
+  --gr-accent-3:   #F4A672;   
+  --gr-accent-4:   #E8472B;   
+  --gr-accent-5:   #6B2FCC;   
+  --gr-accent-6:   #1E2BD6;   
+
+  
+  --gr-blocks: linear-gradient(110deg,
+    #1E2BD6 0%, #1E2BD6 28%, #B5258F 28%, #B5258F 48%,
+    #E8472B 48%, #E8472B 68%, #B5258F 68%, #B5258F 88%, #1E2BD6 88%);
+
+  --gr-pass:       #2E9E5B;
+  --gr-fail:       #E8472B;
+}
+
+  
+
+:root {
+  
+  --gr-display: "Helvetica Neue", "Arial Narrow", Inter, system-ui, sans-serif;
+  --gr-body:    Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gr-mono:    "SF Mono", "JetBrains Mono", Menlo, ui-monospace, monospace;
+
+  --gr-gutter:  clamp(1.25rem, 5vw, 5.5rem);
+  --gr-measure: 62ch;
+  --gr-rail:    128px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--gr-ground);
+  color: var(--gr-ink);
+  font: 400 17px/1.65 var(--gr-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--gr-accent-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gr-rule);
+}
+a:hover { border-bottom-color: var(--gr-accent-ink); }
+a:focus-visible {
+  outline: 2px solid var(--gr-accent-ink);
+  outline-offset: 3px;
+  border-bottom-color: transparent;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+::selection { background: var(--gr-warm); color: var(--gr-ground); }
+
+.gr-shell {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--gr-gutter);
+}
+
+.gr-prose { max-width: var(--gr-measure); text-wrap: pretty; }
+
+.gr-rail {
+  display: grid;
+  grid-template-columns: var(--gr-rail) minmax(0, 1fr);
+  gap: 0 clamp(1rem, 3vw, 2.5rem);
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .gr-rail { grid-template-columns: 1fr; gap: 0.75rem; }
+}
+
+.gr-hr {
+  border: 0;
+  border-top: 1px solid var(--gr-rule);
+  margin: clamp(2.5rem, 7vh, 5rem) 0;
+}
+
+.gr-display {
+  font-family: var(--gr-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+  text-wrap: balance;
+  margin: 0;
+}
+
+.gr-kicker {
+  font: 500 11px/1 var(--gr-mono);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gr-muted);
+  margin: 0;
+}
+
+.gr-lede {
+  font-size: clamp(1.125rem, 1.7vw, 1.375rem);
+  line-height: 1.5;
+  color: var(--gr-ink-2);
+  max-width: var(--gr-measure);
+  text-wrap: pretty;
+}
+.gr-lede strong { color: var(--gr-ink); font-weight: 700; }
+
+.gr-evidence {
+  font: 400 11px/1.6 var(--gr-mono);
+  color: var(--gr-muted);
+  margin: 0.5rem 0 0;
+  max-width: var(--gr-measure);
+  text-wrap: pretty;
+}
+.gr-evidence::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  border-top: 1px solid var(--gr-rule);
+  vertical-align: 0.35em;
+  margin-right: 0.6em;
+}
+
+.gr-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1px;
+  background: var(--gr-rule);
+  border-top: 1px solid var(--gr-rule);
+  border-bottom: 1px solid var(--gr-rule);
+}
+.gr-stat {
+  background: var(--gr-ground);
+  padding: 1.5rem 1.25rem 1.25rem;
+}
+.gr-stat b {
+  display: block;
+  font: 800 clamp(2rem, 4vw, 3rem)/1 var(--gr-display);
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--gr-ink);
+}
+.gr-stat span {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--gr-ink-2);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.gr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.gr-table th,
+.gr-table td {
+  text-align: left;
+  padding: 0.6rem 0.9rem 0.6rem 0;
+  border-bottom: 1px solid var(--gr-rule-soft);
+  vertical-align: top;
+}
+.gr-table th {
+  font: 500 11px/1.4 var(--gr-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gr-muted);
+  border-bottom-color: var(--gr-rule);
+}
+.gr-num {
+  font-family: var(--gr-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  padding-right: 0;
+}
+
+.gr-facts { margin: 0; }
+.gr-facts div {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 0 1rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--gr-rule-soft);
+}
+.gr-facts dt {
+  font: 500 11px/1.6 var(--gr-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gr-muted);
+}
+.gr-facts dd { margin: 0; font-size: 15.5px; color: var(--gr-ink-2); }
+
+.gr-stack {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0;
+  margin: 0;
+}
+.gr-stack li {
+  font: 400 11.5px/1 var(--gr-mono);
+  letter-spacing: 0.04em;
+  color: var(--gr-muted);
+  border: 1px solid var(--gr-rule);
+  padding: 0.45rem 0.55rem;
+}
+
+.gr-figure { margin: 0; }
+.gr-figure img { width: 100%; border: 1px solid var(--gr-rule); }
+.gr-figure figcaption {
+  font: 400 12px/1.65 var(--gr-mono);
+  color: var(--gr-muted);
+  margin-top: 0.75rem;
+  max-width: var(--gr-measure);
+  text-wrap: pretty;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a { transition: border-color 0.15s ease; }
+  .gr-rise {
+    animation: gr-rise 0.4s cubic-bezier(0.16, 0.84, 0.3, 1) both;
   }
+  @keyframes gr-rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: none; }
+  }
+}
+
+@page { size: Letter; margin: 0.6in 0.72in 0.5in; }
+
+@media print {
+  
+  body { font-size: 10.5pt; line-height: 1.5; }
+  .gr-shell { max-width: none; padding: 0; }
+  a { border-bottom: 0.5pt solid var(--gr-rule); }
+  .gr-figure, .gr-stat, .gr-facts div { break-inside: avoid; }
+  .gr-display { break-after: avoid; }
+}
+
 
   *, *::before, *::after { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
@@ -52,21 +297,21 @@
 
   body {
     margin: 0;
-    background: var(--ground);
-    color: var(--ink);
-    font: 400 17px/1.65 var(--body);
+    background: var(--gr-ground);
+    color: var(--gr-ink);
+    font: 400 17px/1.65 var(--gr-body);
     -webkit-font-smoothing: antialiased;
   }
 
-  a { color: var(--cyan); text-decoration: none; }
+  a { color: var(--gr-accent-1); text-decoration: none; }
   a:hover { text-decoration: underline; text-underline-offset: 4px; }
-  a:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--gr-warm); outline-offset: 3px; }
   img { display: block; max-width: 100%; }
 
-  .shell { max-width: 1280px; margin: 0 auto; padding: 0 var(--gutter); }
+  .shell { max-width: 1280px; margin: 0 auto; padding: 0 var(--gr-gutter); }
 
   .display {
-    font-family: var(--display);
+    font-family: var(--gr-display);
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: -0.035em;
@@ -76,15 +321,15 @@
   }
 
   .kicker {
-    font: 500 11px/1 var(--mono);
+    font: 500 11px/1 var(--gr-mono);
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--ink-3);
+    color: var(--gr-muted);
     margin: 0;
   }
 
   /* ---------- the band: the system's signature device ---------- */
-  .band { height: 14px; background: var(--blocks); width: 100%; }
+  .band { height: 14px; background: var(--gr-blocks); width: 100%; }
   .band--thin { height: 5px; }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -98,62 +343,61 @@
     display: flex; flex-wrap: wrap; gap: 0 1.25rem; align-items: baseline;
     margin-bottom: clamp(2.5rem, 7vh, 4.5rem);
   }
-  .hero__id b { font: 600 13px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
+  .hero__id b { font: 600 13px/1 var(--gr-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--gr-ink); }
   .hero__band { margin-bottom: clamp(1.75rem, 4vh, 3rem); }
   /* Sized so each sentence holds one line at desktop without needing nowrap.
      The original bug was max-width:15ch, which forced a ragged four-line wrap;
      nowrap "fixed" it by pushing the whole page wider than a phone viewport.
      Removing the cap is the actual fix, and it still wraps safely on mobile. */
-  .hero h1 { font-size: clamp(2rem, 5.6vw, 5.4rem); max-width: none; text-wrap: pretty; }
-  .hero h1 span { color: var(--ink-3); }
+  .hero h1 { font-size: clamp(2rem, 5.6vw, 5.4rem); text-wrap: pretty; }
+  .hero h1 span { color: var(--gr-muted); }
   .hero__lede {
     font-size: clamp(1.0625rem, 1.7vw, 1.3125rem);
-    line-height: 1.55; color: var(--ink-2);
-    max-width: var(--measure);
+    line-height: 1.55; color: var(--gr-ink-2);
     margin: clamp(1.75rem, 4vh, 2.75rem) 0 0;
   }
-  .hero__lede b { color: var(--ink); font-weight: 600; }
+  .hero__lede b { color: var(--gr-ink); font-weight: 600; }
 
   /* the thesis image: his own slide, his own room, him presenting it */
   .hero__shot { margin: clamp(2.5rem, 6vh, 4rem) 0 0; }
   .hero__shot img { width: 100%; height: auto; }
   .hero__shot figcaption {
-    font: 400 12px/1.7 var(--mono); color: var(--ink-3);
-    margin-top: .8rem; max-width: var(--measure);
+    font: 400 12px/1.7 var(--gr-mono); color: var(--gr-muted);
+    margin-top: .8rem;
   }
 
   /* ---------- stats ---------- */
   .stats {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 1px; background: var(--rule);
-    border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    gap: 1px; background: var(--gr-rule);
+    border-top: 1px solid var(--gr-rule); border-bottom: 1px solid var(--gr-rule);
     margin-top: clamp(2.5rem, 6vh, 4rem);
   }
-  .stat { background: var(--ground); padding: 1.6rem 1.35rem; }
+  .stat { background: var(--gr-ground); padding: 1.6rem 1.35rem; }
   .stat b {
-    display: block; font-family: var(--display); font-weight: 800;
+    display: block; font-family: var(--gr-display); font-weight: 800;
     font-size: clamp(2.4rem, 4.4vw, 3.4rem); line-height: 1;
     letter-spacing: -0.04em; font-variant-numeric: tabular-nums;
-    color: var(--cyan); margin-bottom: .55rem;
+    color: var(--gr-accent-1); margin-bottom: .55rem;
   }
-  .stat span { display: block; font-size: .9375rem; line-height: 1.45; color: var(--ink-2); }
-  .stat i { display: block; font: 400 11.5px/1.5 var(--mono); font-style: normal; color: var(--ink-3); margin-top: .5rem; }
+  .stat span { display: block; font-size: .9375rem; line-height: 1.45; color: var(--gr-ink-2); }
+  .stat i { display: block; font: 400 11.5px/1.5 var(--gr-mono); font-style: normal; color: var(--gr-muted); margin-top: .5rem; }
 
   /* ---------- section head ---------- */
   .sec-head { display: flex; align-items: baseline; gap: 1.25rem; padding: clamp(3.5rem, 9vh, 6rem) 0 0; }
   .sec-head h2 { font-size: clamp(1.1rem, 2vw, 1.4rem); letter-spacing: .04em; }
-  .sec-head .rule { flex: 1; height: 1px; background: var(--rule); }
-  .sec-head p { font: 400 13px/1 var(--mono); color: var(--ink-3); margin: 0; }
+  .sec-head .rule { flex: 1; height: 1px; background: var(--gr-rule); }
+  .sec-head p { font: 400 13px/1 var(--gr-mono); color: var(--gr-muted); margin: 0; }
 
   /* ---------- work ---------- */
-  .work { border-top: 1px solid var(--rule); margin-top: 2.25rem; }
+  .work { border-top: 1px solid var(--gr-rule); margin-top: 2.25rem; }
 
   .piece {
     display: grid;
     grid-template-columns: 128px minmax(0, 1fr);
     gap: clamp(1.5rem, 3.5vw, 3rem);
     padding: clamp(2.5rem, 6vh, 4rem) 0;
-    border-bottom: 1px solid var(--rule);
+    border-bottom: 1px solid var(--gr-rule);
   }
   /* Three columns only when the middle one still has room for a real measure.
      Below this the figure drops under the text instead of crushing it. */
@@ -163,24 +407,24 @@
 
   .piece__rail { display: flex; flex-direction: column; gap: .9rem; }
   .piece__chip { width: 100%; height: 8px; background: var(--c); }
-  .piece__cat { font: 500 10.5px/1.5 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+  .piece__cat { font: 500 10.5px/1.5 var(--gr-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--gr-muted); }
 
   .piece h3 {
-    font-family: var(--display); font-weight: 800; text-transform: uppercase;
+    font-family: var(--gr-display); font-weight: 800; text-transform: uppercase;
     letter-spacing: -0.03em; line-height: 0.98;
     font-size: clamp(1.9rem, 4.1vw, 3.05rem);
     margin: -0.12em 0 1rem; text-wrap: balance;
   }
-  .piece p.lede { font-size: 1.0625rem; line-height: 1.68; color: var(--ink-2); max-width: var(--measure); margin: 0; }
+  .piece p.lede { font-size: 1.0625rem; line-height: 1.68; color: var(--gr-ink-2); margin: 0; text-wrap: pretty; }
 
-  .facts { display: grid; gap: 1px; background: var(--rule-soft); margin: 1.6rem 0 0; border: 1px solid var(--rule-soft); }
-  .fact { background: var(--ground); display: grid; grid-template-columns: 96px minmax(0,1fr); gap: 1.1rem; padding: .95rem 1.1rem; }
-  .fact dt { font: 500 10.5px/1.9 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--c); margin: 0; }
-  .fact dd { margin: 0; font-size: .96875rem; line-height: 1.6; color: var(--ink-2); }
-  .fact dd b { color: var(--ink); font-weight: 600; }
+  .facts { display: grid; gap: 1px; background: var(--gr-rule-soft); margin: 1.6rem 0 0; border: 1px solid var(--gr-rule-soft); }
+  .fact { background: var(--gr-ground); display: grid; grid-template-columns: 96px minmax(0,1fr); gap: 1.1rem; padding: .95rem 1.1rem; }
+  .fact dt { font: 500 10.5px/1.9 var(--gr-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--c); margin: 0; }
+  .fact dd { margin: 0; font-size: .96875rem; line-height: 1.6; color: var(--gr-ink-2); text-wrap: pretty; }
+  .fact dd b { color: var(--gr-ink); font-weight: 600; }
 
   .stack { display: flex; flex-wrap: wrap; gap: .3rem; margin: 1.1rem 0 0; padding: 0; list-style: none; }
-  .stack li { font: 400 11.5px/1 var(--mono); color: var(--ink-3); border: 1px solid var(--rule); padding: .42rem .55rem; }
+  .stack li { font: 400 11.5px/1 var(--gr-mono); color: var(--gr-muted); border: 1px solid var(--gr-rule); padding: .42rem .55rem; }
 
   /* ---------- figures in the third column ----------
      align-self: start matters. Without it the figure stretches to the full
@@ -189,30 +433,30 @@
      The panel and its hairline live on the frame, never on the figure, so
      the caption sits outside the image the way a caption should. */
   .shot { margin: 0; align-self: start; }
-  .shot__frame { border: 1px solid var(--rule); line-height: 0; }
+  .shot__frame { border: 1px solid var(--gr-rule); line-height: 0; }
   .shot__frame img { width: 100%; height: auto; }
-  .shot--light .shot__frame { background: var(--panel); }
-  .shot--dark  .shot__frame { background: #000; }
+  .shot--light .shot__frame { background: var(--gr-panel); }
+  .shot--dark  .shot__frame { background: var(--gr-ground); }
   .shot--tall .shot__frame img { aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 22%; }
-  .shot figcaption { font: 400 11.5px/1.6 var(--mono); color: var(--ink-3); margin-top: .7rem; }
+  .shot figcaption { font: 400 11.5px/1.6 var(--gr-mono); color: var(--gr-muted); margin-top: .7rem; }
 
   /* ---------- the palette, rendered from the real tokens ---------- */
-  .swatches { display: flex; margin: 1.4rem 0 0; border: 1px solid var(--rule); }
+  .swatches { display: flex; margin: 1.4rem 0 0; border: 1px solid var(--gr-rule); }
   .sw { flex: 1; height: 54px; position: relative; }
   .sw span {
     position: absolute; bottom: -1.55rem; left: 0;
-    font: 400 9.5px/1 var(--mono); color: var(--ink-3); letter-spacing: .02em;
+    font: 400 9.5px/1 var(--gr-mono); color: var(--gr-muted); letter-spacing: .02em;
   }
-  .swatch-note { font: 400 11.5px/1.6 var(--mono); color: var(--ink-3); margin: 2.2rem 0 0; }
+  .swatch-note { font: 400 11.5px/1.6 var(--gr-mono); color: var(--gr-muted); margin: 2.2rem 0 0; }
 
   /* ---------- close ---------- */
   .close { padding: clamp(4rem, 10vh, 7rem) 0 clamp(3rem, 7vh, 5rem); }
-  .close h2 { font-size: clamp(2rem, 5.5vw, 4.2rem); max-width: 18ch; }
-  .close p { font-size: 1.0625rem; line-height: 1.7; color: var(--ink-2); max-width: var(--measure); margin: 1.75rem 0 0; }
+  .close h2 { font-size: clamp(2rem, 5.5vw, 4.2rem); }
+  .close p { font-size: 1.0625rem; line-height: 1.7; color: var(--gr-ink-2); margin: 1.75rem 0 0; text-wrap: pretty; }
 
-  footer { border-top: 1px solid var(--rule); padding: 2rem 0 4.5rem; }
-  .footer-row { display: flex; flex-wrap: wrap; gap: .6rem 2rem; align-items: baseline; font: 400 13px/1.9 var(--mono); color: var(--ink-3); }
-  .footer-row b { color: var(--ink); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  footer { border-top: 1px solid var(--gr-rule); padding: 2rem 0 4.5rem; }
+  .footer-row { display: flex; flex-wrap: wrap; gap: .6rem 2rem; align-items: baseline; font: 400 13px/1.9 var(--gr-mono); color: var(--gr-muted); }
+  .footer-row b { color: var(--gr-ink); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 
   @media (max-width: 720px) {
     body { font-size: 16px; }
@@ -277,7 +521,7 @@
 
   <main class="work">
 
-    <article class="piece piece--visual" style="--c: var(--cyan)">
+    <article class="piece piece--visual" style="--c: var(--gr-accent-1)">
       <div class="piece__rail">
         <span class="piece__chip"></span>
         <span class="piece__cat">Brand, site, product</span>
@@ -304,7 +548,7 @@
       </figure>
     </article>
 
-    <article class="piece piece--visual" style="--c: var(--electric)">
+    <article class="piece piece--visual" style="--c: var(--gr-accent-2)">
       <div class="piece__rail">
         <span class="piece__chip"></span>
         <span class="piece__cat">Design system</span>
@@ -318,16 +562,16 @@
           no radii, no shadows. The page you are reading runs on the same tokens.
         </p>
         <div class="swatches">
-          <span class="sw" style="background:#0A0A14"><span>0A0A14</span></span>
-          <span class="sw" style="background:#1E2BD6"><span>1E2BD6</span></span>
-          <span class="sw" style="background:#2547FF"><span>2547FF</span></span>
-          <span class="sw" style="background:#6B2FCC"><span>6B2FCC</span></span>
-          <span class="sw" style="background:#F4A672"><span>F4A672</span></span>
-          <span class="sw" style="background:#22D3EE"><span>22D3EE</span></span>
-          <span class="sw" style="background:#E8472B"><span>E8472B</span></span>
-          <span class="sw" style="background:#FFE100"><span>FFE100</span></span>
+          <span class="sw" style="background:var(--gr-ground)"><span>ground</span></span>
+          <span class="sw" style="background:var(--gr-accent-6)"><span>cobalt</span></span>
+          <span class="sw" style="background:var(--gr-accent-2)"><span>electric</span></span>
+          <span class="sw" style="background:var(--gr-accent-5)"><span>violet</span></span>
+          <span class="sw" style="background:var(--gr-accent-3)"><span>peach</span></span>
+          <span class="sw" style="background:var(--gr-accent-1)"><span>cyan</span></span>
+          <span class="sw" style="background:var(--gr-accent-4)"><span>orange</span></span>
+          <span class="sw" style="background:var(--gr-warm)"><span>yellow</span></span>
         </div>
-        <p class="swatch-note">The real grounds, pulled live from the token file.</p>
+        <p class="swatch-note">Drawn from the live token file, not pasted in. Change a value there and this strip changes with it.</p>
         <dl class="facts">
           <div class="fact"><dt>Role</dt><dd>Designed the system, then built the deck that consumes it.</dd></div>
           <div class="fact"><dt>Approach</dt><dd>Tokens as the single source of truth, imported by the deck rather than copied into it, so a colour changes in one place.</dd></div>
@@ -341,7 +585,7 @@
       </figure>
     </article>
 
-    <article class="piece piece--visual" style="--c: var(--peach)">
+    <article class="piece piece--visual" style="--c: var(--gr-accent-3)">
       <div class="piece__rail">
         <span class="piece__chip"></span>
         <span class="piece__cat">Generative media pipeline</span>
@@ -368,7 +612,7 @@
       </figure>
     </article>
 
-    <article class="piece piece--visual" style="--c: var(--orange)">
+    <article class="piece piece--visual" style="--c: var(--gr-accent-4)">
       <div class="piece__rail">
         <span class="piece__chip"></span>
         <span class="piece__cat">Agent tooling</span>
@@ -395,7 +639,7 @@
       </figure>
     </article>
 
-    <article class="piece piece--visual" style="--c: var(--violet)">
+    <article class="piece piece--visual" style="--c: var(--gr-accent-5)">
       <div class="piece__rail">
         <span class="piece__chip"></span>
         <span class="piece__cat">Video and audio</span>
@@ -421,7 +665,7 @@
       </figure>
     </article>
 
-    <article class="piece" style="--c: var(--yellow)">
+    <article class="piece" style="--c: var(--gr-warm)">
       <div class="piece__rail">
         <span class="piece__chip"></span>
         <span class="piece__cat">Measurement</span>
@@ -444,7 +688,7 @@
       </div>
     </article>
 
-    <article class="piece" style="--c: var(--cobalt)">
+    <article class="piece" style="--c: var(--gr-accent-6)">
       <div class="piece__rail">
         <span class="piece__chip"></span>
         <span class="piece__cat">Research tool</span>
