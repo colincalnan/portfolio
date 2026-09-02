@@ -227,27 +227,137 @@
 
     <div class="stats">
       <div class="stat">
-        <b>260</b>
-        <span>Sign-ups claimed every seat for one night in a town of 15,000</span>
-        <i>Safe Family Internet, June 18</i>
+        <b>189,277</b>
+        <span>Impressions on posts these pipelines made and published</span>
+        <i>139 measured posts, 14 months, to August 2026</i>
       </div>
       <div class="stat">
-        <b>103</b>
-        <span>Families pledged a specific change to their home that night</span>
-        <i>The number I actually care about</i>
+        <b>57,288</b>
+        <span>Views on one reel, cut out of an unattended gig recording by a script</span>
+        <i>Instagram, a single post, same source</i>
       </div>
       <div class="stat">
-        <b>58</b>
-        <span>Households across the region asking for the next one</span>
-        <i>Seven towns, all opted in</i>
+        <b>225</b>
+        <span>Posts generated, rendered and shipped across three brands</span>
+        <i>102 video, 79 image, 21 carousel, 23 text</i>
       </div>
     </div>
   </section>
 
   <div class="sec-head">
-    <h2 class="display">The work</h2>
+    <h2 class="display">Products</h2>
     <span class="rule"></span>
-    <p>Seven pieces</p>
+    <p>Shipped to people who were not me</p>
+  </div>
+
+  <main class="work">
+
+    <article class="piece piece--visual" style="--c: var(--gr-accent-1)">
+      <div class="piece__rail">
+        <span class="piece__chip"></span>
+        <span class="piece__cat">Generative media SaaS</span>
+      </div>
+      <div>
+        <h3>AdvisorAssist</h3>
+        <p class="lede">
+          On-brand social content, generated and published for every customer on a schedule,
+          for financial advisors across Canada. An advisor paid through Stripe, connected
+          their own accounts, and picked a tier. From there it ran itself: a scheduled
+          emitter pulled that tier out of Airtable and fired one event per advisor, a
+          listener assembled the post, composited it into a template using their own logo
+          and their own three brand colours, and published it to their connected accounts
+          on their scheduled date. Built in 2022, before there was a name for any of it.
+        </p>
+        <dl class="facts">
+          <div class="fact"><dt>Role</dt><dd>Built the product. A partner brought the advisor relationships.</dd></div>
+          <div class="fact"><dt>Pipeline</dt><dd>Emitter and listener workflows on a monthly schedule, tier-gated features in code, per-advisor auth by single sign-on so nobody handed me a password, and a branded render step before publish.</dd></div>
+          <div class="fact"><dt>The copy</dt><dd>Generated in batch, not per post. Two years of my partner's own writing as the voice, mapped to the seasons that move an advisor's year, run through the OpenAI API from inside Airtable.</dd></div>
+          <div class="fact"><dt>Status</dt><dd>Ran live. Wound down when the partnership stalled, not when the product did. <b>The publish workflow reached v341.</b></dd></div>
+        </dl>
+        <ul class="stack"><li>Next.js</li><li>TypeScript</li><li>Pipedream</li><li>Airtable</li><li>Stripe</li><li>Ayrshare</li><li>BannerBear</li><li>OpenAI API</li></ul>
+      </div>
+      <figure class="shot shot--light">
+        <div class="shot__frame"><img src="{{IMG:advisorassist}}" alt="The Pipedream workflow that generates and publishes top-tier content, showing the code that reads each advisor's logo and three brand colours off the event and composites them into one of four templates before publishing." width="1100" height="843"></div>
+        <figcaption>The listener that composites each advisor's own branding, then publishes</figcaption>
+      </figure>
+    </article>
+
+    <article class="piece" style="--c: var(--gr-accent-3)">
+      <div class="piece__rail">
+        <span class="piece__chip"></span>
+        <span class="piece__cat">Two accounts, one pipeline</span>
+      </div>
+      <div>
+        <h3>Wines and Tours of the Okanagan</h3>
+        <p class="lede">
+          Two Instagram accounts running the same machine on two different data sources.
+          One scraped the provincial winery database through its API, generated the imagery
+          and the copy, and posted unattended. It also read winery events out of an inbox
+          and posted those, and ran wine scores for a while. The second did it again for
+          wine tour reviews. Building it twice off different inputs is the part I care
+          about: the second one was a configuration, not a rebuild.
+        </p>
+        <dl class="facts">
+          <div class="fact"><dt>Role</dt><dd>Everything. Scraper, generation, templates, scheduling, both accounts.</dd></div>
+          <div class="fact"><dt>Approach</dt><dd>Structured source data in, generated on-brand posts out, published on a schedule with nobody in the loop. A template family rather than a run of one-offs.</dd></div>
+        </dl>
+        <ul class="stack"><li>Make.com</li><li>Airtable</li><li>BannerBear</li><li>Instagram Graph API</li><li>API scraping</li></ul>
+      </div>
+    </article>
+
+    <article class="piece piece--visual" style="--c: var(--gr-accent-4)">
+      <div class="piece__rail">
+        <span class="piece__chip"></span>
+        <span class="piece__cat">Product, with payments</span>
+      </div>
+      <div>
+        <h3>Set List Easy</h3>
+        <p class="lede">
+          A searchable, filterable set list of two, three and four chord songs for musicians
+          who are starting to gig. The problem is real and specific: you can play six chords
+          and you need two hours of material by Friday. Built, rebuilt, and taken to a mobile
+          app, because the interesting question kept changing and the content model kept
+          being right.
+        </p>
+        <dl class="facts">
+          <div class="fact"><dt>Role</dt><dd>Everything. Product, content model, design, build, payments, brand.</dd></div>
+          <div class="fact"><dt>Approach</dt><dd>Accounts and subscriptions from the start, so it had to be a product rather than a demo. Four builds across the life of it, ending in a native mobile app with a real test suite.</dd></div>
+        </dl>
+        <ul class="stack"><li>Next.js</li><li>TypeScript</li><li>Ionic</li><li>Capacitor</li><li>Airtable</li><li>Supabase</li><li>Stripe</li><li>OAuth</li><li>Vitest</li><li>Cypress</li></ul>
+      </div>
+      <figure class="shot shot--light">
+        <div class="shot__frame"><img src="{{IMG:setlisteasy}}" alt="The Set List Easy logo and wordmark: a guitar pick mark beside the name." width="1100" height="440"></div>
+        <figcaption>Mark and wordmark, one of the full brand set</figcaption>
+      </figure>
+    </article>
+
+    <article class="piece" style="--c: var(--gr-accent-5)">
+      <div class="piece__rail">
+        <span class="piece__chip"></span>
+        <span class="piece__cat">Live tool, on stage</span>
+      </div>
+      <div>
+        <h3>Gig Pulse</h3>
+        <p class="lede">
+          An iPad app for the gig itself. Tap the energy in the room against each song as you
+          play, build up a history across nights, then let a model read the history back and
+          tell you which songs earn their place and where the set sags. Dark and high contrast
+          because the only place it gets used is a dark room, mid-set, at arm's length.
+        </p>
+        <dl class="facts">
+          <div class="fact"><dt>Role</dt><dd>Everything, and I am the user. Every design decision was tested at a real gig that week.</dd></div>
+          <div class="fact"><dt>Approach</dt><dd>Progressive web app so it installs without a store. Model provider behind an abstraction rather than wired straight in, so swapping one is a config change.</dd></div>
+        </dl>
+        <ul class="stack"><li>React 19</li><li>TypeScript</li><li>Vite</li><li>Tailwind</li><li>PWA</li><li>Multi-provider AI</li></ul>
+      </div>
+    </article>
+
+  </main>
+
+  <div class="sec-head">
+    <h2 class="display">Systems</h2>
+    <span class="rule"></span>
+    <p>The machines behind the work</p>
   </div>
 
   <main class="work">
@@ -285,12 +395,16 @@
         <span class="piece__cat">Design system</span>
       </div>
       <div>
-        <h3>Bold Talks</h3>
+        <h3>Bold Talks, and Ground</h3>
         <p class="lede">
-          A design system written as tokens first, then a 62-slide deck built on top of it
-          so the talk could not drift from the brand. Eight ground colours, one condensed
-          display face, and two rules that decide most arguments before they start:
-          no radii, no shadows. The page you are reading runs on the same tokens.
+          A presentation system written as tokens first, then a deck built on top of it so
+          the talk could not drift from the brand. Eight ground colours, one condensed
+          display face, and two rules that settle most arguments before they start: no
+          radii, no shadows. It has since become <b>Ground</b>, which turns the same
+          decisions into something an agent can build against: semantic tokens so a page
+          never names a colour, three themes it can flip between, a guidance document
+          written as prose, and a check script that fails a build. The page you are
+          reading is the first thing built on it.
         </p>
         <div class="swatches">
           <span class="sw" style="background:var(--gr-ground)"><span>ground</span></span>
@@ -304,15 +418,15 @@
         </div>
         <p class="swatch-note">Drawn from the live token file, not pasted in. Change a value there and this strip changes with it.</p>
         <dl class="facts">
-          <div class="fact"><dt>Role</dt><dd>Designed the system, then built the deck that consumes it.</dd></div>
-          <div class="fact"><dt>Approach</dt><dd>Tokens as the single source of truth, imported by the deck rather than copied into it, so a colour changes in one place.</dd></div>
-          <div class="fact"><dt>Result</dt><dd>Sized in rem against a fixed canvas so type holds on a projector. Reused since across guides, carousels and the site.</dd></div>
+          <div class="fact"><dt>Role</dt><dd>Designed the system, built the deck that consumes it, then rebuilt it as a token contract three surfaces now share.</dd></div>
+          <div class="fact"><dt>Approach</dt><dd>Judgment written as prose an agent reads, reusable mechanics in the stylesheet, and anything a machine can decide turned into a check that can fail on its own.</dd></div>
+          <div class="fact"><dt>Result</dt><dd>Sized in rem against a fixed canvas so type holds on a projector. Reused since across guides, carousels, the site and this page. <b>Fourteen checks</b> that each fail a build, from contrast to whether every number carries its source.</dd></div>
         </dl>
-        <ul class="stack"><li>Slidev</li><li>CSS custom properties</li><li>Vue</li><li>Token architecture</li></ul>
+        <ul class="stack"><li>Slidev</li><li>CSS custom properties</li><li>Semantic tokens</li><li>Node</li><li>Agent-readable guidance</li></ul>
       </div>
       <figure class="shot shot--dark">
         <div class="shot__frame"><img src="{{IMG:slide}}" alt="Deck title slide: SAFE FAMILY INTERNET NIGHT set in heavy condensed capitals, white on near-black." width="1200" height="675"></div>
-        <figcaption>Title slide, one of 62</figcaption>
+        <figcaption>A title slide off the system, one of roughly two hundred</figcaption>
       </figure>
     </article>
 
