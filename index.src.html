@@ -52,10 +52,10 @@
   }
 
   .kicker {
-    font: 500 11px/1 var(--gr-mono);
-    letter-spacing: 0.22em;
+    font: 500 11.5px/1 var(--gr-mono);
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--gr-muted);
+    color: var(--gr-ink-2);
     margin: 0;
   }
 
@@ -93,7 +93,7 @@
   .hero__shot { margin: clamp(2.5rem, 6vh, 4rem) 0 0; }
   .hero__shot img { width: 100%; height: auto; }
   .hero__shot figcaption {
-    font: 400 12px/1.7 var(--gr-mono); color: var(--gr-muted);
+    font: 400 13px/1.7 var(--gr-mono); color: var(--gr-ink-2);
     margin-top: .8rem;
   }
 
@@ -112,13 +112,13 @@
     color: var(--gr-accent-1); margin-bottom: .55rem;
   }
   .stat span { display: block; font-size: .9375rem; line-height: 1.45; color: var(--gr-ink-2); }
-  .stat i { display: block; font: 400 11.5px/1.5 var(--gr-mono); font-style: normal; color: var(--gr-muted); margin-top: .5rem; }
+  .stat i { display: block; font: 400 12px/1.6 var(--gr-mono); font-style: normal; color: var(--gr-ink-2); margin-top: .6rem; text-wrap: pretty; }
 
   /* ---------- section head ---------- */
   .sec-head { display: flex; align-items: baseline; gap: 1.25rem; padding: clamp(3.5rem, 9vh, 6rem) 0 0; }
   .sec-head h2 { font-size: clamp(1.1rem, 2vw, 1.4rem); letter-spacing: .04em; }
   .sec-head .rule { flex: 1; height: 1px; background: var(--gr-rule); }
-  .sec-head p { font: 400 13px/1 var(--gr-mono); color: var(--gr-muted); margin: 0; }
+  .sec-head p { font: 400 13px/1 var(--gr-mono); color: var(--gr-ink-2); margin: 0; }
 
   /* ---------- work ---------- */
   .work { border-top: 1px solid var(--gr-rule); margin-top: 2.25rem; }
@@ -138,7 +138,7 @@
 
   .piece__rail { display: flex; flex-direction: column; gap: .9rem; }
   .piece__chip { width: 100%; height: 8px; background: var(--c); }
-  .piece__cat { font: 500 10.5px/1.5 var(--gr-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--gr-muted); }
+  .piece__cat { font: 500 11.5px/1.55 var(--gr-mono); letter-spacing: .13em; text-transform: uppercase; color: var(--gr-ink-2); }
 
   .piece h3 {
     font-family: var(--gr-display); font-weight: 800; text-transform: uppercase;
@@ -146,16 +146,16 @@
     font-size: clamp(1.9rem, 4.1vw, 3.05rem);
     margin: -0.12em 0 1rem; text-wrap: balance;
   }
-  .piece p.lede { font-size: 1.0625rem; line-height: 1.68; color: var(--gr-ink-2); margin: 0; text-wrap: pretty; }
+  .piece p.lede { font-size: 1.09375rem; line-height: 1.68; color: var(--gr-ink-2); margin: 0; text-wrap: pretty; }
 
   .facts { display: grid; gap: 1px; background: var(--gr-rule-soft); margin: 1.6rem 0 0; border: 1px solid var(--gr-rule-soft); }
   .fact { background: var(--gr-ground); display: grid; grid-template-columns: 96px minmax(0,1fr); gap: 1.1rem; padding: .95rem 1.1rem; }
-  .fact dt { font: 500 10.5px/1.9 var(--gr-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--c); margin: 0; }
-  .fact dd { margin: 0; font-size: .96875rem; line-height: 1.6; color: var(--gr-ink-2); text-wrap: pretty; }
+  .fact dt { font: 500 11.5px/1.8 var(--gr-mono); letter-spacing: .13em; text-transform: uppercase; color: var(--gr-ink-2); margin: 0; }
+  .fact dd { margin: 0; font-size: 1rem; line-height: 1.62; color: var(--gr-ink); text-wrap: pretty; }
   .fact dd b { color: var(--gr-ink); font-weight: 600; }
 
   .stack { display: flex; flex-wrap: wrap; gap: .3rem; margin: 1.1rem 0 0; padding: 0; list-style: none; }
-  .stack li { font: 400 11.5px/1 var(--gr-mono); color: var(--gr-muted); border: 1px solid var(--gr-rule); padding: .42rem .55rem; }
+  .stack li { font: 400 12px/1 var(--gr-mono); color: var(--gr-ink-2); border: 1px solid var(--gr-rule); padding: .45rem .6rem; }
 
   /* ---------- figures in the third column ----------
      align-self: start matters. Without it the figure stretches to the full
@@ -169,16 +169,16 @@
   .shot--light .shot__frame { background: var(--gr-panel); }
   .shot--dark  .shot__frame { background: var(--gr-ground); }
   .shot--tall .shot__frame img { aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 22%; }
-  .shot figcaption { font: 400 11.5px/1.6 var(--gr-mono); color: var(--gr-muted); margin-top: .7rem; }
+  .shot figcaption { font: 400 12.5px/1.65 var(--gr-mono); color: var(--gr-ink-2); margin-top: .8rem; text-wrap: pretty; }
 
   /* ---------- the palette, rendered from the real tokens ---------- */
   .swatches { display: flex; margin: 1.4rem 0 0; border: 1px solid var(--gr-rule); }
   .sw { flex: 1; height: 54px; position: relative; }
   .sw span {
     position: absolute; bottom: -1.55rem; left: 0;
-    font: 400 9.5px/1 var(--gr-mono); color: var(--gr-muted); letter-spacing: .02em;
+    font: 400 10.5px/1 var(--gr-mono); color: var(--gr-ink-2); letter-spacing: .02em;
   }
-  .swatch-note { font: 400 11.5px/1.6 var(--gr-mono); color: var(--gr-muted); margin: 2.2rem 0 0; }
+  .swatch-note { font: 400 12.5px/1.65 var(--gr-mono); color: var(--gr-ink-2); margin: 2.2rem 0 0; text-wrap: pretty; }
 
   /* ---------- close ---------- */
   .close { padding: clamp(4rem, 10vh, 7rem) 0 clamp(3rem, 7vh, 5rem); }
@@ -186,7 +186,7 @@
   .close p { font-size: 1.0625rem; line-height: 1.7; color: var(--gr-ink-2); margin: 1.75rem 0 0; text-wrap: pretty; }
 
   footer { border-top: 1px solid var(--gr-rule); padding: 2rem 0 4.5rem; }
-  .footer-row { display: flex; flex-wrap: wrap; gap: .6rem 2rem; align-items: baseline; font: 400 13px/1.9 var(--gr-mono); color: var(--gr-muted); }
+  .footer-row { display: flex; flex-wrap: wrap; gap: .6rem 2rem; align-items: baseline; font: 400 13px/1.9 var(--gr-mono); color: var(--gr-ink-2); }
   .footer-row b { color: var(--gr-ink); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
 
   @media (max-width: 720px) {
