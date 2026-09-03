@@ -415,7 +415,7 @@
       Design the brand. Build the pipeline that renders in it. Publish on a schedule with
       nobody in the loop. Those three usually belong to three different people. I do all
       three, in text, images and video, on work that shipped and that other people used.
-      Three of them are below, then the smaller things I keep building.
+      Four of them are below, then the smaller things I keep building.
     </p>
 
         <div class="stats">
@@ -440,7 +440,7 @@
   <div class="sec-head">
     <h2 class="display">Selected work</h2>
     <span class="rule"></span>
-    <p>Three, in depth</p>
+    <p>Four, in depth</p>
   </div>
 
   <main class="work">
@@ -665,6 +665,73 @@
 
   </main>
 
+    <article class="piece" style="--c: var(--gr-accent-5)">
+      <div class="piece__rail">
+        <span class="piece__chip"></span>
+        <span class="piece__cat">Video pipeline</span>
+      </div>
+      <div>
+        <h3>Colin Calnan Music<span class="golinks"><a class="golink" href="https://www.instagram.com/colincalnanmusic" rel="noopener" aria-label="Opens instagram.com/colincalnanmusic in a new tab" title="instagram.com/colincalnanmusic" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
+        <p class="piece__one">A two hour recording of a gig goes in on Saturday morning. Twenty three captioned clips come out, named after the songs, ready to post.</p>
+        <figure class="plate plate--lead">
+          <div class="plate__frame"><button type="button" class="zoom" data-cap="A folder listing of the output: song_02_Bryan_Adams_-_Summer_of_69_reel.mp4, song_04_Creedence_Clearwater_Revival_-_Have_You_Ever_Seen_the_Rain_reel.mp4 and so on, each mp4 paired with its own captions json file." aria-label="Open full size"><img src="{{IMG:gig-files}}" alt="A folder listing of the output: song_02_Bryan_Adams_-_Summer_of_69_reel.mp4, song_04_Creedence_Clearwater_Revival_-_Have_You_Ever_Seen_the_Rain_reel.mp4 and so on, each mp4 paired with its own captions json file." width="700" height="544"></button></div>
+          <figcaption>The output folder. Every song its own clip, every clip its own captions, all named by what was played.</figcaption>
+        </figure>
+        <p class="lede">
+          I play covers most weekends and there is always a phone clipped to the speaker
+          stand recording the whole set. That footage used to sit on a drive because going
+          through two hours to find the good bits is a job nobody does twice.
+        </p>
+        <div class="steps">
+        <div class="step">
+          <span class="step__n">01</span>
+          <div>
+            <span class="step__stage">The source</span>
+            <h4>One phone, one long file</h4>
+            <p>Nothing is set up for this. The phone is on the stand for every gig anyway, so the input is free and it arrives whether I do anything or not. The whole problem is what happens to it afterwards.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step__n">02</span>
+          <div>
+            <span class="step__stage">The detection</span>
+            <h4>Find the quiet bits</h4>
+            <p>A song is loud and the gap after it is not. So the script reads the loudness of the whole recording, draws a line across it, and calls everything above the line a song and everything below it a gap. No transcription, no model, just the shape of the sound.</p>
+            <figure class="plate ">
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="The energy analysis for one gig: a jagged line of loudness across 120 minutes, a red dashed threshold across the middle, and 23 shaded blue bands, one per detected song, with the quiet gaps between them left white." aria-label="Open full size"><img src="{{IMG:gig-energy}}" alt="The energy analysis for one gig: a jagged line of loudness across 120 minutes, a red dashed threshold across the middle, and 23 shaded blue bands, one per detected song, with the quiet gaps between them left white." width="1000" height="250"></button></div>
+              <figcaption>One gig, 120 minutes. Each shaded band is a song it found. The white gaps are me talking between them.</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step__n">03</span>
+          <div>
+            <span class="step__stage">The cut</span>
+            <h4>Cut, caption, name</h4>
+            <p>Each band becomes its own vertical clip with the captions burned on. The file names come from what was actually played, so the folder is already a set list. <b>23 clips from one night</b>, and I did not watch any of the footage.</p>
+            <figure class="plate ">
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="A frame from one of the cut reels: Colin playing guitar and singing into a microphone on a lawn at golden hour, shot vertically." aria-label="Open full size"><img src="{{IMG:gig-reel}}" alt="A frame from one of the cut reels: Colin playing guitar and singing into a microphone on a lawn at golden hour, shot vertically." width="236" height="420"></button></div>
+              <figcaption>One of the twenty three.</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step__n">04</span>
+          <div>
+            <span class="step__stage">The publish</span>
+            <h4>A month of posts from one evening</h4>
+            <p>They go out on a schedule over the following weeks. One of them has <b>57,288 views</b>, which is more than anything else I have ever put online. The same script now runs on talk footage too: one evening at the theatre came back as 19 clips.</p>
+          </div>
+        </div>
+        </div>
+        <dl class="facts">
+          <div class="fact"><dt>Role</dt><dd>Everything, and I am the only user. Every decision got tested at a real gig that week.</dd></div>
+          <div class="fact"><dt>Decision</dt><dd>It finds songs from <b>loudness alone</b>, not from listening to the words. Cruder, and it means it works on a talk, a set, or anything else with pauses in it, for nothing per run.</dd></div>
+        </dl>
+        <ul class="stack"><li>Python</li><li>librosa</li><li>ffmpeg</li><li>Whisper</li><li>Buffer API</li></ul>
+      </div>
+    </article>
+
   <div class="sec-head">
     <h2 class="display">Craft</h2>
     <span class="rule"></span>
@@ -672,12 +739,6 @@
   </div>
 
   <div class="craft">
-    <article class="cr" style="--c: var(--gr-accent-5)">
-      <span class="cr__cat">Video pipeline</span>
-      <div class="plate plate--craft plate--mark"><div class="plate__frame"><button type="button" class="zoom" data-cap="Two panels. On the left a frame from a cut reel, Colin playing guitar and singing into a mic on a lawn at golden hour. On the right the energy analysis for that gig: normalised RMS across 120 minutes with a threshold line and 23 shaded regions, one per detected song." aria-label="Open full size"><img src="{{IMG:craft-reels}}" alt="Two panels. On the left a frame from a cut reel, Colin playing guitar and singing into a mic on a lawn at golden hour. On the right the energy analysis for that gig: normalised RMS across 120 minutes with a threshold line and 23 shaded regions, one per detected song." width="720" height="403"></button></div></div>
-      <h3>Cutting video<span class="golinks"><a class="golink golink--wide" href="https://www.instagram.com/p/DZOmcfODP4c/" rel="noopener" aria-label="Opens the reel on Instagram in a new tab" title="the reel on Instagram" target="_blank"><span class="golink__t">Music</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a><a class="golink golink--wide" href="https://www.instagram.com/p/DbcJH0kDctP/" rel="noopener" aria-label="Opens the Safe Family Internet reel on Instagram in a new tab" title="the talk reel on Instagram" target="_blank"><span class="golink__t">Talk</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
-      <p>There is already a phone on the speaker stand at every gig I play, recording the whole thing. This listens to the two hour file, works out where each song starts and stops from how loud it is, and cuts them into captioned clips. One gig came out as <b>23 songs</b> and one of those has 57,288 views. The same job runs on talk footage: <b>19 clips</b> came out of one evening at the theatre, captioned and scheduled the same way.</p>
-    </article>
     <article class="cr" style="--c: var(--gr-accent-4)">
       <span class="cr__cat">Publishing engine</span>
       <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The closing slide of a rendered carousel: a violet to cobalt gradient, a headline in condensed capitals, and the site address in a cyan chip." aria-label="Open full size"><img src="{{IMG:craft-carousel}}" alt="The closing slide of a rendered carousel: a violet to cobalt gradient, a headline in condensed capitals, and the site address in a cyan chip." width="448" height="560"></button></div></div>
