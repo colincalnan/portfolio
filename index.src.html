@@ -377,8 +377,8 @@
       <div>
         <h3>Wines and Tours of the Okanagan</h3>
         <figure class="piece__lead">
-          <div class="shot__frame"><img src="{{IMG:woto-posts}}" alt="Four generated Instagram posts in a grid: a gradient tasting-note card, a bottle with a WineAlign gold medal and a 93 point score, a regional fact set as a pull quote over a vineyard, and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." width="800" height="800"></div>
-          <figcaption>Four different series, four templates, one wordmark. Tasting notes, award scores, regional facts, and the weekly winery feature. Each one is a row of Airtable and nobody laid any of them out.</figcaption>
+          <div class="shot__frame"><img src="{{IMG:woto-posts}}" alt="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." width="820" height="820"></div>
+          <figcaption>Four series, four templates, one wordmark. The profile card is the one I still like: body, tannins, sweetness, acidity and alcohol arrive as numbers in a column and leave as meters, with the bar length and the colour swatch drawn from the field values. Every one of these is a row of Airtable. Nobody laid any of them out.</figcaption>
         </figure>
         <p class="lede">
           Two Instagram accounts running the same machine on different data. The wine one
@@ -402,12 +402,13 @@
         <div class="tri">
           <span class="tri__label">Build</span>
           <div class="tri__shot"><img src="{{IMG:woto-build}}" alt="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." width="700" height="538"></div>
-          <p>The template as data. Twenty-eight named layers, so a row becomes a card: <b>wine_name</b>, <b>value_tannins</b>, <b>meter_acidity</b>, <b>wine_image</b>. Airtable in, rendered post out, published on a schedule.</p>
+          <p>The template behind the profile card, as data. Twenty-eight named layers so a row becomes a frame: <b>wine_name</b>, <b>value_tannins</b>, <b>meter_acidity</b>, <b>colour_colour</b>, <b>wine_image</b>. Airtable in, rendered post out, published on a schedule.</p>
         </div>
         </div>
         <dl class="facts">
           <div class="fact"><dt>Role</dt><dd>Everything. Brand, scraper, templates, generation, scheduling, both accounts.</dd></div>
-          <div class="fact"><dt>Series</dt><dd>Tasting notes, award scores, regional facts, a weekly winery feature, and winery events pulled from an inbox. <b>Four templates, one system.</b></dd></div>
+          <div class="fact"><dt>Series</dt><dd>Wine profile cards, award scores, tasting notes, regional facts, a weekly winery feature, and winery events pulled from an inbox. <b>One system, five templates.</b></dd></div>
+          <div class="fact"><dt>The good one</dt><dd>The profile card renders <b>five tasting measures as meters</b>, bar length and colour swatch both computed from the row. Structured data becoming a designed frame, which is the whole job.</dd></div>
           <div class="fact"><dt>Approach</dt><dd>Structured source data in, generated on-brand posts out, published on a schedule with nobody in the loop. A template family rather than a run of one-offs.</dd></div>
           <div class="fact"><dt>Decision</dt><dd>Every field on the card is a <b>named layer</b> rather than baked into the artwork. It costs more up front and it is the reason pointing the machine at a second data source was a configuration rather than a rebuild.</dd></div>
         </dl>
