@@ -442,7 +442,7 @@
   <div class="sec-head">
     <h2 class="display">Selected work</h2>
     <span class="rule"></span>
-    <p>Four, in depth</p>
+    <p>Three, in depth</p>
   </div>
   <p class="method">
     The four moves, in order. <b>Get the real information into a table.</b> <b>Build the
@@ -492,10 +492,6 @@
             <span class="step__stage">The template</span>
             <h4>Their brand, composited in, four ways</h4>
             <p>The four designs are not pictures, they are forms with slots. Their logo goes in one slot, their three brand colours in others, so every post comes out looking like <b>their</b> firm rather than like a template. What they paid for decides how much gets filled in.</p>
-            <figure class="plate plate--mark">
-              <div class="plate__frame"><button type="button" class="zoom" data-cap="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." aria-label="Open full size"><img src="{{IMG:aa-brand}}" alt="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." width="740" height="740"></button></div>
-              <figcaption>Three tiers, three rendered banners. The difference between them is enforced in the pipeline, not in a sales conversation.</figcaption>
-            </figure>
           </div>
         </div>
         <div class="step">
@@ -506,7 +502,7 @@
             <p>Once a month, at one minute past midnight, it wakes up, goes through the customer list, and hands each advisor off to be built and posted. Their month goes out on the days it was meant to. Nobody watches it happen.</p>
             <figure class="plate">
               <div class="plate__frame"><button type="button" class="zoom" data-cap="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." aria-label="Open full size"><img src="{{IMG:aa-build}}" alt="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." width="560" height="167"></button></div>
-              <figcaption>Five Pipedream workflows: the emitter, two listeners, a JWT generator and a profile guard. The publish listener reached v341.</figcaption>
+              <figcaption>Five Pipedream workflows: the emitter, two listeners, a JWT generator and a profile guard.</figcaption>
             </figure>
           </div>
         </div>
@@ -514,7 +510,7 @@
         <dl class="facts">
           <div class="fact"><dt>Role</dt><dd>Built the product. A partner brought the advisor relationships.</dd></div>
           <div class="fact"><dt>Decision</dt><dd>Copy was generated <b>in batch, against a calendar</b>, rather than per post at publish time. It cost a month of lead time and it is why the pipeline could run for every advisor every month without a model in the hot path.</dd></div>
-          <div class="fact"><dt>Status</dt><dd>Ran live. Wound down when the partnership stalled, not when the product did. <b>The publish workflow reached v341.</b></dd></div>
+          <div class="fact"><dt>Status</dt><dd>Ran live, posting to advisors' own feeds on a schedule.</dd></div>
         </dl>
         <ul class="stack"><li>Next.js</li><li>TypeScript</li><li>Pipedream</li><li>Airtable</li><li>Stripe</li><li>Ayrshare</li><li>BannerBear</li><li>OpenAI API</li></ul>
       </div>
@@ -582,71 +578,6 @@
       </div>
     </article>
 
-    <article class="piece" style="--c: var(--gr-accent-2)">
-      <div class="piece__rail">
-        <span class="piece__chip"></span>
-        <span class="piece__cat">Geospatial product</span>
-      </div>
-      <div>
-        <h3>Lake Country Zoning<span class="golinks"><a class="golink" href="https://lakecountry-envelope.vercel.app" rel="noopener" aria-label="Opens lakecountry-envelope.vercel.app in a new tab" title="lakecountry-envelope.vercel.app" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
-        <figure class="plate plate--lead">
-          <div class="plate__frame"><button type="button" class="zoom" data-cap="The Lake Country Zoning app after a lookup: the address, the PID, the zone code and name, a satellite view with the parcel outlined in yellow, the buildable envelope filled green and the setbacks dashed in red, and a table underneath giving parcel 5,009 square metres, buildable envelope 3,953 and max footprint 2,505." aria-label="Open full size"><img src="{{IMG:env-app}}" alt="The Lake Country Zoning app after a lookup: the address, the PID, the zone code and name, a satellite view with the parcel outlined in yellow, the buildable envelope filled green and the setbacks dashed in red, and a table underneath giving parcel 5,009 square metres, buildable envelope 3,953 and max footprint 2,505." width="576" height="720"></button></div>
-          <figcaption>One address in. A zoning bylaw, a parcel polygon and six government endpoints later, this comes out. Roughly fifteen seconds. Zone, setbacks, overlays, the envelope drawn on the lot, and every number with a bylaw citation behind it.</figcaption>
-        </figure>
-        <p class="lede">
-          Before a designer can sketch anything, they need to know how much of the lot they are
-          allowed to build on. Finding that out means reading the zoning bylaw, measuring in from
-          each edge by a different amount, and checking whether the lot is in any protected area.
-          It takes about half an hour and it is the same half hour every time. Type an address
-          into this and it comes back in fifteen seconds.
-        </p>
-        <div class="steps">
-        <div class="step">
-          <span class="step__n">01</span>
-          <div>
-            <span class="step__stage">The source</span>
-            <h4>An address becomes a polygon</h4>
-            <p>The address goes to the provincial address service, which gives a location, and that location goes to the provincial land registry, which gives the actual shape of the lot. Then the District's own maps say what the lot is zoned and whether it sits in any protected area. All public, all free, six different services.</p>
-          </div>
-        </div>
-        <div class="step">
-          <span class="step__n">02</span>
-          <div>
-            <span class="step__stage">The rules</span>
-            <h4>Read the bylaw once, not on every request</h4>
-            <p>The rules live in a PDF. I read that PDF once, pulled every zone's numbers out of it, and saved them as a file the app can look things up in. <b>That one decision is what makes it a product.</b> It answers in seconds instead of half a minute, costs nothing to run, and the trade is that an oddly written bylaw will not parse. When that happens it says so, rather than making a number up.</p>
-          </div>
-        </div>
-        <div class="step">
-          <span class="step__n">03</span>
-          <div>
-            <span class="step__stage">The geometry</span>
-            <h4>Work out which edge is the front</h4>
-            <p>This is the part that was actually hard. You have to keep different distances from the front, the back and the sides, so the program has to work out which edge is which, and lots are not tidy rectangles. It looks at where the roads are: the edge nearest a road is the front, the far one is the back, the rest are sides. Odd-shaped lots still fool it, so when it has to guess it tells you it guessed.</p>
-          </div>
-        </div>
-        <div class="step">
-          <span class="step__n">04</span>
-          <div>
-            <span class="step__stage">The render</span>
-            <h4>Intersect the half-planes and draw the answer</h4>
-            <p>Push in from every edge by the right amount and whatever shape is left in the middle is where you can build. It draws that on a map of the real lot, with each distance labelled, and tells you which rule is the one actually limiting you.</p>
-            <figure class="plate">
-              <div class="plate__frame"><button type="button" class="zoom" data-cap="A generated site plan for 11777 Hare Rd: the parcel outlined in black over a street map, the buildable envelope filled in green, and each setback drawn as a labelled red dashed line. A footer reads parcel 10,095 square metres, buildable envelope 7,798, max footprint 2,019." aria-label="Open full size"><img src="{{IMG:env-build}}" alt="A generated site plan for 11777 Hare Rd: the parcel outlined in black over a street map, the buildable envelope filled in green, and each setback drawn as a labelled red dashed line. A footer reads parcel 10,095 square metres, buildable envelope 7,798, max footprint 2,019." width="720" height="600"></button></div>
-              <figcaption>The generated site plan. Parcel in black, envelope in green, every setback drawn and labelled.</figcaption>
-            </figure>
-          </div>
-        </div>
-        </div>
-        <dl class="facts">
-          <div class="fact"><dt>Role</dt><dd>Everything. Built for an architectural design practice, whose principal is the primary user.</dd></div>
-          <div class="fact"><dt>Decision</dt><dd>The bylaw is <b>parsed once into JSON</b>, not read by a model at request time. It made the tool answer in seconds instead of tens of seconds, cost nothing to run, and gave up the ability to handle a bylaw written in an unusual format. That trade is why it is a product rather than a demo.</dd></div>
-          <div class="fact"><dt>Honest gap</dt><dd>Easements have no public endpoint, so the tool says so rather than quietly returning a number that is too big. Same for flag lots, where front-edge detection can misclassify and the output warns.</dd></div>
-        </dl>
-        <ul class="stack"><li>Python</li><li>FastAPI</li><li>GeoPandas</li><li>Shapely</li><li>Next.js 15</li><li>React 19</li><li>TypeScript</li><li>Railway</li><li>Vercel</li></ul>
-      </div>
-    </article>
-
     <article class="piece" style="--c: var(--gr-accent-1)">
       <div class="piece__rail">
         <span class="piece__chip"></span>
@@ -655,15 +586,16 @@
       <div>
         <h3>Safe Family Internet<span class="golinks"><a class="golink" href="https://safefamilyinternet.ca" rel="noopener" aria-label="Opens safefamilyinternet.ca in a new tab" title="safefamilyinternet.ca" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
         <p class="lede">
-          Parents are told constantly that the internet is dangerous for their kids. Almost
-          nobody tells them what to actually change, or in what order. So I built the thing
-          that does: a name, a site, a set of guides, and everything needed to keep it running.
+          An internet safety initiative I started in Lake Country. Parents are told
+          constantly that the internet is dangerous for their kids and almost nobody tells
+          them what to change, or in what order. So I built the answer, and then I built
+          the brand that carries it, so other people could use it without me in the room.
         </p>
         <div class="steps">
         <div class="step">
           <span class="step__n">01</span>
           <div>
-            <span class="step__stage">The source</span>
+            <span class="step__stage">The idea</span>
             <h4>One model, and everything hangs off it</h4>
             <p>Everything hangs off one idea: there are four layers between a stranger and your kid, and you should fix them in order. The apps, then the device, then the home network, then the people around them. Every guide, every slide and every post is one step inside one of those four.</p>
             <figure class="plate">
@@ -676,8 +608,8 @@
           <span class="step__n">02</span>
           <div>
             <span class="step__stage">The template</span>
-            <h4>An identity a volunteer can use without me</h4>
-            <p>A shield, a name, and a logo that animates from unprotected to protected. Exported in every colour and size anyone might need, so a volunteer never has to crop one themselves. Then a template for the guides: the phone screen in a frame, a pink box around the exact thing to tap, numbered steps.</p>
+            <h4>A brand, and the rules for using it</h4>
+            <p>A shield, a name, and a logo that animates from unprotected to protected, exported as <b>22 files</b> covering every colourway and size so a volunteer never has to crop one. Under it a design system: the colours, the type, and seven kinds of slide. The deck, the guides, the posts and the site all read from it.</p>
             <figure class="plate plate--mark">
               <div class="plate__frame"><button type="button" class="zoom" data-cap="The Safe Family Internet shield mark in white and blue on black." aria-label="Open full size"><img src="{{IMG:logo}}" alt="The Safe Family Internet shield mark in white and blue on black." width="558" height="700"></button></div>
               <figcaption>The primary mark, one of twenty-two exports covering every colourway and size.</figcaption>
@@ -688,16 +620,16 @@
           <span class="step__n">03</span>
           <div>
             <span class="step__stage">The generation</span>
-            <h4>Raw screenshots in, branded frames out</h4>
-            <p>Take screenshots on your phone, drop the folder in, and eight branded step-by-step guides come out the other side, framed and annotated. Social posts work the same way: type the words, get back finished slides in the right colours and fonts. No designer in either loop.</p>
+            <h4>Everything comes out on brand without a designer</h4>
+            <p>Take screenshots on your phone, drop the folder in, and out come eight branded step-by-step guides, each screen framed with a pink box around the thing to tap. Posts work the same way: type the words, get finished slides in the right colours and fonts. A roughly 200 slide deck came off the same system.</p>
           </div>
         </div>
         <div class="step">
           <span class="step__n">04</span>
           <div>
             <span class="step__stage">The publish</span>
-            <h4>Straight to the platforms, and a gate behind it</h4>
-            <p>The slides post straight to Instagram and LinkedIn as proper swipeable posts. No Canva, no scheduling tool in between. The guides sit behind an email form that checks the address, adds it to the mailing list and sends the download, all without a server to look after.</p>
+            <h4>Out to the platforms, and into people's homes</h4>
+            <p>The slides post straight to Instagram and LinkedIn as proper swipeable posts, with no Canva and no scheduler in between. The guides sit behind an email form that checks the address, adds it to the list and sends the download. <b>260 sign-ups claimed every seat</b> for one night in a town of 15,000.</p>
             <figure class="plate">
               <div class="plate__frame"><button type="button" class="zoom" data-cap="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." aria-label="Open full size"><img src="{{IMG:sfi-build}}" alt="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." width="448" height="560"></button></div>
               <figcaption>One rendered carousel slide. Type, highlight block and footer all come from tokens.</figcaption>
@@ -722,6 +654,13 @@
   </div>
 
   <div class="craft">
+    <article class="cr" style="--c: var(--gr-accent-6)">
+      <span class="cr__cat">Geospatial tool</span>
+      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The Lake Country Zoning app after a lookup: the address, the zone, a satellite view with the lot outlined and the buildable area filled in green, and a table of the areas underneath." aria-label="Open full size"><img src="{{IMG:env-app}}" alt="The Lake Country Zoning app after a lookup: the address, the zone, a satellite view with the lot outlined and the buildable area filled in green, and a table of the areas underneath." width="576" height="720"></button></div></div>
+      <h3>Lake Country Zoning<span class="golinks"><a class="golink" href="https://lakecountry-envelope.vercel.app" rel="noopener" aria-label="Opens lakecountry-envelope.vercel.app in a new tab" title="lakecountry-envelope.vercel.app" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
+      <p>Before a designer can sketch anything they need to know how much of the lot they can build on, which means reading the zoning bylaw and measuring in from every edge by a different amount. Half an hour, every time. Type an address into this and it comes back in fifteen seconds, drawn on the lot.</p>
+    </article>
+
     <article class="cr" style="--c: var(--gr-accent-4)">
       <span class="cr__cat">Product, with payments</span>
       <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." aria-label="Open full size"><img src="{{IMG:craft-setlist}}" alt="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." width="560" height="293"></button></div></div>
