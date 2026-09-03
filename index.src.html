@@ -512,19 +512,18 @@
     <article class="piece" style="--c: var(--gr-accent-3)">
       <div class="piece__rail">
         <span class="piece__chip"></span>
-        <span class="piece__cat">Two accounts, one pipeline</span>
+        <span class="piece__cat">Generative media pipeline</span>
       </div>
       <div>
-        <h3>Wines and Tours of the Okanagan<span class="golinks"><a class="golink golink--wide" href="https://www.instagram.com/winesoftheokanagan/" rel="noopener" aria-label="Opens instagram.com/winesoftheokanagan in a new tab" title="instagram.com/winesoftheokanagan" target="_blank"><span class="golink__t">Wines</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a><a class="golink golink--wide" href="https://www.instagram.com/toursoftheokanagan/" rel="noopener" aria-label="Opens instagram.com/toursoftheokanagan in a new tab" title="instagram.com/toursoftheokanagan" target="_blank"><span class="golink__t">Tours</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
-        <p class="piece__one">An Instagram account that builds itself out of a public winery database, and then a second one built the same way.</p>
+        <h3>Wines of the Okanagan<span class="golinks"><a class="golink" href="https://www.instagram.com/winesoftheokanagan/" rel="noopener" aria-label="Opens instagram.com/winesoftheokanagan in a new tab" title="instagram.com/winesoftheokanagan" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
+        <p class="piece__one">An Instagram account that builds itself out of a public winery database.</p>
         <figure class="plate plate--lead">
           <div class="plate__frame"><button type="button" class="zoom" data-cap="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." aria-label="Open full size"><img src="{{IMG:woto-posts}}" alt="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." width="720" height="720"></button></div>
-          <figcaption>Four series, four templates, one wordmark. The profile card is the one I still like: body, tannins, sweetness, acidity and alcohol arrive as numbers in a column and leave as meters, with the bar length and the colour swatch drawn from the field values. Every one of these is a row of Airtable. Nobody laid any of them out.</figcaption>
+          <figcaption>Four kinds of post, four templates, one account. The profile card is the one I still like: body, tannins, sweetness, acidity and alcohol arrive as numbers in a column and leave as meters, with the bar length and the colour dot drawn from the values. Every one of these is a row in a table. Nobody laid any of them out.</figcaption>
         </figure>
         <p class="lede">
           Every winery in the province is listed in a public database and every one of them
           wants to be found. Nobody was turning that list into something people would follow.
-          So I did, twice.
         </p>
         <div class="steps">
         <div class="step">
@@ -559,14 +558,14 @@
           <span class="step__n">04</span>
           <div>
             <span class="step__stage">The publish</span>
-            <h4>On a schedule, then again somewhere else</h4>
-            <p>It posts itself, on a schedule, with nobody approving anything. Then I pointed the same setup at wine tour reviews and got a second account out of it. <b>That was an afternoon of settings, not a rebuild</b>, which is the only reason one person could run two feeds at once.</p>
+            <h4>It posts itself</h4>
+            <p>Everything goes out on a schedule with nobody approving anything, through the Instagram publishing API. I also subscribed to every winery newsletter and ran a job that read the incoming mail for deals and events and pushed those out through their own template.</p>
           </div>
         </div>
         </div>
         <dl class="facts">
           <div class="fact"><dt>Role</dt><dd>Everything. Brand, scraper, templates, generation, scheduling, both accounts.</dd></div>
-          <div class="fact"><dt>Decision</dt><dd>Every field on the card is a <b>named layer</b> rather than baked into the artwork. It costs more up front and it is the reason pointing the machine at a second data source was a configuration rather than a rebuild.</dd></div>
+          <div class="fact"><dt>Decision</dt><dd>Every field on the card is a <b>named layer</b> rather than baked into the artwork. It costs more up front, and it is the reason a new kind of post was a new template rather than a new build.</dd></div>
         </dl>
         <ul class="stack"><li>Make.com</li><li>Airtable</li><li>BannerBear</li><li>Instagram Graph API</li><li>API scraping</li></ul>
       </div>
@@ -630,8 +629,8 @@
             <h4>Out to the platforms, and into people's homes</h4>
             <p>The slides post straight to Instagram and LinkedIn as proper swipeable posts, with no Canva and no scheduler in between. The guides sit behind an email form that checks the address, adds it to the list and sends the download. <b>260 sign-ups claimed every seat</b> for one night in a town of 15,000.</p>
             <figure class="plate">
-              <div class="plate__frame"><button type="button" class="zoom" data-cap="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." aria-label="Open full size"><img src="{{IMG:sfi-build}}" alt="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." width="448" height="560"></button></div>
-              <figcaption>One rendered carousel slide. Type, highlight block and footer all come from tokens.</figcaption>
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="Three slides from one carousel side by side: a black cover reading What one town just proved, an orange slide with the number 103 and the line families pledged to set up a layer of protection, and a violet closing slide reading You'll find out what to do with the site address in a cyan chip." aria-label="Open full size"><img src="{{IMG:sfi-carousel}}" alt="Three slides from one carousel side by side: a black cover reading What one town just proved, an orange slide with the number 103 and the line families pledged to set up a layer of protection, and a violet closing slide reading You'll find out what to do with the site address in a cyan chip." width="1100" height="458"></button></div>
+              <figcaption>Three slides from one post. Same type, same colours, same footer, and not one of them laid out by hand.</figcaption>
             </figure>
           </div>
         </div>
