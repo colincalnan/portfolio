@@ -453,10 +453,10 @@
     <p>Four, in depth</p>
   </div>
   <p class="method">
-    Same four moves every time. <b>Find the source of truth</b> and get it into a table.
-    <b>Make the template a data object</b> so a row can become a frame. <b>Generate</b> against
-    it. <b>Publish unattended.</b> The projects below are that method pointed at four
-    different problems, and the fourth one is not social media at all.
+    Four of these, and they were all built the same way. Get the real information into a
+    table. Build the design so it reads from that table instead of being drawn by hand.
+    Let the machine make the posts. Let it publish them on its own. The last one is not
+    social media at all, which is the point: it is the same method aimed at a different job.
   </p>
 
   <main class="work">
@@ -473,9 +473,9 @@
           <figcaption>Three advisors' feeds. Every card generated, branded and published by the pipeline, on a schedule, without them or me touching it.</figcaption>
         </figure>
         <p class="lede">
-          On-brand social content, generated and published for every customer on a schedule,
-          for financial advisors across Canada. Built in 2022, before there was a name for it,
-          and it ran live.
+          Financial advisors know their clients need to hear from them every week. Almost none
+          of them post, because writing is not the job they trained for. So we sold them the
+          posting. They paid, connected their accounts, and their feed filled itself.
         </p>
         <div class="steps">
         <div class="step">
@@ -483,7 +483,7 @@
           <div>
             <span class="step__stage">The source</span>
             <h4>They buy a tier and connect their own accounts</h4>
-            <p>Stripe checkout writes the plan onto an Airtable row. A single sign-on handoff through Ayrshare returns a profile key, so the advisor links their own LinkedIn, Facebook and Instagram and <b>I never hold a password</b>. That row is the source of truth from then on: plan, platforms, institution, hashtags, brand colours.</p>
+            <p>They pay through Stripe, which sets their plan. Then they link their own LinkedIn, Facebook and Instagram themselves, through a handoff that means <b>I never see a password</b>. Everything the system needs about them now lives on one row: what they paid for, which accounts to post to, their firm, their hashtags, their brand colours.</p>
           </div>
         </div>
         <div class="step">
@@ -491,7 +491,7 @@
           <div>
             <span class="step__stage">The generation</span>
             <h4>A year of posts, written before the year starts</h4>
-            <p>Two years of my partner's own posts became the voice corpus, mapped to the seasons that move an advisor's business, then generated as a full library through the OpenAI API called from inside Airtable. <b>Batch, not per post.</b> The runtime reads from a library rather than waiting on a model, which is what made it cheap enough to run monthly for everyone.</p>
+            <p>An advisor's year has a shape: tax season, the new year, RRSP deadlines. So we took two years of my partner's own posts, fed them in as the voice to copy, and wrote a whole year of content against that calendar in one go. <b>Written ahead, not on the day.</b> That is what made it cheap enough to run for everybody, every month.</p>
           </div>
         </div>
         <div class="step">
@@ -499,7 +499,7 @@
           <div>
             <span class="step__stage">The template</span>
             <h4>Their brand, composited in, four ways</h4>
-            <p>In BannerBear the post is a template with named layers, so the advisor's own logo and their own three brand colours drop into one of four designs. Hashtags assemble by tier in code: Engage gets the basics, Elevate adds their institution, Elite adds their custom set.</p>
+            <p>The four designs are not pictures, they are forms with slots. Their logo goes in one slot, their three brand colours in others, so every post comes out looking like <b>their</b> firm rather than like a template. What they paid for decides how much gets filled in.</p>
             <figure class="plate plate--mark">
               <div class="plate__frame"><button type="button" class="zoom" data-cap="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." aria-label="Open full size"><img src="{{IMG:aa-brand}}" alt="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." width="740" height="740"></button></div>
               <figcaption>Three tiers, three rendered banners. The difference between them is enforced in the pipeline, not in a sales conversation.</figcaption>
@@ -511,7 +511,7 @@
           <div>
             <span class="step__stage">The publish</span>
             <h4>Once a month, unattended</h4>
-            <p>A scheduled emitter wakes at 12:01, reads the customer view, and fires one event per advisor carrying their key and their settings. <code>$.send.emit(object)</code>. A listener assembles that advisor's month and POSTs to Ayrshare with the scheduled date on it. Nobody looks at it.</p>
+            <p>Once a month, at one minute past midnight, it wakes up, goes through the customer list, and hands each advisor off to be built and posted. Their month goes out on the days it was meant to. Nobody watches it happen.</p>
             <figure class="plate">
               <div class="plate__frame"><button type="button" class="zoom" data-cap="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." aria-label="Open full size"><img src="{{IMG:aa-build}}" alt="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." width="560" height="167"></button></div>
               <figcaption>Five Pipedream workflows: the emitter, two listeners, a JWT generator and a profile guard. The publish listener reached v341.</figcaption>
@@ -540,8 +540,9 @@
           <figcaption>Four series, four templates, one wordmark. The profile card is the one I still like: body, tannins, sweetness, acidity and alcohol arrive as numbers in a column and leave as meters, with the bar length and the colour swatch drawn from the field values. Every one of these is a row of Airtable. Nobody laid any of them out.</figcaption>
         </figure>
         <p class="lede">
-          Two Instagram accounts running the same machine on different data. Five post series
-          off one table, then the whole thing pointed at a second source and run again.
+          Every winery in the province is listed in a public database and every one of them
+          wants to be found. Nobody was turning that list into something people would follow.
+          So I did, twice.
         </p>
         <div class="steps">
         <div class="step">
@@ -549,7 +550,7 @@
           <div>
             <span class="step__stage">The source</span>
             <h4>The winery database, read through its API</h4>
-            <p>The provincial winery database is public and has an API. Read it into Airtable, one row per wine: producer, vintage, varietal, the five tasting measures, the account handle, the bottle shot. From there the content problem is a rendering problem.</p>
+            <p>The database is public, so I pulled the whole thing into a spreadsheet: one row per wine, with the producer, the vintage, how it tastes, the winery's handle and a photo of the bottle. Once the facts are in a table, the only question left is what they should look like.</p>
           </div>
         </div>
         <div class="step">
@@ -557,7 +558,7 @@
           <div>
             <span class="step__stage">The template</span>
             <h4>Twenty-eight named layers, not artwork</h4>
-            <p>The card is a data object: <code>wine_name</code>, <code>value_tannins</code>, <code>meter_acidity</code>, <code>colour_colour</code>, <code>wine_image</code>. <b>Meter bar length and the colour swatch are computed from the row.</b> That is the whole trick, and it is why a new series was a new template rather than a new build.</p>
+            <p>Every part of the card has a name, so the design can go and fetch its own content. The tasting notes are the good bit: <b>the bar next to "tannins" is as long as the number in that column, and the little colour dot is the wine's actual colour.</b> Nobody sets those. That is the whole trick, and it is why adding a new kind of post later meant making a new form, not building a new thing.</p>
             <figure class="plate">
               <div class="plate__frame"><button type="button" class="zoom" data-cap="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." aria-label="Open full size"><img src="{{IMG:woto-build}}" alt="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." width="700" height="538"></button></div>
               <figcaption>The BannerBear editor. Every field on the card is addressable.</figcaption>
@@ -569,7 +570,7 @@
           <div>
             <span class="step__stage">The generation</span>
             <h4>Five series over the same table</h4>
-            <p>Wine profile cards, award scores off the national wine awards, tasting notes, regional facts, and a weekly winery feature. Same rows, five templates, four visual registers that still read as one account. Winery events came from somewhere else again, parsed out of an inbox.</p>
+            <p>Five kinds of post, all off the same table: a tasting profile, an award score, a tasting note, a fact about the region, and a winery of the week. They look nothing like each other and still read as one account, which is the hard part. Winery events came from somewhere else entirely, pulled out of an inbox.</p>
           </div>
         </div>
         <div class="step">
@@ -577,7 +578,7 @@
           <div>
             <span class="step__stage">The publish</span>
             <h4>On a schedule, then again somewhere else</h4>
-            <p>Make.com runs the cycle and publishes through the Instagram Graph API with nobody in the loop. Then the same rendering system got pointed at wine tour reviews and ran a second account. <b>A configuration, not a rebuild</b>, which is the only reason one person could run two feeds.</p>
+            <p>It posts itself, on a schedule, with nobody approving anything. Then I pointed the same setup at wine tour reviews and got a second account out of it. <b>That was an afternoon of settings, not a rebuild</b>, which is the only reason one person could run two feeds at once.</p>
           </div>
         </div>
         </div>
@@ -601,10 +602,11 @@
           <figcaption>One address in. A zoning bylaw, a parcel polygon and six government endpoints later, this comes out. Roughly fifteen seconds. Zone, setbacks, overlays, the envelope drawn on the lot, and every number with a bylaw citation behind it.</figcaption>
         </figure>
         <p class="lede">
-          Sizing a project against a lot means reading a bylaw, finding the zone, applying four
-          different setbacks to four edges, working out which edge is even the front, subtracting
-          any overlays, then deciding whether coverage or geometry binds. Half an hour, every
-          time. This does it from an address in about fifteen seconds.
+          Before a designer can sketch anything, they need to know how much of the lot they are
+          allowed to build on. Finding that out means reading the zoning bylaw, measuring in from
+          each edge by a different amount, and checking whether the lot is in any protected area.
+          It takes about half an hour and it is the same half hour every time. Type an address
+          into this and it comes back in fifteen seconds.
         </p>
         <div class="steps">
         <div class="step">
@@ -612,7 +614,7 @@
           <div>
             <span class="step__stage">The source</span>
             <h4>An address becomes a polygon</h4>
-            <p>BC Geocoder resolves the address, ParcelMap BC returns the authoritative parcel geometry over WFS, and the District's ArcGIS is the fallback. A point query on the centroid gives the zone, then five more layers for development permit overlays. Everything works in <code>EPSG:3005</code> so areas come out in real metres.</p>
+            <p>The address goes to the provincial address service, which gives a location, and that location goes to the provincial land registry, which gives the actual shape of the lot. Then the District's own maps say what the lot is zoned and whether it sits in any protected area. All public, all free, six different services.</p>
           </div>
         </div>
         <div class="step">
@@ -620,7 +622,7 @@
           <div>
             <span class="step__stage">The rules</span>
             <h4>Read the bylaw once, not on every request</h4>
-            <p>Bylaw 561 is a PDF. A regex extractor parses every zone's setbacks out of it into <code>zone_setbacks.json</code>, ahead of time. <b>This is the decision the product rests on.</b> Seconds instead of tens of seconds, nothing per request, and it gives up handling a bylaw written in an unusual format. Zones that will not parse return null with a warning rather than a confident wrong number.</p>
+            <p>The rules live in a PDF. I read that PDF once, pulled every zone's numbers out of it, and saved them as a file the app can look things up in. <b>That one decision is what makes it a product.</b> It answers in seconds instead of half a minute, costs nothing to run, and the trade is that an oddly written bylaw will not parse. When that happens it says so, rather than making a number up.</p>
           </div>
         </div>
         <div class="step">
@@ -628,7 +630,7 @@
           <div>
             <span class="step__stage">The geometry</span>
             <h4>Work out which edge is the front</h4>
-            <p>The hard part, and it is not a data problem. Setbacks differ per edge, so the geometry has to know which edge is which. Road centrelines within 60 metres, front is the nearest edge inside 25, flanking is the second road edge sharing a corner, rear is farthest from front, the rest is interior. Irregular lots still catch it out, so the output says when it fell back to a heuristic.</p>
+            <p>This is the part that was actually hard. You have to keep different distances from the front, the back and the sides, so the program has to work out which edge is which, and lots are not tidy rectangles. It looks at where the roads are: the edge nearest a road is the front, the far one is the back, the rest are sides. Odd-shaped lots still fool it, so when it has to guess it tells you it guessed.</p>
           </div>
         </div>
         <div class="step">
@@ -636,7 +638,7 @@
           <div>
             <span class="step__stage">The render</span>
             <h4>Intersect the half-planes and draw the answer</h4>
-            <p>Each edge inset by its own setback is an inward half-plane. Intersect them and what remains is the buildable envelope. Shapely for geometry, Matplotlib and contextily for the map, and the result states whether lot coverage or the geometry is binding.</p>
+            <p>Push in from every edge by the right amount and whatever shape is left in the middle is where you can build. It draws that on a map of the real lot, with each distance labelled, and tells you which rule is the one actually limiting you.</p>
             <figure class="plate">
               <div class="plate__frame"><button type="button" class="zoom" data-cap="A generated site plan for 11777 Hare Rd: the parcel outlined in black over a street map, the buildable envelope filled in green, and each setback drawn as a labelled red dashed line. A footer reads parcel 10,095 square metres, buildable envelope 7,798, max footprint 2,019." aria-label="Open full size"><img src="{{IMG:env-build}}" alt="A generated site plan for 11777 Hare Rd: the parcel outlined in black over a street map, the buildable envelope filled in green, and each setback drawn as a labelled red dashed line. A footer reads parcel 10,095 square metres, buildable envelope 7,798, max footprint 2,019." width="720" height="600"></button></div>
               <figcaption>The generated site plan. Parcel in black, envelope in green, every setback drawn and labelled.</figcaption>
@@ -661,9 +663,9 @@
       <div>
         <h3>Safe Family Internet<span class="golinks"><a class="golink" href="https://safefamilyinternet.ca" rel="noopener" aria-label="Opens safefamilyinternet.ca in a new tab" title="safefamilyinternet.ca" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
         <p class="lede">
-          A whole product built to get non-technical parents to change one thing at home tonight.
-          Identity, site, a gated library of step-by-step guides, and the publishing engine behind
-          all of it.
+          Parents are told constantly that the internet is dangerous for their kids. Almost
+          nobody tells them what to actually change, or in what order. So I built the thing
+          that does: a name, a site, a set of guides, and everything needed to keep it running.
         </p>
         <div class="steps">
         <div class="step">
@@ -671,7 +673,7 @@
           <div>
             <span class="step__stage">The source</span>
             <h4>One model, and everything hangs off it</h4>
-            <p>Parents are not short of warnings. They are short of one thing to do tonight. So everything is organised around four layers, apps, devices, network and community, in the order you should fix them. Every guide, slide and post is a step inside one of those rings.</p>
+            <p>Everything hangs off one idea: there are four layers between a stranger and your kid, and you should fix them in order. The apps, then the device, then the home network, then the people around them. Every guide, every slide and every post is one step inside one of those four.</p>
             <figure class="plate">
               <div class="plate__frame"><button type="button" class="zoom" data-cap="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." aria-label="Open full size"><img src="{{IMG:sfi-idea}}" alt="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." width="560" height="315"></button></div>
               <figcaption>The castle model. Information architecture, not a diagram drawn afterwards.</figcaption>
@@ -683,7 +685,7 @@
           <div>
             <span class="step__stage">The template</span>
             <h4>An identity a volunteer can use without me</h4>
-            <p>A shield, a wordmark, and a mark that animates from unprotected to protected, exported as a full matrix so nobody has to crop anything. Then a guide template: black phone frame, brand pink on the exact control to tap, numbered steps.</p>
+            <p>A shield, a name, and a logo that animates from unprotected to protected. Exported in every colour and size anyone might need, so a volunteer never has to crop one themselves. Then a template for the guides: the phone screen in a frame, a pink box around the exact thing to tap, numbered steps.</p>
             <figure class="plate plate--mark">
               <div class="plate__frame"><button type="button" class="zoom" data-cap="The Safe Family Internet shield mark in white and blue on black." aria-label="Open full size"><img src="{{IMG:logo}}" alt="The Safe Family Internet shield mark in white and blue on black." width="558" height="700"></button></div>
               <figcaption>The primary mark, one of twenty-two exports covering every colourway and size.</figcaption>
@@ -695,7 +697,7 @@
           <div>
             <span class="step__stage">The generation</span>
             <h4>Raw screenshots in, branded frames out</h4>
-            <p>A folder of phone screenshots becomes eight annotated PDF guides. Separately, a JSON file becomes brand-correct 1080x1350 carousel frames, rendered by headless Chrome straight off the design tokens. Neither step has a designer in it.</p>
+            <p>Take screenshots on your phone, drop the folder in, and eight branded step-by-step guides come out the other side, framed and annotated. Social posts work the same way: type the words, get back finished slides in the right colours and fonts. No designer in either loop.</p>
           </div>
         </div>
         <div class="step">
@@ -703,7 +705,7 @@
           <div>
             <span class="step__stage">The publish</span>
             <h4>Straight to the platforms, and a gate behind it</h4>
-            <p>Native Instagram carousels through the Graph API and multi-image posts through the LinkedIn REST API. No Canva, no scheduler. The guides sit behind a serverless function that validates email and consent, adds the address to the campaign platform, and sends the toolkit.</p>
+            <p>The slides post straight to Instagram and LinkedIn as proper swipeable posts. No Canva, no scheduling tool in between. The guides sit behind an email form that checks the address, adds it to the mailing list and sends the download, all without a server to look after.</p>
             <figure class="plate">
               <div class="plate__frame"><button type="button" class="zoom" data-cap="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." aria-label="Open full size"><img src="{{IMG:sfi-build}}" alt="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." width="448" height="560"></button></div>
               <figcaption>One rendered carousel slide. Type, highlight block and footer all come from tokens.</figcaption>
@@ -732,49 +734,49 @@
       <span class="cr__cat">Product, with payments</span>
       <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." aria-label="Open full size"><img src="{{IMG:craft-setlist}}" alt="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." width="560" height="293"></button></div></div>
       <h3>Set List Easy<span class="golinks"><a class="golink" href="https://setlisteasy.com" rel="noopener" aria-label="Opens setlisteasy.com in a new tab" title="setlisteasy.com" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
-      <p>A searchable set list of two, three and four chord songs for musicians who are starting to gig. Accounts, subscriptions and a perform mode. Four builds across its life, ending as a native mobile app.</p>
+      <p>You know six chords and you have a two hour gig on Friday. Every song list online is sorted by artist or decade, never by how hard it is to play. So this one is. People pay for it.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-5)">
       <span class="cr__cat">Live tool, on stage</span>
       <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The Gig Pulse app on a dark screen: a scored song list down the left with Crazy, Dancing In The Dark and Free Fallin, and on the right the song Bright Side Of The Road with four tap targets, applause, dancing, singing and screaming, each worth a different number of points, above a crowd energy counter." aria-label="Open full size"><img src="{{IMG:craft-gigpulse}}" alt="The Gig Pulse app on a dark screen: a scored song list down the left with Crazy, Dancing In The Dark and Free Fallin, and on the right the song Bright Side Of The Road with four tap targets, applause, dancing, singing and screaming, each worth a different number of points, above a crowd energy counter." width="720" height="539"></button></div></div>
       <h3>Gig Pulse<span class="golinks"><a class="golink golink--wide" href="https://gigpulse-ai.vercel.app/" rel="noopener" aria-label="Opens gigpulse-ai.vercel.app in a new tab" title="gigpulse-ai.vercel.app" target="_blank"><span class="golink__t">App</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a><a class="golink golink--wide" href="https://gigpulse-marketing.vercel.app/" rel="noopener" aria-label="Opens gigpulse-marketing.vercel.app in a new tab" title="gigpulse-marketing.vercel.app" target="_blank"><span class="golink__t">Site</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
-      <p>An iPad app for the gig itself. Applause is one point, dancing two, singing three, screaming five. Tap what the room does, song by song, then let a model read the history back and tell you which songs earn their place. <b>120 songs scored</b> so far.</p>
+      <p>Every musician thinks they know which songs work. Nobody writes it down, because you cannot take notes with a guitar on. So this is one tap: applause is worth one, dancing two, singing three, screaming five. After enough gigs it tells you which songs to keep. <b>120 songs scored</b> so far.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-2)">
       <span class="cr__cat">Design system</span>
       <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="A slide off the Bold Talks system: heavy white condensed capitals filling a deep cobalt field, with a corner label naming the slide type." aria-label="Open full size"><img src="{{IMG:craft-boldtalks}}" alt="A slide off the Bold Talks system: heavy white condensed capitals filling a deep cobalt field, with a corner label naming the slide type." width="560" height="315"></button></div></div>
-      <h3>Bold Talks, and Ground<span class="golinks"><a class="golink" href="https://colincalnan.github.io/loops-tutorial/" rel="noopener" aria-label="Opens colincalnan.github.io/loops-tutorial in a new tab" title="colincalnan.github.io/loops-tutorial" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
-      <p>A presentation system written as tokens first, now a semantic contract with three themes, guidance an agent reads, and a check script that fails a build. This page runs on it.</p>
+      <h3>Bold Talks, and Ground</h3>
+      <p>I kept redrawing the same slides. So the colours and type became a file, and now the deck, the guides and this page all read from it. It also ships a checker that refuses to publish a page that breaks the rules.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-3)">
       <span class="cr__cat">Screenshot pipeline</span>
       <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The screenshot pipeline, before and after. On the left a raw iPhone capture of a settings pane, on the right the finished guide step in a phone frame with the toggle ringed in pink." aria-label="Open full size"><img src="{{IMG:craft-guides}}" alt="The screenshot pipeline, before and after. On the left a raw iPhone capture of a settings pane, on the right the finished guide step in a phone frame with the toggle ringed in pink." width="560" height="498"></button></div></div>
       <h3>Parent guides<span class="golinks"><a class="golink" href="https://downloads.safefamilyinternet.ca" rel="noopener" aria-label="Opens downloads.safefamilyinternet.ca in a new tab" title="downloads.safefamilyinternet.ca" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
-      <p>A folder of raw phone screenshots goes in, branded annotated PDFs come out. Black phone frame, a pink box on the exact thing to tap. Eight guides shipped.</p>
+      <p>Take screenshots on your phone. Drop the folder in. Out come branded step-by-step guides, each screen in a frame with a pink box around the exact thing to tap. Eight of them so far.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-4)">
       <span class="cr__cat">Publishing engine</span>
       <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The closing slide of a rendered carousel: a violet to cobalt gradient, a headline in condensed capitals, and the site address in a cyan chip." aria-label="Open full size"><img src="{{IMG:craft-carousel}}" alt="The closing slide of a rendered carousel: a violet to cobalt gradient, a headline in condensed capitals, and the site address in a cyan chip." width="448" height="560"></button></div></div>
       <h3>Carousel and publishing</h3>
-      <p>A JSON file goes in, headless Chrome renders brand-correct 1080x1350 frames, and they post as a native Instagram carousel and a LinkedIn multi-image. No Canva, no scheduler, no designer.</p>
+      <p>Type the words, get back finished slides in the right colours and fonts, posted straight to Instagram and LinkedIn as proper swipeable posts. No Canva, no scheduling tool, no designer.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-5)">
       <span class="cr__cat">Video pipeline</span>
       <div class="plate plate--craft plate--mark"><div class="plate__frame"><button type="button" class="zoom" data-cap="Two panels. On the left a frame from a cut reel, Colin playing guitar and singing into a mic on a lawn at golden hour. On the right the energy analysis for that gig: normalised RMS across 120 minutes with a threshold line and 23 shaded regions, one per detected song." aria-label="Open full size"><img src="{{IMG:craft-reels}}" alt="Two panels. On the left a frame from a cut reel, Colin playing guitar and singing into a mic on a lawn at golden hour. On the right the energy analysis for that gig: normalised RMS across 120 minutes with a threshold line and 23 shaded regions, one per detected song." width="720" height="403"></button></div></div>
       <h3>Reels and transcribe<span class="golinks"><a class="golink" href="https://www.instagram.com/p/DZOmcfODP4c/" rel="noopener" aria-label="Opens the reel on Instagram in a new tab" title="the reel on Instagram" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
-      <p>There is already a phone clipped to the speaker stand at every gig I play. Energy analysis finds the song boundaries in the unattended two hour recording, cuts each one into a vertical reel, and captions it. This gig came out as <b>23 songs</b>. One reel from the series has 57,288 views.</p>
+      <p>There is already a phone on the speaker stand at every gig I play, recording the whole thing. This listens to the two hour file, works out where each song starts and stops from how loud it is, and cuts them into captioned clips. That one gig came out as <b>23 songs</b>. One of the clips has 57,288 views.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-6)">
       <span class="cr__cat">Agent loop</span>
       <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The Job Scout report: a headline reading remote creative-AI roles, a stacked funnel bar showing 4,130 postings narrowing to a 224 role shortlist, and rows of filter buttons." aria-label="Open full size"><img src="{{IMG:craft-jobscout}}" alt="The Job Scout report: a headline reading remote creative-AI roles, a stacked funnel bar showing 4,130 postings narrowing to a 224 role shortlist, and rows of filter buttons." width="560" height="200"></button></div></div>
       <h3>Job Scout</h3>
-      <p>Reads 4,130 job postings across 88 boards, gates them on facts a machine can check, then pays a model to read the survivors against a rubric written in prose. It found this application.</p>
+      <p>Job boards are mostly noise. This reads 4,130 postings a week, throws out anything that fails a fact I can check by machine, then has a model read what is left against a description of what I actually want, written in plain English. It found this job.</p>
     </article>
     <article class="cr" style="--c: var(--gr-warm)">
       <span class="cr__cat">Instrumentation</span>
       <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The social metrics report: a bar chart with one bar per post over eight months, most sitting near a dashed median line and a few spiking far above it." aria-label="Open full size"><img src="{{IMG:craft-metrics}}" alt="The social metrics report: a bar chart with one bar per post over eight months, most sitting near a dashed median line and a few spiking far above it." width="560" height="244"></button></div></div>
       <h3>Social metrics</h3>
-      <p>Pulls per-post numbers back out of the publishing pipeline and tells me the truth, including that reach here behaves like a lottery rather than a machine.</p>
+      <p>Pulls the numbers back out of everything I post and tells me the truth, including the unwelcome part: reach behaves like a lottery, so the useful question is how often you buy a ticket.</p>
     </article>
   </div>
 
