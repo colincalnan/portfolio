@@ -134,6 +134,10 @@
   .piece__chip { width: 100%; height: 8px; background: var(--c); }
   .piece__cat { font: 500 11.5px/1.55 var(--gr-mono); letter-spacing: .13em; text-transform: uppercase; color: var(--gr-ink-2); }
 
+  .piece__one {
+    font-size: clamp(1.0625rem, 1.9vw, 1.375rem); line-height: 1.45;
+    color: var(--gr-ink); margin: 0 0 1.4rem; text-wrap: pretty;
+  }
   .piece h3 {
     font-family: var(--gr-display); font-weight: 800; text-transform: uppercase;
     letter-spacing: -0.03em; line-height: 0.98;
@@ -313,12 +317,6 @@
     display: block; font: 500 10.5px/1 var(--gr-mono); letter-spacing: .18em;
     text-transform: uppercase; color: var(--gr-muted); margin-bottom: .45rem;
   }
-  .method {
-    font: 400 13px/1.7 var(--gr-mono); color: var(--gr-ink-2);
-    margin: 1.5rem 0 0; padding: 1rem 0 0; border-top: 1px solid var(--gr-rule);
-    text-wrap: pretty;
-  }
-  .method b { color: var(--gr-ink); font-weight: 600; }
   .step h4 {
     margin: 0 0 .45rem; font-family: var(--gr-display); font-weight: 800;
     text-transform: uppercase; letter-spacing: -.015em; line-height: 1.05;
@@ -444,12 +442,6 @@
     <span class="rule"></span>
     <p>Three, in depth</p>
   </div>
-  <p class="method">
-    The four moves, in order. <b>Get the real information into a table.</b> <b>Build the
-    design so it reads from that table</b> instead of being drawn by hand. <b>Let the machine
-    make the posts.</b> <b>Let it publish on its own.</b> The last project is not social media
-    at all, which is the point: same method, different job.
-  </p>
 
   <main class="work">
 
@@ -460,6 +452,7 @@
       </div>
       <div>
         <h3>AdvisorAssist<span class="golinks"><a class="golink" href="https://advisorassist.ca" rel="noopener" aria-label="Opens advisorassist.ca in a new tab" title="advisorassist.ca" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
+        <p class="piece__one">A subscription that wrote and posted a financial advisor's social media for them, every month, on their own branding, without them doing anything.</p>
         <figure class="plate plate--lead">
           <div class="plate__frame"><button type="button" class="zoom" data-cap="Three financial advisors' LinkedIn posts fanned out, each with its own branded card, hashtag block, shortened link and engagement counts, all produced and published by the pipeline." aria-label="Open full size"><img src="{{IMG:aa-posted}}" alt="Three financial advisors' LinkedIn posts fanned out, each with its own branded card, hashtag block, shortened link and engagement counts, all produced and published by the pipeline." width="900" height="900"></button></div>
           <figcaption>Three advisors' feeds. Every card generated, branded and published by the pipeline, on a schedule, without them or me touching it.</figcaption>
@@ -523,6 +516,7 @@
       </div>
       <div>
         <h3>Wines and Tours of the Okanagan<span class="golinks"><a class="golink golink--wide" href="https://www.instagram.com/winesoftheokanagan/" rel="noopener" aria-label="Opens instagram.com/winesoftheokanagan in a new tab" title="instagram.com/winesoftheokanagan" target="_blank"><span class="golink__t">Wines</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a><a class="golink golink--wide" href="https://www.instagram.com/toursoftheokanagan/" rel="noopener" aria-label="Opens instagram.com/toursoftheokanagan in a new tab" title="instagram.com/toursoftheokanagan" target="_blank"><span class="golink__t">Tours</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
+        <p class="piece__one">An Instagram account that builds itself out of a public winery database, and then a second one built the same way.</p>
         <figure class="plate plate--lead">
           <div class="plate__frame"><button type="button" class="zoom" data-cap="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." aria-label="Open full size"><img src="{{IMG:woto-posts}}" alt="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." width="720" height="720"></button></div>
           <figcaption>Four series, four templates, one wordmark. The profile card is the one I still like: body, tannins, sweetness, acidity and alcohol arrive as numbers in a column and leave as meters, with the bar length and the colour swatch drawn from the field values. Every one of these is a row of Airtable. Nobody laid any of them out.</figcaption>
@@ -584,7 +578,8 @@
         <span class="piece__cat">Brand, site, product</span>
       </div>
       <div>
-        <h3>Safe Family Internet<span class="golinks"><a class="golink" href="https://safefamilyinternet.ca" rel="noopener" aria-label="Opens safefamilyinternet.ca in a new tab" title="safefamilyinternet.ca" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
+        <h3>Safe Family Internet<span class="golinks"><a class="golink golink--wide" href="https://safefamilyinternet.ca" rel="noopener" aria-label="Opens safefamilyinternet.ca in a new tab" title="safefamilyinternet.ca" target="_blank"><span class="golink__t">Site</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a><a class="golink golink--wide" href="https://downloads.safefamilyinternet.ca" rel="noopener" aria-label="Opens downloads.safefamilyinternet.ca in a new tab" title="downloads.safefamilyinternet.ca" target="_blank"><span class="golink__t">Guides</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
+        <p class="piece__one">A brand, a set of guides and the machine that produces them, made to get parents to change one thing at home tonight.</p>
         <p class="lede">
           An internet safety initiative I started in Lake Country. Parents are told
           constantly that the internet is dangerous for their kids and almost nobody tells
@@ -622,6 +617,10 @@
             <span class="step__stage">The generation</span>
             <h4>Everything comes out on brand without a designer</h4>
             <p>Take screenshots on your phone, drop the folder in, and out come eight branded step-by-step guides, each screen framed with a pink box around the thing to tap. Posts work the same way: type the words, get finished slides in the right colours and fonts. A roughly 200 slide deck came off the same system.</p>
+            <figure class="plate">
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="The screenshot pipeline, before and after. On the left a raw iPhone screenshot of a settings screen. On the right the same screen as a finished guide step, in a phone frame with the toggle ringed in brand pink." aria-label="Open full size"><img src="{{IMG:sfi-pipeline}}" alt="The screenshot pipeline, before and after. On the left a raw iPhone screenshot of a settings screen. On the right the same screen as a finished guide step, in a phone frame with the toggle ringed in brand pink." width="760" height="676"></button></div>
+              <figcaption>Left, what you take on your phone. Right, what comes out. Nobody drew the one on the right.</figcaption>
+            </figure>
           </div>
         </div>
         <div class="step">
@@ -686,13 +685,7 @@
       <h3>Bold Talks, and Ground</h3>
       <p>I kept redrawing the same slides. So the colours and type became a file, and now the deck, the guides and this page all read from it. It also ships a checker that refuses to publish a page that breaks the rules.</p>
     </article>
-    <article class="cr" style="--c: var(--gr-accent-3)">
-      <span class="cr__cat">Screenshot pipeline</span>
-      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The screenshot pipeline, before and after. On the left a raw iPhone capture of a settings pane, on the right the finished guide step in a phone frame with the toggle ringed in pink." aria-label="Open full size"><img src="{{IMG:craft-guides}}" alt="The screenshot pipeline, before and after. On the left a raw iPhone capture of a settings pane, on the right the finished guide step in a phone frame with the toggle ringed in pink." width="560" height="498"></button></div></div>
-      <h3>Parent guides<span class="golinks"><a class="golink" href="https://downloads.safefamilyinternet.ca" rel="noopener" aria-label="Opens downloads.safefamilyinternet.ca in a new tab" title="downloads.safefamilyinternet.ca" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
-      <p>Take screenshots on your phone. Drop the folder in. Out come branded step-by-step guides, each screen in a frame with a pink box around the exact thing to tap. Eight of them so far.</p>
-    </article>
-    <article class="cr" style="--c: var(--gr-accent-4)">
+   <article class="cr" style="--c: var(--gr-accent-4)">
       <span class="cr__cat">Publishing engine</span>
       <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The closing slide of a rendered carousel: a violet to cobalt gradient, a headline in condensed capitals, and the site address in a cyan chip." aria-label="Open full size"><img src="{{IMG:craft-carousel}}" alt="The closing slide of a rendered carousel: a violet to cobalt gradient, a headline in condensed capitals, and the site address in a cyan chip." width="448" height="560"></button></div></div>
       <h3>Carousel and publishing</h3>
