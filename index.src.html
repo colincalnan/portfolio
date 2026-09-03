@@ -237,6 +237,9 @@
   .cr__cat { font: 500 11px/1 var(--gr-mono); letter-spacing: .13em; text-transform: uppercase; color: var(--gr-ink-2); display: flex; align-items: center; gap: .55rem; }
   .cr__cat::before { content: ""; width: 16px; height: 4px; flex: none; background: var(--c); }
   .cr p { margin: 0; font-size: .9375rem; line-height: 1.58; color: var(--gr-ink-2); text-wrap: pretty; }
+  .cr__link { font: 500 11.5px/1 var(--gr-mono); letter-spacing: .1em; text-transform: uppercase; margin-top: auto; padding-top: .25rem; }
+  .cr__link a { border-bottom: 1px solid var(--gr-rule); }
+  .cr__link a::after { content: " \2197"; }
 
   /* ---------- the triad: idea, brand, build ----------
      The claim this page makes is that these three usually live in different
@@ -537,9 +540,10 @@
     </article>
     <article class="cr" style="--c: var(--gr-accent-5)">
       <span class="cr__cat">Video pipeline</span>
-      <div class="cr__shot cr__shot--dark cr__shot--contain"><button type="button" class="zoom" data-cap="A poster frame from a cut reel: a dark theatre stage with a burned-in caption bar reading, there is one switch on your child's phone." aria-label="Open full size"><img src="{{IMG:craft-reels}}" alt="A poster frame from a cut reel: a dark theatre stage with a burned-in caption bar reading, there is one switch on your child's phone." width="900" height="506"></button></div>
+      <div class="cr__shot cr__shot--dark cr__shot--contain"><button type="button" class="zoom" data-cap="Two panels. On the left a frame from a cut reel, Colin playing guitar and singing into a mic on a lawn at golden hour. On the right the energy analysis for that gig: normalised RMS across 120 minutes with a threshold line and 23 shaded regions, one per detected song." aria-label="Open full size"><img src="{{IMG:craft-reels}}" alt="Two panels. On the left a frame from a cut reel, Colin playing guitar and singing into a mic on a lawn at golden hour. On the right the energy analysis for that gig: normalised RMS across 120 minutes with a threshold line and 23 shaded regions, one per detected song." width="900" height="506"></button></div>
       <h3>Reels and transcribe</h3>
-      <p>Energy analysis finds the song boundaries in an unattended two hour gig recording and cuts it into publishable reels. One of them has 57,288 views.</p>
+      <p>There is already a phone clipped to the speaker stand at every gig I play. Energy analysis finds the song boundaries in the unattended two hour recording, cuts each one into a vertical reel, and captions it. This gig came out as <b>23 songs</b>. One reel from the series has 57,288 views.</p>
+      <p class="cr__link"><a href="https://www.instagram.com/p/DZOmcfODP4c/" rel="noopener">Watch one</a></p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-6)">
       <span class="cr__cat">Agent loop</span>
