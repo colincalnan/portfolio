@@ -377,16 +377,17 @@
       <div>
         <h3>Wines and Tours of the Okanagan</h3>
         <figure class="piece__lead">
-          <div class="shot__frame"><img src="{{IMG:woto-posts}}" alt="Four generated Instagram posts in a grid, each on a different gradient, each carrying the same headline block, wine name, hashtag and Wines of the Okanagan wordmark." width="900" height="900"></div>
-          <figcaption>Four posts, one template, four rows of Airtable. Nobody laid these out.</figcaption>
+          <div class="shot__frame"><img src="{{IMG:woto-posts}}" alt="Four generated Instagram posts in a grid: a gradient tasting-note card, a bottle with a WineAlign gold medal and a 93 point score, a regional fact set as a pull quote over a vineyard, and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." width="800" height="800"></div>
+          <figcaption>Four different series, four templates, one wordmark. Tasting notes, award scores, regional facts, and the weekly winery feature. Each one is a row of Airtable and nobody laid any of them out.</figcaption>
         </figure>
         <p class="lede">
-          Two Instagram accounts running the same machine on two different data sources.
-          One scraped the provincial winery database through its API, generated the imagery
-          and the copy, and posted unattended. It also read winery events out of an inbox
-          and posted those, and ran wine scores for a while. The second did it again for
-          wine tour reviews. Building it twice off different inputs is the part I care
-          about: the second one was a configuration, not a rebuild.
+          Two Instagram accounts running the same machine on different data. The wine one
+          scraped the provincial winery database through its API and turned rows into
+          posts: tasting notes, award scores off the national wine awards, regional facts,
+          and a weekly winery feature. It also read winery events out of an inbox and
+          posted those. Then the same machine got pointed at wine tour reviews and ran a
+          second account. Four post series and two accounts off one rendering system is
+          the part I care about. None of it was a rebuild.
         </p>
         <div class="triad">
         <div class="tri">
@@ -396,7 +397,7 @@
         <div class="tri">
           <span class="tri__label">Brand</span>
           <div class="tri__shot tri__shot--dark tri__shot--contain"><img src="{{IMG:woto-brand}}" alt="The Wines of the Okanagan mark: a wine glass with a sun inside it above the stacked wordmark." width="700" height="649"></div>
-          <p>A mark, a wordmark, a gradient set and a headline voice, all built so an unattended feed still reads as one thing. Template families rather than per-post design.</p>
+          <p>A mark, a wordmark, a gradient set and a headline voice. Four post series that look nothing like each other and still read as one account, which is the only way an unattended feed holds together.</p>
         </div>
         <div class="tri">
           <span class="tri__label">Build</span>
@@ -405,7 +406,8 @@
         </div>
         </div>
         <dl class="facts">
-          <div class="fact"><dt>Role</dt><dd>Everything. Scraper, generation, templates, scheduling, both accounts.</dd></div>
+          <div class="fact"><dt>Role</dt><dd>Everything. Brand, scraper, templates, generation, scheduling, both accounts.</dd></div>
+          <div class="fact"><dt>Series</dt><dd>Tasting notes, award scores, regional facts, a weekly winery feature, and winery events pulled from an inbox. <b>Four templates, one system.</b></dd></div>
           <div class="fact"><dt>Approach</dt><dd>Structured source data in, generated on-brand posts out, published on a schedule with nobody in the loop. A template family rather than a run of one-offs.</dd></div>
           <div class="fact"><dt>Decision</dt><dd>Every field on the card is a <b>named layer</b> rather than baked into the artwork. It costs more up front and it is the reason pointing the machine at a second data source was a configuration rather than a rebuild.</dd></div>
         </dl>
