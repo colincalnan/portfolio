@@ -90,12 +90,6 @@
   .hero__lede b { color: var(--gr-ink); font-weight: 600; }
 
   /* the thesis image: his own slide, his own room, him presenting it */
-  .hero__shot { margin: clamp(2.5rem, 6vh, 4rem) 0 0; }
-  .hero__shot img { width: 100%; height: auto; }
-  .hero__shot figcaption {
-    font: 400 13px/1.7 var(--gr-mono); color: var(--gr-ink-2);
-    margin-top: .8rem;
-  }
 
   /* ---------- stats ---------- */
   .stats {
@@ -157,11 +151,6 @@
   .stack { display: flex; flex-wrap: wrap; gap: .3rem; margin: 1.1rem 0 0; padding: 0; list-style: none; }
   .stack li { font: 400 12px/1 var(--gr-mono); color: var(--gr-ink-2); border: 1px solid var(--gr-rule); padding: .45rem .6rem; }
 
-
-
-
-
-
   /* ---------- go-links ----------
      The link belongs beside the name, not at the bottom of the case study.
      A reader deciding whether this thing is real should not have to scroll
@@ -184,6 +173,49 @@
      Half the argument on this page is that these things are real and running.
      A link that reads as body copy does not carry that, so it gets a chip:
      mono, bordered, an arrow, and a hover that lights the accent. */
+
+  /* ---------- the plate ----------
+     One container for every image on the page, whatever shape it is.
+
+     The problem it solves: these images are screenshots, renders, logos and
+     photographs, and they arrive at wildly different aspect ratios. Sizing each
+     one to the column stretched them. Letting each sit at natural size left a
+     ragged edge and dead space to the right.
+
+     So the plate is always the full width of its column, which keeps the
+     vertical rhythm consistent, and the image is centred inside it at its own
+     size, never upscaled, with a height cap so nothing becomes a wall. The
+     caption lives in the plate under a hairline, so it can never drift away
+     from what it describes. Full size is one click away. */
+  .plate {
+    margin: 1rem 0 0;
+    border: 1px solid var(--gr-rule);
+    background: var(--gr-ground-2);
+  }
+  .plate__frame {
+    display: grid; place-items: center;
+    padding: clamp(.7rem, 2.2vw, 1.4rem);
+    min-height: 4rem;
+  }
+  .plate img {
+    display: block; width: auto; height: auto;
+    max-width: 100%; max-height: 300px;
+  }
+  .plate figcaption {
+    border-top: 1px solid var(--gr-rule-soft);
+    padding: .75rem clamp(.8rem, 2vw, 1.1rem) .85rem;
+    font: 400 12px/1.6 var(--gr-mono); color: var(--gr-ink-2);
+    text-wrap: pretty;
+  }
+  .plate--lead { margin: 0 0 1.75rem; }
+  .plate--lead img { max-height: 460px; }
+  .plate--craft { margin: 0; }
+  .plate--craft .plate__frame { padding: .8rem; }
+  .plate--craft img { max-height: 170px; }
+  .plate--hero { margin: clamp(2.5rem, 6vh, 4rem) 0 0; }
+  .plate--hero img { max-height: 560px; }
+  .plate--mark .plate__frame { padding: clamp(1.4rem, 4vw, 2.6rem); }
+  .plate--mark img { max-height: 220px; }
 
   /* ---------- lightbox ----------
      Every image on this page is already inlined as a data URI, so opening one
@@ -230,13 +262,6 @@
      One full-width image at the top of a case study, before the reading
      starts. Used only where the strongest evidence is a picture of the
      output rather than a picture of the machine. */
-  .piece__lead { margin: 0 0 1.75rem; }
-  .piece__lead .shot__frame { border: 1px solid var(--gr-rule); background: var(--gr-panel); line-height: 0; width: fit-content; max-width: 100%; }
-  .piece__lead img { display: block; max-width: 100%; width: auto; height: auto; max-height: 440px; }
-  .piece__lead figcaption {
-    font: 400 12.5px/1.65 var(--gr-mono); color: var(--gr-ink-2);
-    margin-top: .8rem; text-wrap: pretty;
-  }
 
   /* ---------- craft ----------
      Everything that is real, live and ongoing but is not one of the three
@@ -251,9 +276,6 @@
     margin-top: 2.25rem;
   }
   .cr { background: var(--gr-ground); padding: 1.25rem 1.35rem 1.5rem; display: flex; flex-direction: column; gap: .9rem; }
-  .cr__shot { background: var(--gr-panel); border: 1px solid var(--gr-rule); line-height: 0; width: fit-content; max-width: 100%; }
-  .cr__shot img { display: block; max-width: 100%; width: auto; height: auto; max-height: 190px; }
-  .cr__shot--dark { background: var(--gr-ground-2); }
 
   .cr h3 {
     font-family: var(--gr-display); font-weight: 800; text-transform: uppercase;
@@ -263,7 +285,6 @@
   .cr__cat { font: 500 11px/1 var(--gr-mono); letter-spacing: .13em; text-transform: uppercase; color: var(--gr-ink-2); display: flex; align-items: center; gap: .55rem; }
   .cr__cat::before { content: ""; width: 16px; height: 4px; flex: none; background: var(--c); }
   .cr p { margin: 0; font-size: .9375rem; line-height: 1.58; color: var(--gr-ink-2); text-wrap: pretty; }
-
 
   /* ---------- how it works ----------
      Replaces the idea/brand/build triad on case studies. Naming three
@@ -303,10 +324,6 @@
     font: 400 .875em/1 var(--gr-mono); color: var(--gr-ink);
     border: 1px solid var(--gr-rule); padding: .18em .38em; white-space: nowrap;
   }
-  .step__shot { margin: .9rem 0 0; border: 1px solid var(--gr-rule); background: var(--gr-panel); line-height: 0; width: fit-content; max-width: 100%; }
-  .step__shot--dark { background: var(--gr-ground-2); }
-  .step__shot img { display: block; max-width: 100%; width: auto; height: auto; max-height: 300px; }
-  .step__cap { font: 400 12px/1.6 var(--gr-mono); color: var(--gr-muted); margin: .6rem 0 0; text-wrap: pretty; }
 
   @media (max-width: 720px) {
     .step { grid-template-columns: 1fr; gap: .35rem; }
@@ -352,13 +369,6 @@
      leaving the caption stranded in the middle of a black rectangle.
      The panel and its hairline live on the frame, never on the figure, so
      the caption sits outside the image the way a caption should. */
-  .shot { margin: 0; align-self: start; }
-  .shot__frame { border: 1px solid var(--gr-rule); line-height: 0; width: fit-content; max-width: 100%; }
-  .shot__frame img { display: block; max-width: 100%; width: auto; height: auto; max-height: 440px; }
-  .shot--light .shot__frame { background: var(--gr-panel); }
-  .shot--dark  .shot__frame { background: var(--gr-ground); }
-  .shot--tall .shot__frame img { aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 22%; }
-  .shot figcaption { font: 400 12.5px/1.65 var(--gr-mono); color: var(--gr-ink-2); margin-top: .8rem; text-wrap: pretty; }
 
   /* ---------- the palette, rendered from the real tokens ---------- */
   .swatches { display: flex; margin: 0; border: 1px solid var(--gr-rule); }
@@ -404,8 +414,8 @@
       <b>Template families, not one-offs.</b>
     </p>
 
-    <figure class="hero__shot">
-      <img src="{{IMG:stage}}" alt="Colin on stage at Creekside Theatre presenting a slide showing an iPhone Screen Time setting inside a phone frame, with the step written in plain language beside it." width="740" height="415">
+    <figure class="plate plate--hero">
+      <div class="plate__frame"><img src="{{IMG:stage}}" alt="Colin on stage at Creekside Theatre presenting a slide showing an iPhone Screen Time setting inside a phone frame, with the step written in plain language beside it." width="740" height="415"></div>
       <figcaption>
         June 18, Creekside Theatre. The slide, the phone frame, the type and the
         instruction are all off the same design system on this page.
@@ -452,8 +462,8 @@
       </div>
       <div>
         <h3>AdvisorAssist<span class="golinks"><a class="golink" href="https://advisorassist.ca" rel="noopener" aria-label="advisorassist.ca" title="advisorassist.ca">↗</a></span></h3>
-        <figure class="piece__lead">
-          <div class="shot__frame"><button type="button" class="zoom" data-cap="Three real financial advisors' LinkedIn posts side by side, each with its own branded card, hashtags and engagement counts." aria-label="Open full size"><img src="{{IMG:aa-posted}}" alt="Three real financial advisors' LinkedIn posts side by side, each with its own branded card, hashtags and engagement counts." width="720" height="403"></button></div>
+        <figure class="plate plate--lead">
+          <div class="plate__frame"><button type="button" class="zoom" data-cap="Three real financial advisors' LinkedIn posts side by side, each with its own branded card, hashtags and engagement counts." aria-label="Open full size"><img src="{{IMG:aa-posted}}" alt="Three real financial advisors' LinkedIn posts side by side, each with its own branded card, hashtags and engagement counts." width="720" height="403"></button></div>
           <figcaption>Three advisors' feeds. Every card generated, branded and published by the pipeline, on a schedule, without them or me touching it.</figcaption>
         </figure>
         <p class="lede">
@@ -484,8 +494,10 @@
             <span class="step__stage">The template</span>
             <h4>Their brand, composited in, four ways</h4>
             <p>In BannerBear the post is a template with named layers, so the advisor's own logo and their own three brand colours drop into one of four designs. Hashtags assemble by tier in code: Engage gets the basics, Elevate adds their institution, Elite adds their custom set.</p>
-            <div class="step__shot step__shot--contain"><button type="button" class="zoom" data-cap="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." aria-label="Open full size"><img src="{{IMG:aa-brand}}" alt="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." width="740" height="740"></button></div>
-            <p class="step__cap">Three tiers, three rendered banners. The difference between them is enforced in the pipeline, not in a sales conversation.</p>
+            <figure class="plate plate--mark">
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." aria-label="Open full size"><img src="{{IMG:aa-brand}}" alt="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." width="740" height="740"></button></div>
+              <figcaption>Three tiers, three rendered banners. The difference between them is enforced in the pipeline, not in a sales conversation.</figcaption>
+            </figure>
           </div>
         </div>
         <div class="step">
@@ -494,8 +506,10 @@
             <span class="step__stage">The publish</span>
             <h4>Once a month, unattended</h4>
             <p>A scheduled emitter wakes at 12:01, reads the customer view, and fires one event per advisor carrying their key and their settings. <code>$.send.emit(object)</code>. A listener assembles that advisor's month and POSTs to Ayrshare with the scheduled date on it. Nobody looks at it.</p>
-            <div class="step__shot step__shot--dark"><button type="button" class="zoom" data-cap="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." aria-label="Open full size"><img src="{{IMG:aa-build}}" alt="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." width="560" height="167"></button></div>
-            <p class="step__cap">Five Pipedream workflows: the emitter, two listeners, a JWT generator and a profile guard. The publish listener reached v341.</p>
+            <figure class="plate">
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." aria-label="Open full size"><img src="{{IMG:aa-build}}" alt="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." width="560" height="167"></button></div>
+              <figcaption>Five Pipedream workflows: the emitter, two listeners, a JWT generator and a profile guard. The publish listener reached v341.</figcaption>
+            </figure>
           </div>
         </div>
         </div>
@@ -515,8 +529,8 @@
       </div>
       <div>
         <h3>Wines and Tours of the Okanagan<span class="golinks"><a class="golink" href="https://www.instagram.com/winesoftheokanagan/" rel="noopener" aria-label="instagram.com/winesoftheokanagan" title="instagram.com/winesoftheokanagan">↗</a><a class="golink" href="https://www.instagram.com/toursoftheokanagan/" rel="noopener" aria-label="instagram.com/toursoftheokanagan" title="instagram.com/toursoftheokanagan">↗</a></span></h3>
-        <figure class="piece__lead">
-          <div class="shot__frame"><button type="button" class="zoom" data-cap="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." aria-label="Open full size"><img src="{{IMG:woto-posts}}" alt="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." width="720" height="720"></button></div>
+        <figure class="plate plate--lead">
+          <div class="plate__frame"><button type="button" class="zoom" data-cap="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." aria-label="Open full size"><img src="{{IMG:woto-posts}}" alt="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." width="720" height="720"></button></div>
           <figcaption>Four series, four templates, one wordmark. The profile card is the one I still like: body, tannins, sweetness, acidity and alcohol arrive as numbers in a column and leave as meters, with the bar length and the colour swatch drawn from the field values. Every one of these is a row of Airtable. Nobody laid any of them out.</figcaption>
         </figure>
         <p class="lede">
@@ -538,8 +552,10 @@
             <span class="step__stage">The template</span>
             <h4>Twenty-eight named layers, not artwork</h4>
             <p>The card is a data object: <code>wine_name</code>, <code>value_tannins</code>, <code>meter_acidity</code>, <code>colour_colour</code>, <code>wine_image</code>. <b>Meter bar length and the colour swatch are computed from the row.</b> That is the whole trick, and it is why a new series was a new template rather than a new build.</p>
-            <div class="step__shot "><button type="button" class="zoom" data-cap="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." aria-label="Open full size"><img src="{{IMG:woto-build}}" alt="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." width="700" height="538"></button></div>
-            <p class="step__cap">The BannerBear editor. Every field on the card is addressable.</p>
+            <figure class="plate">
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." aria-label="Open full size"><img src="{{IMG:woto-build}}" alt="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." width="700" height="538"></button></div>
+              <figcaption>The BannerBear editor. Every field on the card is addressable.</figcaption>
+            </figure>
           </div>
         </div>
         <div class="step">
@@ -574,8 +590,8 @@
       </div>
       <div>
         <h3>Lake Country Zoning<span class="golinks"><a class="golink" href="https://lakecountry-envelope.vercel.app" rel="noopener" aria-label="lakecountry-envelope.vercel.app" title="lakecountry-envelope.vercel.app">↗</a></span></h3>
-        <figure class="piece__lead">
-          <div class="shot__frame"><button type="button" class="zoom" data-cap="The Lake Country Zoning app after a lookup: the address, the PID, the zone code and name, a satellite view with the parcel outlined in yellow, the buildable envelope filled green and the setbacks dashed in red, and a table underneath giving parcel 5,009 square metres, buildable envelope 3,953 and max footprint 2,505." aria-label="Open full size"><img src="{{IMG:env-app}}" alt="The Lake Country Zoning app after a lookup: the address, the PID, the zone code and name, a satellite view with the parcel outlined in yellow, the buildable envelope filled green and the setbacks dashed in red, and a table underneath giving parcel 5,009 square metres, buildable envelope 3,953 and max footprint 2,505." width="576" height="720"></button></div>
+        <figure class="plate plate--lead">
+          <div class="plate__frame"><button type="button" class="zoom" data-cap="The Lake Country Zoning app after a lookup: the address, the PID, the zone code and name, a satellite view with the parcel outlined in yellow, the buildable envelope filled green and the setbacks dashed in red, and a table underneath giving parcel 5,009 square metres, buildable envelope 3,953 and max footprint 2,505." aria-label="Open full size"><img src="{{IMG:env-app}}" alt="The Lake Country Zoning app after a lookup: the address, the PID, the zone code and name, a satellite view with the parcel outlined in yellow, the buildable envelope filled green and the setbacks dashed in red, and a table underneath giving parcel 5,009 square metres, buildable envelope 3,953 and max footprint 2,505." width="576" height="720"></button></div>
           <figcaption>One address in. A zoning bylaw, a parcel polygon and six government endpoints later, this comes out. Roughly fifteen seconds. Zone, setbacks, overlays, the envelope drawn on the lot, and every number with a bylaw citation behind it.</figcaption>
         </figure>
         <p class="lede">
@@ -615,8 +631,10 @@
             <span class="step__stage">The render</span>
             <h4>Intersect the half-planes and draw the answer</h4>
             <p>Each edge inset by its own setback is an inward half-plane. Intersect them and what remains is the buildable envelope. Shapely for geometry, Matplotlib and contextily for the map, and the result states whether lot coverage or the geometry is binding.</p>
-            <div class="step__shot "><button type="button" class="zoom" data-cap="A generated site plan for 11777 Hare Rd: the parcel outlined in black over a street map, the buildable envelope filled in green, and each setback drawn as a labelled red dashed line. A footer reads parcel 10,095 square metres, buildable envelope 7,798, max footprint 2,019." aria-label="Open full size"><img src="{{IMG:env-build}}" alt="A generated site plan for 11777 Hare Rd: the parcel outlined in black over a street map, the buildable envelope filled in green, and each setback drawn as a labelled red dashed line. A footer reads parcel 10,095 square metres, buildable envelope 7,798, max footprint 2,019." width="720" height="600"></button></div>
-            <p class="step__cap">The generated site plan. Parcel in black, envelope in green, every setback drawn and labelled.</p>
+            <figure class="plate">
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="A generated site plan for 11777 Hare Rd: the parcel outlined in black over a street map, the buildable envelope filled in green, and each setback drawn as a labelled red dashed line. A footer reads parcel 10,095 square metres, buildable envelope 7,798, max footprint 2,019." aria-label="Open full size"><img src="{{IMG:env-build}}" alt="A generated site plan for 11777 Hare Rd: the parcel outlined in black over a street map, the buildable envelope filled in green, and each setback drawn as a labelled red dashed line. A footer reads parcel 10,095 square metres, buildable envelope 7,798, max footprint 2,019." width="720" height="600"></button></div>
+              <figcaption>The generated site plan. Parcel in black, envelope in green, every setback drawn and labelled.</figcaption>
+            </figure>
           </div>
         </div>
         </div>
@@ -648,8 +666,10 @@
             <span class="step__stage">The source</span>
             <h4>One model, and everything hangs off it</h4>
             <p>Parents are not short of warnings. They are short of one thing to do tonight. So everything is organised around four layers, apps, devices, network and community, in the order you should fix them. Every guide, slide and post is a step inside one of those rings.</p>
-            <div class="step__shot step__shot--dark"><button type="button" class="zoom" data-cap="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." aria-label="Open full size"><img src="{{IMG:sfi-idea}}" alt="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." width="560" height="315"></button></div>
-            <p class="step__cap">The castle model. Information architecture, not a diagram drawn afterwards.</p>
+            <figure class="plate">
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." aria-label="Open full size"><img src="{{IMG:sfi-idea}}" alt="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." width="560" height="315"></button></div>
+              <figcaption>The castle model. Information architecture, not a diagram drawn afterwards.</figcaption>
+            </figure>
           </div>
         </div>
         <div class="step">
@@ -658,8 +678,10 @@
             <span class="step__stage">The template</span>
             <h4>An identity a volunteer can use without me</h4>
             <p>A shield, a wordmark, and a mark that animates from unprotected to protected, exported as a full matrix so nobody has to crop anything. Then a guide template: black phone frame, brand pink on the exact control to tap, numbered steps.</p>
-            <div class="step__shot step__shot--dark step__shot--contain"><button type="button" class="zoom" data-cap="The Safe Family Internet shield mark in white and blue on black." aria-label="Open full size"><img src="{{IMG:logo}}" alt="The Safe Family Internet shield mark in white and blue on black." width="558" height="700"></button></div>
-            <p class="step__cap">The primary mark, one of twenty-two exports covering every colourway and size.</p>
+            <figure class="plate plate--mark">
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="The Safe Family Internet shield mark in white and blue on black." aria-label="Open full size"><img src="{{IMG:logo}}" alt="The Safe Family Internet shield mark in white and blue on black." width="558" height="700"></button></div>
+              <figcaption>The primary mark, one of twenty-two exports covering every colourway and size.</figcaption>
+            </figure>
           </div>
         </div>
         <div class="step">
@@ -676,8 +698,10 @@
             <span class="step__stage">The publish</span>
             <h4>Straight to the platforms, and a gate behind it</h4>
             <p>Native Instagram carousels through the Graph API and multi-image posts through the LinkedIn REST API. No Canva, no scheduler. The guides sit behind a serverless function that validates email and consent, adds the address to the campaign platform, and sends the toolkit.</p>
-            <div class="step__shot step__shot--dark"><button type="button" class="zoom" data-cap="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." aria-label="Open full size"><img src="{{IMG:sfi-build}}" alt="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." width="448" height="560"></button></div>
-            <p class="step__cap">One rendered carousel slide. Type, highlight block and footer all come from tokens.</p>
+            <figure class="plate">
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." aria-label="Open full size"><img src="{{IMG:sfi-build}}" alt="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." width="448" height="560"></button></div>
+              <figcaption>One rendered carousel slide. Type, highlight block and footer all come from tokens.</figcaption>
+            </figure>
           </div>
         </div>
         </div>
@@ -700,49 +724,49 @@
   <div class="craft">
     <article class="cr" style="--c: var(--gr-accent-4)">
       <span class="cr__cat">Product, with payments</span>
-      <div class="cr__shot"><button type="button" class="zoom" data-cap="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." aria-label="Open full size"><img src="{{IMG:craft-setlist}}" alt="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." width="560" height="293"></button></div>
+      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." aria-label="Open full size"><img src="{{IMG:craft-setlist}}" alt="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." width="560" height="293"></button></div></div>
       <h3>Set List Easy<span class="golinks"><a class="golink" href="https://setlisteasy.com" rel="noopener" aria-label="setlisteasy.com" title="setlisteasy.com">↗</a></span></h3>
       <p>A searchable set list of two, three and four chord songs for musicians who are starting to gig. Accounts, subscriptions and a perform mode. Four builds across its life, ending as a native mobile app.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-5)">
       <span class="cr__cat">Live tool, on stage</span>
-      <div class="cr__shot cr__shot--dark"><button type="button" class="zoom" data-cap="The Gig Pulse app on a dark screen: a scored song list down the left with Crazy, Dancing In The Dark and Free Fallin, and on the right the song Bright Side Of The Road with four tap targets, applause, dancing, singing and screaming, each worth a different number of points, above a crowd energy counter." aria-label="Open full size"><img src="{{IMG:craft-gigpulse}}" alt="The Gig Pulse app on a dark screen: a scored song list down the left with Crazy, Dancing In The Dark and Free Fallin, and on the right the song Bright Side Of The Road with four tap targets, applause, dancing, singing and screaming, each worth a different number of points, above a crowd energy counter." width="720" height="539"></button></div>
+      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The Gig Pulse app on a dark screen: a scored song list down the left with Crazy, Dancing In The Dark and Free Fallin, and on the right the song Bright Side Of The Road with four tap targets, applause, dancing, singing and screaming, each worth a different number of points, above a crowd energy counter." aria-label="Open full size"><img src="{{IMG:craft-gigpulse}}" alt="The Gig Pulse app on a dark screen: a scored song list down the left with Crazy, Dancing In The Dark and Free Fallin, and on the right the song Bright Side Of The Road with four tap targets, applause, dancing, singing and screaming, each worth a different number of points, above a crowd energy counter." width="720" height="539"></button></div></div>
       <h3>Gig Pulse<span class="golinks"><a class="golink" href="https://gigpulse-ai.vercel.app/" rel="noopener" aria-label="gigpulse-ai.vercel.app" title="gigpulse-ai.vercel.app">↗</a><a class="golink" href="https://gigpulse-marketing.vercel.app/" rel="noopener" aria-label="gigpulse-marketing.vercel.app" title="gigpulse-marketing.vercel.app">↗</a></span></h3>
       <p>An iPad app for the gig itself. Applause is one point, dancing two, singing three, screaming five. Tap what the room does, song by song, then let a model read the history back and tell you which songs earn their place. <b>120 songs scored</b> so far.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-2)">
       <span class="cr__cat">Design system</span>
-      <div class="cr__shot cr__shot--dark"><button type="button" class="zoom" data-cap="A slide off the Bold Talks system: heavy white condensed capitals filling a deep cobalt field, with a corner label naming the slide type." aria-label="Open full size"><img src="{{IMG:craft-boldtalks}}" alt="A slide off the Bold Talks system: heavy white condensed capitals filling a deep cobalt field, with a corner label naming the slide type." width="560" height="315"></button></div>
+      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="A slide off the Bold Talks system: heavy white condensed capitals filling a deep cobalt field, with a corner label naming the slide type." aria-label="Open full size"><img src="{{IMG:craft-boldtalks}}" alt="A slide off the Bold Talks system: heavy white condensed capitals filling a deep cobalt field, with a corner label naming the slide type." width="560" height="315"></button></div></div>
       <h3>Bold Talks, and Ground<span class="golinks"><a class="golink" href="https://colincalnan.github.io/loops-tutorial/" rel="noopener" aria-label="colincalnan.github.io/loops-tutorial" title="colincalnan.github.io/loops-tutorial">↗</a></span></h3>
       <p>A presentation system written as tokens first, now a semantic contract with three themes, guidance an agent reads, and a check script that fails a build. This page runs on it.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-3)">
       <span class="cr__cat">Screenshot pipeline</span>
-      <div class="cr__shot"><button type="button" class="zoom" data-cap="The screenshot pipeline, before and after. On the left a raw iPhone capture of a settings pane, on the right the finished guide step in a phone frame with the toggle ringed in pink." aria-label="Open full size"><img src="{{IMG:craft-guides}}" alt="The screenshot pipeline, before and after. On the left a raw iPhone capture of a settings pane, on the right the finished guide step in a phone frame with the toggle ringed in pink." width="560" height="498"></button></div>
+      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The screenshot pipeline, before and after. On the left a raw iPhone capture of a settings pane, on the right the finished guide step in a phone frame with the toggle ringed in pink." aria-label="Open full size"><img src="{{IMG:craft-guides}}" alt="The screenshot pipeline, before and after. On the left a raw iPhone capture of a settings pane, on the right the finished guide step in a phone frame with the toggle ringed in pink." width="560" height="498"></button></div></div>
       <h3>Parent guides<span class="golinks"><a class="golink" href="https://downloads.safefamilyinternet.ca" rel="noopener" aria-label="downloads.safefamilyinternet.ca" title="downloads.safefamilyinternet.ca">↗</a></span></h3>
       <p>A folder of raw phone screenshots goes in, branded annotated PDFs come out. Black phone frame, a pink box on the exact thing to tap. Eight guides shipped.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-4)">
       <span class="cr__cat">Publishing engine</span>
-      <div class="cr__shot cr__shot--dark"><button type="button" class="zoom" data-cap="The closing slide of a rendered carousel: a violet to cobalt gradient, a headline in condensed capitals, and the site address in a cyan chip." aria-label="Open full size"><img src="{{IMG:craft-carousel}}" alt="The closing slide of a rendered carousel: a violet to cobalt gradient, a headline in condensed capitals, and the site address in a cyan chip." width="448" height="560"></button></div>
+      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The closing slide of a rendered carousel: a violet to cobalt gradient, a headline in condensed capitals, and the site address in a cyan chip." aria-label="Open full size"><img src="{{IMG:craft-carousel}}" alt="The closing slide of a rendered carousel: a violet to cobalt gradient, a headline in condensed capitals, and the site address in a cyan chip." width="448" height="560"></button></div></div>
       <h3>Carousel and publishing</h3>
       <p>A JSON file goes in, headless Chrome renders brand-correct 1080x1350 frames, and they post as a native Instagram carousel and a LinkedIn multi-image. No Canva, no scheduler, no designer.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-5)">
       <span class="cr__cat">Video pipeline</span>
-      <div class="cr__shot cr__shot--dark cr__shot--contain"><button type="button" class="zoom" data-cap="Two panels. On the left a frame from a cut reel, Colin playing guitar and singing into a mic on a lawn at golden hour. On the right the energy analysis for that gig: normalised RMS across 120 minutes with a threshold line and 23 shaded regions, one per detected song." aria-label="Open full size"><img src="{{IMG:craft-reels}}" alt="Two panels. On the left a frame from a cut reel, Colin playing guitar and singing into a mic on a lawn at golden hour. On the right the energy analysis for that gig: normalised RMS across 120 minutes with a threshold line and 23 shaded regions, one per detected song." width="720" height="403"></button></div>
+      <div class="plate plate--craft plate--mark"><div class="plate__frame"><button type="button" class="zoom" data-cap="Two panels. On the left a frame from a cut reel, Colin playing guitar and singing into a mic on a lawn at golden hour. On the right the energy analysis for that gig: normalised RMS across 120 minutes with a threshold line and 23 shaded regions, one per detected song." aria-label="Open full size"><img src="{{IMG:craft-reels}}" alt="Two panels. On the left a frame from a cut reel, Colin playing guitar and singing into a mic on a lawn at golden hour. On the right the energy analysis for that gig: normalised RMS across 120 minutes with a threshold line and 23 shaded regions, one per detected song." width="720" height="403"></button></div></div>
       <h3>Reels and transcribe<span class="golinks"><a class="golink" href="https://www.instagram.com/p/DZOmcfODP4c/" rel="noopener" aria-label="the reel on Instagram" title="the reel on Instagram">↗</a></span></h3>
       <p>There is already a phone clipped to the speaker stand at every gig I play. Energy analysis finds the song boundaries in the unattended two hour recording, cuts each one into a vertical reel, and captions it. This gig came out as <b>23 songs</b>. One reel from the series has 57,288 views.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-6)">
       <span class="cr__cat">Agent loop</span>
-      <div class="cr__shot"><button type="button" class="zoom" data-cap="The Job Scout report: a headline reading remote creative-AI roles, a stacked funnel bar showing 4,130 postings narrowing to a 224 role shortlist, and rows of filter buttons." aria-label="Open full size"><img src="{{IMG:craft-jobscout}}" alt="The Job Scout report: a headline reading remote creative-AI roles, a stacked funnel bar showing 4,130 postings narrowing to a 224 role shortlist, and rows of filter buttons." width="560" height="200"></button></div>
+      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The Job Scout report: a headline reading remote creative-AI roles, a stacked funnel bar showing 4,130 postings narrowing to a 224 role shortlist, and rows of filter buttons." aria-label="Open full size"><img src="{{IMG:craft-jobscout}}" alt="The Job Scout report: a headline reading remote creative-AI roles, a stacked funnel bar showing 4,130 postings narrowing to a 224 role shortlist, and rows of filter buttons." width="560" height="200"></button></div></div>
       <h3>Job Scout</h3>
       <p>Reads 4,130 job postings across 88 boards, gates them on facts a machine can check, then pays a model to read the survivors against a rubric written in prose. It found this application.</p>
     </article>
     <article class="cr" style="--c: var(--gr-warm)">
       <span class="cr__cat">Instrumentation</span>
-      <div class="cr__shot"><button type="button" class="zoom" data-cap="The social metrics report: a bar chart with one bar per post over eight months, most sitting near a dashed median line and a few spiking far above it." aria-label="Open full size"><img src="{{IMG:craft-metrics}}" alt="The social metrics report: a bar chart with one bar per post over eight months, most sitting near a dashed median line and a few spiking far above it." width="560" height="244"></button></div>
+      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The social metrics report: a bar chart with one bar per post over eight months, most sitting near a dashed median line and a few spiking far above it." aria-label="Open full size"><img src="{{IMG:craft-metrics}}" alt="The social metrics report: a bar chart with one bar per post over eight months, most sitting near a dashed median line and a few spiking far above it." width="560" height="244"></button></div></div>
       <h3>Social metrics</h3>
       <p>Pulls per-post numbers back out of the publishing pipeline and tells me the truth, including that reach here behaves like a lottery rather than a machine.</p>
     </article>
