@@ -239,11 +239,13 @@
   .plate--mark img { max-height: 220px; }
 
   /* ---------- lightbox ----------
-     Every image on this page is already inlined as a data URI, so opening one
-     full size costs nothing and loads nothing. Native <dialog> because it
-     gives focus trapping, Esc to close and return focus for free, and because
-     a hand-rolled modal that does none of those is the kind of detail this
-     page is arguing about. */
+     Images are served files at full resolution, so opening one here genuinely
+     shows more than the page does: the inline copy is capped at 300px tall,
+     this one gets the window. The footer links the raw file for anyone who
+     wants to zoom past even that. Native <dialog> because it gives focus
+     trapping, Esc to close and return focus for free, and because a
+     hand-rolled modal that does none of those is the kind of detail this page
+     is arguing about. */
   .zoom {
     display: block; padding: 0; border: 0; background: none;
     cursor: zoom-in; line-height: 0; color: inherit; font: inherit;
@@ -260,16 +262,24 @@
     min-height: 100%; display: grid; place-items: center;
     padding: clamp(1rem, 4vw, 3rem); gap: 1rem; cursor: zoom-out;
   }
-  .lb__fig { margin: 0; max-width: min(1400px, 100%); cursor: default; }
+  .lb__fig { margin: 0; max-width: min(1900px, 100%); cursor: default; }
   .lb__fig img {
     display: block; width: auto; height: auto;
-    max-width: 100%; max-height: 78vh;
+    max-width: 100%; max-height: 86vh;
     border: 1px solid var(--gr-rule); background: var(--gr-ground-2);
   }
   .lb__cap {
     font: 400 12.5px/1.65 var(--gr-mono); color: var(--gr-ink-2);
     margin-top: .9rem; max-width: 70ch; text-wrap: pretty;
   }
+  .lb__full {
+    display: inline-block; margin-top: .6rem;
+    font: 500 11.5px/1 var(--gr-mono); letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gr-accent); text-decoration: none;
+    border-bottom: 1px solid currentColor; padding-bottom: .2rem;
+  }
+  .lb__full:hover { color: var(--gr-warm); }
+  .lb__full:focus-visible { outline: 2px solid var(--gr-warm); outline-offset: 3px; }
   .lb__close {
     position: fixed; top: 1rem; right: 1rem;
     font: 500 11.5px/1 var(--gr-mono); letter-spacing: .13em; text-transform: uppercase;
@@ -465,7 +475,7 @@
         <h3>Advisor Assist<span class="golinks"><a class="golink" href="https://advisorassist.ca" rel="noopener" aria-label="Opens advisorassist.ca in a new tab" title="advisorassist.ca" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
         <p class="piece__one">A subscription that wrote and posted a financial advisor's social media for them, every month, on their own branding, without them doing anything.</p>
         <figure class="plate plate--lead">
-          <div class="plate__frame"><button type="button" class="zoom" data-cap="Three financial advisors' LinkedIn posts fanned out, each with its own branded card, hashtag block, shortened link and engagement counts, all produced and published by the pipeline." aria-label="Open full size"><img src="{{IMG:aa-posted}}" alt="Three financial advisors' LinkedIn posts fanned out, each with its own branded card, hashtag block, shortened link and engagement counts, all produced and published by the pipeline." width="900" height="900"></button></div>
+          <div class="plate__frame"><button type="button" class="zoom" data-cap="Three financial advisors' LinkedIn posts fanned out, each with its own branded card, hashtag block, shortened link and engagement counts, all produced and published by the pipeline." aria-label="Open full size"><img src="{{IMG:aa-posted}}" alt="Three financial advisors' LinkedIn posts fanned out, each with its own branded card, hashtag block, shortened link and engagement counts, all produced and published by the pipeline." width="1800" height="1800"></button></div>
           <figcaption>Three advisors' feeds. Every card generated, branded and published by the pipeline, on a schedule, without them or me touching it.</figcaption>
         </figure>
         <p class="lede">
@@ -497,7 +507,7 @@
             <h4>Their brand, composited in, four ways</h4>
             <p>The four designs are not pictures, they are forms with slots. Their logo goes in one slot, their three brand colours in others, so every post comes out looking like <b>their</b> firm rather than like a template. What they paid for decides how much gets filled in.</p>
             <figure class="plate">
-              <div class="plate__frame"><button type="button" class="zoom" data-cap="Two BannerBear templates side by side, Basic Template 1 and Elite Template 1. Both have a photo slot and a caption bar. The Elite one has an extra strip along the bottom for the advisor's own logo." aria-label="Open full size"><img src="{{IMG:aa-templates}}" alt="Two BannerBear templates side by side, Basic Template 1 and Elite Template 1. Both have a photo slot and a caption bar. The Elite one has an extra strip along the bottom for the advisor's own logo." width="1100" height="464"></button></div>
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="Two BannerBear templates side by side, Basic Template 1 and Elite Template 1. Both have a photo slot and a caption bar. The Elite one has an extra strip along the bottom for the advisor's own logo." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:aa-templates}}" alt="Two BannerBear templates side by side, Basic Template 1 and Elite Template 1. Both have a photo slot and a caption bar. The Elite one has an extra strip along the bottom for the advisor's own logo." width="1900" height="762"></button></div>
               <figcaption>Two of the four templates. The Elite one has a slot along the bottom for the advisor's own logo and the Basic one does not, which is what paying more actually bought.</figcaption>
             </figure>
           </div>
@@ -509,7 +519,7 @@
             <h4>Once a month, unattended</h4>
             <p>Once a month, at one minute past midnight, it wakes up, goes through the customer list, and hands each advisor off to be built and posted. Their month goes out on the days it was meant to. Nobody watches it happen.</p>
             <figure class="plate">
-              <div class="plate__frame"><button type="button" class="zoom" data-cap="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." aria-label="Open full size"><img src="{{IMG:aa-build}}" alt="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." width="560" height="167"></button></div>
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:aa-build}}" alt="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." width="1268" height="380"></button></div>
               <figcaption>Five Pipedream workflows: the emitter, two listeners, a JWT generator and a profile guard.</figcaption>
             </figure>
           </div>
@@ -533,7 +543,7 @@
         <h3>Wines of the Okanagan<span class="golinks"><a class="golink" href="https://www.instagram.com/winesoftheokanagan/" rel="noopener" aria-label="Opens instagram.com/winesoftheokanagan in a new tab" title="instagram.com/winesoftheokanagan" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
         <p class="piece__one">An Instagram account that builds itself out of a public winery database.</p>
         <figure class="plate plate--lead">
-          <div class="plate__frame"><button type="button" class="zoom" data-cap="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." aria-label="Open full size"><img src="{{IMG:woto-posts}}" alt="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." width="720" height="720"></button></div>
+          <div class="plate__frame"><button type="button" class="zoom" data-cap="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:woto-posts}}" alt="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." width="2000" height="2000"></button></div>
           <figcaption>Four kinds of post, four templates, one account. The profile card is the one I still like: body, tannins, sweetness, acidity and alcohol arrive as numbers in a column and leave as meters, with the bar length and the colour dot drawn from the values. Every one of these is a row in a table. Nobody laid any of them out.</figcaption>
         </figure>
         <p class="lede">
@@ -556,7 +566,7 @@
             <h4>Twenty-eight named layers, not artwork</h4>
             <p>Every part of the card has a name, so the design can go and fetch its own content. The tasting notes are the good bit: <b>the bar next to "tannins" is as long as the number in that column, and the little colour dot is the wine's actual colour.</b> Nobody sets those. That is the whole trick, and it is why adding a new kind of post later meant making a new form, not building a new thing.</p>
             <figure class="plate">
-              <div class="plate__frame"><button type="button" class="zoom" data-cap="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." aria-label="Open full size"><img src="{{IMG:woto-build}}" alt="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." width="700" height="538"></button></div>
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:woto-build}}" alt="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." width="1720" height="1322"></button></div>
               <figcaption>The BannerBear editor. Every field on the card is addressable.</figcaption>
             </figure>
           </div>
@@ -595,7 +605,7 @@
         <h3>Safe Family Internet<span class="golinks"><a class="golink golink--wide" href="https://safefamilyinternet.ca" rel="noopener" aria-label="Opens safefamilyinternet.ca in a new tab" title="safefamilyinternet.ca" target="_blank"><span class="golink__t">Site</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a><a class="golink golink--wide" href="https://downloads.safefamilyinternet.ca" rel="noopener" aria-label="Opens downloads.safefamilyinternet.ca in a new tab" title="downloads.safefamilyinternet.ca" target="_blank"><span class="golink__t">Guides</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
         <p class="piece__one">A brand, a set of guides and the machine that produces them, made to get parents to change one thing at home tonight.</p>
         <figure class="plate plate--lead">
-          <div class="plate__frame"><button type="button" class="zoom" data-cap="Colin on the Creekside Theatre stage, a Safe Family Internet slide filling the screen behind him: a purple phone frame showing an iPhone Screen Time setting, with the step written in plain language beside it." aria-label="Open full size"><img src="{{IMG:sfi-stage}}" alt="Colin on the Creekside Theatre stage, a Safe Family Internet slide filling the screen behind him: a purple phone frame showing an iPhone Screen Time setting, with the step written in plain language beside it." width="900" height="506"></button></div>
+          <div class="plate__frame"><button type="button" class="zoom" data-cap="Colin on the Creekside Theatre stage, a Safe Family Internet slide filling the screen behind him: a purple phone frame showing an iPhone Screen Time setting, with the step written in plain language beside it." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:sfi-stage}}" alt="Colin on the Creekside Theatre stage, a Safe Family Internet slide filling the screen behind him: a purple phone frame showing an iPhone Screen Time setting, with the step written in plain language beside it." width="1920" height="1080"></button></div>
           <figcaption>The biggest thing the brand produced: a roughly 200 slide deck, delivered to a full theatre. The slide, the phone frame, the type and the instruction all came off the same token file as the guides and the posts.</figcaption>
         </figure>
         <p class="lede">
@@ -612,7 +622,7 @@
             <h4>One model, and everything hangs off it</h4>
             <p>Everything hangs off one idea: there are four layers between a stranger and your kid, and you should fix them in order. The apps, then the device, then the home network, then the people around them. Every guide, every slide and every post is one step inside one of those four.</p>
             <figure class="plate">
-              <div class="plate__frame"><button type="button" class="zoom" data-cap="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." aria-label="Open full size"><img src="{{IMG:sfi-idea}}" alt="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." width="560" height="315"></button></div>
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:sfi-idea}}" alt="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." width="1680" height="946"></button></div>
               <figcaption>The castle model. Information architecture, not a diagram drawn afterwards.</figcaption>
             </figure>
           </div>
@@ -624,7 +634,7 @@
             <h4>A brand, and the rules for using it</h4>
             <p>A shield, a name, and a logo that animates from unprotected to protected, exported as <b>22 files</b> covering every colourway and size so a volunteer never has to crop one. Under it a design system: the colours, the type, and seven kinds of slide. The deck, the guides, the posts and the site all read from it.</p>
             <figure class="plate">
-              <div class="plate__frame"><button type="button" class="zoom" data-cap="Four versions of the Safe Family Internet shield side by side: primary cobalt on white, cobalt on black, magenta, and cobalt again, each with the wifi arcs, the pink dot and the stacked wordmark." aria-label="Open full size"><img src="{{IMG:sfi-marks}}" alt="Four versions of the Safe Family Internet shield side by side: primary cobalt on white, cobalt on black, magenta, and cobalt again, each with the wifi arcs, the pink dot and the stacked wordmark." width="1100" height="321"></button></div>
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="Four versions of the Safe Family Internet shield side by side: primary cobalt on white, cobalt on black, magenta, and cobalt again, each with the wifi arcs, the pink dot and the stacked wordmark." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:sfi-marks}}" alt="Four versions of the Safe Family Internet shield side by side: primary cobalt on white, cobalt on black, magenta, and cobalt again, each with the wifi arcs, the pink dot and the stacked wordmark." width="2200" height="628"></button></div>
               <figcaption>Four of the twenty-two exports. Every colourway and size anyone might need, so nobody ever has to crop one themselves.</figcaption>
             </figure>
           </div>
@@ -636,7 +646,7 @@
             <h4>Everything comes out on brand without a designer</h4>
             <p>Take screenshots on your phone, drop the folder in, and out come eight branded step-by-step guides, each screen framed with a pink box around the thing to tap. Posts work the same way: type the words, get finished slides in the right colours and fonts. A roughly 200 slide deck came off the same system.</p>
             <figure class="plate">
-              <div class="plate__frame"><button type="button" class="zoom" data-cap="The screenshot pipeline, before and after. On the left a raw iPhone screenshot of a settings screen. On the right the same screen as a finished guide step, in a phone frame with the toggle ringed in brand pink." aria-label="Open full size"><img src="{{IMG:sfi-pipeline}}" alt="The screenshot pipeline, before and after. On the left a raw iPhone screenshot of a settings screen. On the right the same screen as a finished guide step, in a phone frame with the toggle ringed in brand pink." width="760" height="676"></button></div>
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="The screenshot pipeline, before and after. On the left a raw iPhone screenshot of a settings screen. On the right the same screen as a finished guide step, in a phone frame with the toggle ringed in brand pink." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:sfi-pipeline}}" alt="The screenshot pipeline, before and after. On the left a raw iPhone screenshot of a settings screen. On the right the same screen as a finished guide step, in a phone frame with the toggle ringed in brand pink." width="1865" height="1660"></button></div>
               <figcaption>Left, what you take on your phone. Right, what comes out. Nobody drew the one on the right.</figcaption>
             </figure>
           </div>
@@ -648,7 +658,7 @@
             <h4>The talk becomes a month of clips</h4>
             <p>The evening was filmed end to end. The same cutter I use on my own gigs listens to the recording, finds where one point stops and the next begins, cuts them out and burns the captions on. <b>19 clips</b> came out of one evening, then went into the schedule alongside the carousels.</p>
             <figure class="plate">
-              <div class="plate__frame"><button type="button" class="zoom" data-cap="Three frames from a Safe Family Internet talk reel: Colin on stage with burned-in captions reading one switch stops every app install without your say-so, they can't install Snapchat, and there is one switch on your child's phone." aria-label="Open full size"><img src="{{IMG:sfi-video}}" alt="Three frames from a Safe Family Internet talk reel: Colin on stage with burned-in captions reading one switch stops every app install without your say-so, they can't install Snapchat, and there is one switch on your child's phone." width="1000" height="592"></button></div>
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="Three frames from a Safe Family Internet talk reel: Colin on stage with burned-in captions reading one switch stops every app install without your say-so, they can't install Snapchat, and there is one switch on your child's phone." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:sfi-video}}" alt="Three frames from a Safe Family Internet talk reel: Colin on stage with burned-in captions reading one switch stops every app install without your say-so, they can't install Snapchat, and there is one switch on your child's phone." width="2200" height="1280"></button></div>
               <figcaption>Three frames from one clip. The yellow caption block is the same one the slides use.</figcaption>
             </figure>
           </div>
@@ -660,7 +670,7 @@
             <h4>Out to the platforms, and into people's homes</h4>
             <p>The slides post straight to Instagram and LinkedIn as proper swipeable posts, with no Canva and no scheduler in between. The guides sit behind an email form that checks the address, adds it to the list and sends the download. <b>260 sign-ups claimed every seat</b> for one night in a town of 15,000.</p>
             <figure class="plate">
-              <div class="plate__frame"><button type="button" class="zoom" data-cap="Three slides from one carousel side by side: a black cover reading What one town just proved, an orange slide with the number 103 and the line families pledged to set up a layer of protection, and a violet closing slide reading You'll find out what to do with the site address in a cyan chip." aria-label="Open full size"><img src="{{IMG:sfi-carousel}}" alt="Three slides from one carousel side by side: a black cover reading What one town just proved, an orange slide with the number 103 and the line families pledged to set up a layer of protection, and a violet closing slide reading You'll find out what to do with the site address in a cyan chip." width="1100" height="458"></button></div>
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="Three slides from one carousel side by side: a black cover reading What one town just proved, an orange slide with the number 103 and the line families pledged to set up a layer of protection, and a violet closing slide reading You'll find out what to do with the site address in a cyan chip." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:sfi-carousel}}" alt="Three slides from one carousel side by side: a black cover reading What one town just proved, an orange slide with the number 103 and the line families pledged to set up a layer of protection, and a violet closing slide reading You'll find out what to do with the site address in a cyan chip." width="2400" height="982"></button></div>
               <figcaption>Three slides from one post. Same type, same colours, same footer, and not one of them laid out by hand.</figcaption>
             </figure>
           </div>
@@ -685,7 +695,7 @@
         <h3>Colin Calnan Music<span class="golinks"><a class="golink" href="https://www.instagram.com/colincalnanmusic" rel="noopener" aria-label="Opens instagram.com/colincalnanmusic in a new tab" title="instagram.com/colincalnanmusic" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
         <p class="piece__one">A two hour recording of a gig goes in on Saturday morning. Twenty three captioned clips come out, named after the songs, ready to post.</p>
         <figure class="plate plate--lead">
-          <div class="plate__frame"><button type="button" class="zoom" data-cap="Three frames from cut reels, each from a different gig: a covered winery patio, a barn door open onto a vineyard, and a sunlit courtyard. Same setup every time, one phone on a stand." aria-label="Open full size"><img src="{{IMG:gig-reels}}" alt="Three frames from cut reels, each from a different gig: a covered winery patio, a barn door open onto a vineyard, and a sunlit courtyard. Same setup every time, one phone on a stand." width="1000" height="592"></button></div>
+          <div class="plate__frame"><button type="button" class="zoom" data-cap="Three frames from cut reels, each from a different gig: a covered winery patio, a barn door open onto a vineyard, and a sunlit courtyard. Same setup every time, one phone on a stand." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:gig-reels}}" alt="Three frames from cut reels, each from a different gig: a covered winery patio, a barn door open onto a vineyard, and a sunlit courtyard. Same setup every time, one phone on a stand." width="2057" height="1200"></button></div>
           <figcaption>Three nights, three venues, one phone on a stand each time. Every clip on that account came out of a recording like these without anyone opening an editor.</figcaption>
         </figure>
         <p class="lede">
@@ -709,7 +719,7 @@
             <h4>Find the quiet bits</h4>
             <p>A song is loud and the gap after it is not. So the script reads the loudness of the whole recording, draws a line across it, and calls everything above the line a song and everything below it a gap. No transcription, no model, just the shape of the sound.</p>
             <figure class="plate ">
-              <div class="plate__frame"><button type="button" class="zoom" data-cap="The energy analysis for one gig: a jagged line of loudness across 120 minutes, a red dashed threshold across the middle, and 23 shaded blue bands, one per detected song, with the quiet gaps between them left white." aria-label="Open full size"><img src="{{IMG:gig-energy}}" alt="The energy analysis for one gig: a jagged line of loudness across 120 minutes, a red dashed threshold across the middle, and 23 shaded blue bands, one per detected song, with the quiet gaps between them left white." width="1000" height="250"></button></div>
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="The energy analysis for one gig: a jagged line of loudness across 120 minutes, a red dashed threshold across the middle, and 23 shaded blue bands, one per detected song, with the quiet gaps between them left white." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:gig-energy}}" alt="The energy analysis for one gig: a jagged line of loudness across 120 minutes, a red dashed threshold across the middle, and 23 shaded blue bands, one per detected song, with the quiet gaps between them left white." width="2400" height="600"></button></div>
               <figcaption>One gig, 120 minutes. Each shaded band is a song it found. The white gaps are me talking between them.</figcaption>
             </figure>
           </div>
@@ -721,7 +731,7 @@
             <h4>Cut, caption, name</h4>
             <p>Each band becomes its own vertical clip with the captions burned on. The file names come from what was actually played. <b>23 clips from one night</b>, and I did not watch any of the footage.</p>
             <figure class="plate">
-              <div class="plate__frame"><button type="button" class="zoom" data-cap="A folder listing of the output: song_02_Bryan_Adams_-_Summer_of_69_reel.mp4, song_04_Creedence_Clearwater_Revival_-_Have_You_Ever_Seen_the_Rain_reel.mp4 and so on, each mp4 paired with its own captions json file." aria-label="Open full size"><img src="{{IMG:gig-files}}" alt="A folder listing of the output: song_02_Bryan_Adams_-_Summer_of_69_reel.mp4, song_04_Creedence_Clearwater_Revival_-_Have_You_Ever_Seen_the_Rain_reel.mp4 and so on, each mp4 paired with its own captions json file." width="700" height="544"></button></div>
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="A folder listing of the output: song_02_Bryan_Adams_-_Summer_of_69_reel.mp4, song_04_Creedence_Clearwater_Revival_-_Have_You_Ever_Seen_the_Rain_reel.mp4 and so on, each mp4 paired with its own captions json file." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:gig-files}}" alt="A folder listing of the output: song_02_Bryan_Adams_-_Summer_of_69_reel.mp4, song_04_Creedence_Clearwater_Revival_-_Have_You_Ever_Seen_the_Rain_reel.mp4 and so on, each mp4 paired with its own captions json file." width="624" height="486"></button></div>
               <figcaption>The output folder. Every song its own clip, every clip its own captions, all named by what was played, so the folder is already a set list.</figcaption>
             </figure>
           </div>
@@ -733,7 +743,7 @@
             <h4>A month of posts from one evening</h4>
             <p>They go out on a schedule over the following weeks. One of them has <b>57,288 views</b>, which is more than anything else I have ever put online. The same script now runs on talk footage too: one evening at the theatre came back as 19 clips.</p>
             <figure class="plate">
-              <div class="plate__frame"><button type="button" class="zoom" data-cap="The account open in Instagram, six posts in a grid with the app's own sidebar down the left. Each post is a still from a cut clip with a yellow caption over it, and a view count underneath: 1,576, 1,265, 437, 354, 718 and 2,547." aria-label="Open full size"><img src="{{IMG:gig-posts}}" alt="The account open in Instagram, six posts in a grid with the app's own sidebar down the left. Each post is a still from a cut clip with a yellow caption over it, and a view count underneath: 1,576, 1,265, 437, 354, 718 and 2,547." width="1024" height="769"></button></div>
+              <div class="plate__frame"><button type="button" class="zoom" data-cap="The account open in Instagram, six posts in a grid with the app's own sidebar down the left. Each post is a still from a cut clip with a yellow caption over it, and a view count underneath: 1,576, 1,265, 437, 354, 718 and 2,547." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:gig-posts}}" alt="The account open in Instagram, six posts in a grid with the app's own sidebar down the left. Each post is a still from a cut clip with a yellow caption over it, and a view count underneath: 1,576, 1,265, 437, 354, 718 and 2,547." width="1024" height="770"></button></div>
               <figcaption>A month of the account. Every one of these is a clip the script found and cut, with a line written over it afterwards.</figcaption>
             </figure>
           </div>
@@ -756,37 +766,37 @@
   <div class="craft">
     <article class="cr" style="--c: var(--gr-accent-3)">
       <span class="cr__cat">Public writing</span>
-      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The loops field guide open at its first lesson: a sidebar listing fifteen numbered lessons with a progress counter, beside a page headed Stop prompting. Start designing loops." aria-label="Open full size"><img src="{{IMG:craft-loops}}" alt="The loops field guide open at its first lesson: a sidebar listing fifteen numbered lessons with a progress counter, beside a page headed Stop prompting. Start designing loops." width="720" height="428"></button></div></div>
+      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The loops field guide open at its first lesson: a sidebar listing fifteen numbered lessons with a progress counter, beside a page headed Stop prompting. Start designing loops." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:craft-loops}}" alt="The loops field guide open at its first lesson: a sidebar listing fifteen numbered lessons with a progress counter, beside a page headed Stop prompting. Start designing loops." width="1440" height="856"></button></div></div>
       <h3>Loops<span class="golinks"><a class="golink" href="https://colincalnan.github.io/loops-tutorial/" rel="noopener" aria-label="Opens colincalnan.github.io/loops-tutorial in a new tab" title="colincalnan.github.io/loops-tutorial" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
       <p>Getting an agent to finish a job instead of stopping halfway is a skill, and almost nobody writes it down. So I did: fifteen free lessons on designing agent loops, what makes a check real rather than two optimists agreeing, and where to keep a person in the chair. It is how I work every day, in Claude Code and Codex.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-6)">
       <span class="cr__cat">Geospatial tool</span>
-      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The Lake Country Zoning app after a lookup: the address, the zone, a satellite view with the lot outlined and the buildable area filled in green, and a table of the areas underneath." aria-label="Open full size"><img src="{{IMG:env-app}}" alt="The Lake Country Zoning app after a lookup: the address, the zone, a satellite view with the lot outlined and the buildable area filled in green, and a table of the areas underneath." width="576" height="720"></button></div></div>
+      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The Lake Country Zoning app after a lookup: the address, the zone, a satellite view with the lot outlined and the buildable area filled in green, and a table of the areas underneath." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:env-app}}" alt="The Lake Country Zoning app after a lookup: the address, the zone, a satellite view with the lot outlined and the buildable area filled in green, and a table of the areas underneath." width="772" height="966"></button></div></div>
       <h3>Lake Country Zoning<span class="golinks"><a class="golink" href="https://lakecountry-envelope.vercel.app" rel="noopener" aria-label="Opens lakecountry-envelope.vercel.app in a new tab" title="lakecountry-envelope.vercel.app" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
       <p>Before a designer can sketch anything they need to know how much of the lot they can build on, which means reading the zoning bylaw and measuring in from every edge by a different amount. Half an hour, every time. Type an address into this and it comes back in fifteen seconds, drawn on the lot.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-4)">
       <span class="cr__cat">Product, with payments</span>
-      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." aria-label="Open full size"><img src="{{IMG:craft-setlist}}" alt="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." width="560" height="293"></button></div></div>
+      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:craft-setlist}}" alt="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." width="1344" height="704"></button></div></div>
       <h3>Set List Easy<span class="golinks"><a class="golink" href="https://setlisteasy.com" rel="noopener" aria-label="Opens setlisteasy.com in a new tab" title="setlisteasy.com" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
       <p>You know six chords and you have a two hour gig on Friday. Every song list online is sorted by artist or decade, never by how hard it is to play. So this one is. People pay for it.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-5)">
       <span class="cr__cat">Live tool, on stage</span>
-      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The Gig Pulse app on a dark screen: a scored song list down the left with Crazy, Dancing In The Dark and Free Fallin, and on the right the song Bright Side Of The Road with four tap targets, applause, dancing, singing and screaming, each worth a different number of points, above a crowd energy counter." aria-label="Open full size"><img src="{{IMG:craft-gigpulse}}" alt="The Gig Pulse app on a dark screen: a scored song list down the left with Crazy, Dancing In The Dark and Free Fallin, and on the right the song Bright Side Of The Road with four tap targets, applause, dancing, singing and screaming, each worth a different number of points, above a crowd energy counter." width="720" height="539"></button></div></div>
+      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The Gig Pulse app on a dark screen: a scored song list down the left with Crazy, Dancing In The Dark and Free Fallin, and on the right the song Bright Side Of The Road with four tap targets, applause, dancing, singing and screaming, each worth a different number of points, above a crowd energy counter." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:craft-gigpulse}}" alt="The Gig Pulse app on a dark screen: a scored song list down the left with Crazy, Dancing In The Dark and Free Fallin, and on the right the song Bright Side Of The Road with four tap targets, applause, dancing, singing and screaming, each worth a different number of points, above a crowd energy counter." width="1720" height="1288"></button></div></div>
       <h3>Gig Pulse<span class="golinks"><a class="golink golink--wide" href="https://gigpulse-ai.vercel.app/" rel="noopener" aria-label="Opens gigpulse-ai.vercel.app in a new tab" title="gigpulse-ai.vercel.app" target="_blank"><span class="golink__t">App</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a><a class="golink golink--wide" href="https://gigpulse-marketing.vercel.app/" rel="noopener" aria-label="Opens gigpulse-marketing.vercel.app in a new tab" title="gigpulse-marketing.vercel.app" target="_blank"><span class="golink__t">Site</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
       <p>Every musician thinks they know which songs work. Nobody writes it down, because you cannot take notes with a guitar on. So this is one tap: applause is worth one, dancing two, singing three, screaming five. After enough gigs it tells you which songs to keep. <b>120 songs scored</b> so far.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-6)">
       <span class="cr__cat">Agent loop</span>
-      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The Job Scout report: a headline reading remote creative-AI roles, a stacked funnel bar showing 4,130 postings narrowing to a 224 role shortlist, and rows of filter buttons." aria-label="Open full size"><img src="{{IMG:craft-jobscout}}" alt="The Job Scout report: a headline reading remote creative-AI roles, a stacked funnel bar showing 4,130 postings narrowing to a 224 role shortlist, and rows of filter buttons." width="560" height="200"></button></div></div>
+      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The Job Scout report: a headline reading remote creative-AI roles, a stacked funnel bar showing 4,130 postings narrowing to a 224 role shortlist, and rows of filter buttons." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:craft-jobscout}}" alt="The Job Scout report: a headline reading remote creative-AI roles, a stacked funnel bar showing 4,130 postings narrowing to a 224 role shortlist, and rows of filter buttons." width="1400" height="500"></button></div></div>
       <h3>Job Scout</h3>
       <p>Job boards are mostly noise. This reads 4,130 postings a week, throws out anything that fails a fact I can check by machine, then has a model read what is left against a description of what I actually want, written in plain English. It found this job.</p>
     </article>
     <article class="cr" style="--c: var(--gr-warm)">
       <span class="cr__cat">Instrumentation</span>
-      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The social metrics report: a bar chart with one bar per post over eight months, most sitting near a dashed median line and a few spiking far above it." aria-label="Open full size"><img src="{{IMG:craft-metrics}}" alt="The social metrics report: a bar chart with one bar per post over eight months, most sitting near a dashed median line and a few spiking far above it." width="560" height="244"></button></div></div>
+      <div class="plate plate--craft"><div class="plate__frame"><button type="button" class="zoom" data-cap="The social metrics report: a bar chart with one bar per post over eight months, most sitting near a dashed median line and a few spiking far above it." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:craft-metrics}}" alt="The social metrics report: a bar chart with one bar per post over eight months, most sitting near a dashed median line and a few spiking far above it." width="1400" height="610"></button></div></div>
       <h3>Social metrics</h3>
       <p>Pulls the numbers back out of everything I post and tells me the truth, including the unwelcome part: reach behaves like a lottery, so the useful question is how often you buy a ticket.</p>
     </article>
@@ -826,6 +836,7 @@
     <figure class="lb__fig">
       <img id="lb-img" src="" alt="">
       <figcaption class="lb__cap" id="lb-cap"></figcaption>
+      <a class="lb__full" id="lb-full" href="" target="_blank" rel="noopener">Open full size</a>
     </figure>
   </div>
   <button type="button" class="lb__close" data-close>Close &nbsp;esc</button>
@@ -837,14 +848,21 @@
     if (!lb || typeof lb.showModal !== 'function') return;   // no dialog support, images stay inline
     var img = document.getElementById('lb-img');
     var cap = document.getElementById('lb-cap');
+    var full = document.getElementById('lb-full');
 
     document.addEventListener('click', function (e) {
       var btn = e.target.closest('.zoom');
       if (btn) {
         var source = btn.querySelector('img');
-        img.src = source.currentSrc || source.src;
+        var src = source.currentSrc || source.src;
+        img.src = src;
         img.alt = source.alt || '';
         cap.textContent = btn.dataset.cap || '';
+        // The dialog still fits the image to the window. This opens the file
+        // itself, at its real pixel size, for anyone who wants to read the
+        // small type in a screenshot.
+        full.href = src;
+        full.textContent = 'Open full size \u00b7 ' + source.naturalWidth + '\u00d7' + source.naturalHeight;
         lb.showModal();
         return;
       }
@@ -852,7 +870,7 @@
       if (e.target.closest('[data-close]')) lb.close();
     });
 
-    // Free the memory when it closes. These are data URIs and some are large.
+    // Drop the src on close so a big image is not held decoded in memory.
     lb.addEventListener('close', function () { img.removeAttribute('src'); });
   })();
 </script>
