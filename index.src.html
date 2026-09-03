@@ -281,6 +281,16 @@
     font: 500 12px/1.4 var(--gr-mono); letter-spacing: .06em;
     color: var(--c); padding-top: .18rem;
   }
+  .step__stage {
+    display: block; font: 500 10.5px/1 var(--gr-mono); letter-spacing: .18em;
+    text-transform: uppercase; color: var(--gr-muted); margin-bottom: .45rem;
+  }
+  .method {
+    font: 400 13px/1.7 var(--gr-mono); color: var(--gr-ink-2);
+    margin: 1.5rem 0 0; padding: 1rem 0 0; border-top: 1px solid var(--gr-rule);
+    text-wrap: pretty;
+  }
+  .method b { color: var(--gr-ink); font-weight: 600; }
   .step h4 {
     margin: 0 0 .45rem; font-family: var(--gr-display); font-weight: 800;
     text-transform: uppercase; letter-spacing: -.015em; line-height: 1.05;
@@ -425,6 +435,12 @@
     <span class="rule"></span>
     <p>Four, in depth</p>
   </div>
+  <p class="method">
+    Same four moves every time. <b>Find the source of truth</b> and get it into a table.
+    <b>Make the template a data object</b> so a row can become a frame. <b>Generate</b> against
+    it. <b>Publish unattended.</b> The projects below are that method pointed at four
+    different problems, and the fourth one is not social media at all.
+  </p>
 
   <main class="work">
 
@@ -441,45 +457,46 @@
         </figure>
         <p class="lede">
           On-brand social content, generated and published for every customer on a schedule,
-          for financial advisors across Canada. An advisor paid through Stripe, connected
-          their own accounts, and picked a tier. From there it ran itself: a scheduled
-          emitter pulled that tier out of Airtable and fired one event per advisor, a
-          listener assembled the post, composited it into a template using their own logo
-          and their own three brand colours, and published it to their connected accounts
-          on their scheduled date. Built in 2022, before there was a name for any of it.
+          for financial advisors across Canada. Built in 2022, before there was a name for it,
+          and it ran live.
         </p>
         <div class="steps">
         <div class="step">
           <span class="step__n">01</span>
           <div>
+            <span class="step__stage">The source</span>
             <h4>They buy a tier and connect their own accounts</h4>
-            <p>Stripe checkout writes the plan onto an Airtable row. Then a single sign-on handoff through Ayrshare gives back a profile key, so the advisor links their own LinkedIn, Facebook and Instagram and <b>I never hold a password</b>. A separate workflow polls until that profile actually exists, because nothing downstream can run without the key.</p>
-          <div class="step__shot step__shot--contain"><button type="button" class="zoom" data-cap="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." aria-label="Open full size"><img src="{{IMG:aa-brand}}" alt="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." width="900" height="900"></button></div>
-          <p class="step__cap">Three tiers, three rendered banners. Engage, Elevate and Elite each unlock a different amount of the pipeline, and the difference is enforced in code rather than in a sales conversation.</p>
+            <p>Stripe checkout writes the plan onto an Airtable row. A single sign-on handoff through Ayrshare returns a profile key, so the advisor links their own LinkedIn, Facebook and Instagram and <b>I never hold a password</b>. That row is the source of truth from then on: plan, platforms, institution, hashtags, brand colours.</p>
           </div>
         </div>
         <div class="step">
           <span class="step__n">02</span>
           <div>
+            <span class="step__stage">The generation</span>
             <h4>A year of posts, written before the year starts</h4>
-            <p>Two years of my partner's own posts became the voice corpus. That got mapped to the seasons that actually move an advisor's business, tax season, the new year, the RRSP deadline, and a full library was generated against that calendar through the OpenAI API, called from inside Airtable. Generation was <b>batch, not per post</b>: the pipeline reads from a library rather than calling a model at publish time.</p>
+            <p>Two years of my partner's own posts became the voice corpus, mapped to the seasons that move an advisor's business, then generated as a full library through the OpenAI API called from inside Airtable. <b>Batch, not per post.</b> The runtime reads from a library rather than waiting on a model, which is what made it cheap enough to run monthly for everyone.</p>
           </div>
         </div>
         <div class="step">
           <span class="step__n">03</span>
           <div>
-            <h4>Once a month, fan out one event per advisor</h4>
-            <p>A scheduled emitter wakes at 12:01, reads the customer view, and builds each advisor's platform list from which accounts they actually connected. Then one event each, carrying their profile key, plan, institution and hashtag sets. <code>$.send.emit(object)</code>.</p>
-          <div class="step__shot step__shot--dark"><button type="button" class="zoom" data-cap="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." aria-label="Open full size"><img src="{{IMG:aa-build}}" alt="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." width="900" height="269"></button></div>
-          <p class="step__cap">Five Pipedream workflows: the emitter, two listeners, a JWT generator and a profile guard. The publish listener reached v341.</p>
+            <span class="step__stage">The template</span>
+            <h4>Their brand, composited in, four ways</h4>
+            <p>In BannerBear the post is a template with named layers, so the advisor's own logo and their own three brand colours drop into one of four designs. Hashtags assemble by tier in code: Engage gets the basics, Elevate adds their institution, Elite adds their custom set.</p>
+            <div class="step__shot step__shot--contain"><button type="button" class="zoom" data-cap="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." aria-label="Open full size"><img src="{{IMG:aa-brand}}" alt="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." width="900" height="900"></button></div>
+            <p class="step__cap">Three tiers, three rendered banners. The difference between them is enforced in the pipeline, not in a sales conversation.</p>
           </div>
         </div>
         <div class="step">
           <span class="step__n">04</span>
           <div>
-            <h4>Composite their brand onto it, then publish</h4>
-            <p>The listener pulls that advisor's month of content, picks one of four BannerBear templates, and injects <b>their</b> logo and <b>their</b> three brand colours. Hashtags assemble by tier: Engage gets the basics, Elevate adds their institution, Elite adds their custom set. Then a POST to Ayrshare with the scheduled date on it, and the post appears on their feed on the day it was meant to.</p>
+            <span class="step__stage">The publish</span>
+            <h4>Once a month, unattended</h4>
+            <p>A scheduled emitter wakes at 12:01, reads the customer view, and fires one event per advisor carrying their key and their settings. <code>$.send.emit(object)</code>. A listener assembles that advisor's month and POSTs to Ayrshare with the scheduled date on it. Nobody looks at it.</p>
+            <div class="step__shot step__shot--dark"><button type="button" class="zoom" data-cap="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." aria-label="Open full size"><img src="{{IMG:aa-build}}" alt="The Pipedream project index for Advisor Assist: five named workflows with their service icons and last-updated dates." width="900" height="269"></button></div>
+            <p class="step__cap">Five Pipedream workflows: the emitter, two listeners, a JWT generator and a profile guard. The publish listener reached v341.</p>
           </div>
+        </div>
         </div>
         </div>
         <dl class="facts">
@@ -504,44 +521,44 @@
           <figcaption>Four series, four templates, one wordmark. The profile card is the one I still like: body, tannins, sweetness, acidity and alcohol arrive as numbers in a column and leave as meters, with the bar length and the colour swatch drawn from the field values. Every one of these is a row of Airtable. Nobody laid any of them out.</figcaption>
         </figure>
         <p class="lede">
-          Two Instagram accounts running the same machine on different data. The wine one
-          scraped the provincial winery database through its API and turned rows into
-          posts: tasting notes, award scores off the national wine awards, regional facts,
-          and a weekly winery feature. It also read winery events out of an inbox and
-          posted those. Then the same machine got pointed at wine tour reviews and ran a
-          second account. Four post series and two accounts off one rendering system is
-          the part I care about. None of it was a rebuild.
+          Two Instagram accounts running the same machine on different data. Five post series
+          off one table, then the whole thing pointed at a second source and run again.
         </p>
         <div class="steps">
         <div class="step">
           <span class="step__n">01</span>
           <div>
-            <h4>Take the winery database and make it a table</h4>
-            <p>The provincial winery database is public and has an API. Read it into Airtable, one row per wine: producer, vintage, varietal, the tasting measures, the account handle, the bottle shot. From that point the content problem is a rendering problem.</p>
+            <span class="step__stage">The source</span>
+            <h4>The winery database, read through its API</h4>
+            <p>The provincial winery database is public and has an API. Read it into Airtable, one row per wine: producer, vintage, varietal, the five tasting measures, the account handle, the bottle shot. From there the content problem is a rendering problem.</p>
           </div>
         </div>
         <div class="step">
           <span class="step__n">02</span>
           <div>
-            <h4>Turn one table into five different post series</h4>
-            <p>Wine profile cards, award scores off the national wine awards, tasting notes, regional facts, and a weekly winery feature. Five templates reading the same rows. Winery events came from a different source again, parsed out of an inbox.</p>
+            <span class="step__stage">The template</span>
+            <h4>Twenty-eight named layers, not artwork</h4>
+            <p>The card is a data object: <code>wine_name</code>, <code>value_tannins</code>, <code>meter_acidity</code>, <code>colour_colour</code>, <code>wine_image</code>. <b>Meter bar length and the colour swatch are computed from the row.</b> That is the whole trick, and it is why a new series was a new template rather than a new build.</p>
+            <div class="step__shot "><button type="button" class="zoom" data-cap="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." aria-label="Open full size"><img src="{{IMG:woto-build}}" alt="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." width="900" height="538"></button></div>
+            <p class="step__cap">The BannerBear editor. Every field on the card is addressable.</p>
           </div>
         </div>
         <div class="step">
           <span class="step__n">03</span>
           <div>
-            <h4>Make the template a data object, not artwork</h4>
-            <p>In BannerBear the card is <b>28 named layers</b>: <code>wine_name</code>, <code>value_tannins</code>, <code>meter_acidity</code>, <code>colour_colour</code>, <code>wine_image</code>. The meter bar length and the colour swatch are both computed from the row. That is the whole trick, and it is why a new series was a new template rather than a new build.</p>
-          <div class="step__shot "><button type="button" class="zoom" data-cap="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." aria-label="Open full size"><img src="{{IMG:woto-build}}" alt="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." width="900" height="538"></button></div>
-          <p class="step__cap">The BannerBear editor. Every field on the card is addressable, so a row becomes a frame.</p>
+            <span class="step__stage">The generation</span>
+            <h4>Five series over the same table</h4>
+            <p>Wine profile cards, award scores off the national wine awards, tasting notes, regional facts, and a weekly winery feature. Same rows, five templates, four visual registers that still read as one account. Winery events came from somewhere else again, parsed out of an inbox.</p>
           </div>
         </div>
         <div class="step">
           <span class="step__n">04</span>
           <div>
-            <h4>Schedule it, then point the same machine somewhere else</h4>
-            <p>Make.com runs the cycle and publishes through the Instagram Graph API on a schedule with nobody in the loop. Then the same rendering system got pointed at wine tour reviews and ran a second account. <b>That was a configuration, not a rebuild</b>, which is the only reason a one-person operation could run two feeds.</p>
+            <span class="step__stage">The publish</span>
+            <h4>On a schedule, then again somewhere else</h4>
+            <p>Make.com runs the cycle and publishes through the Instagram Graph API with nobody in the loop. Then the same rendering system got pointed at wine tour reviews and ran a second account. <b>A configuration, not a rebuild</b>, which is the only reason one person could run two feeds.</p>
           </div>
+        </div>
         </div>
         </div>
         <dl class="facts">
@@ -567,49 +584,46 @@
           <figcaption>One address in. A zoning bylaw, a parcel polygon and six government endpoints later, this comes out. Roughly fifteen seconds. Zone, setbacks, overlays, the envelope drawn on the lot, and every number with a bylaw citation behind it.</figcaption>
         </figure>
         <p class="lede">
-          A designer sizing a project against a lot has to read a zoning bylaw, find the
-          right zone, apply four different setbacks to four edges, work out which edge is
-          even the front, subtract any development permit overlays, and then decide whether
-          lot coverage or geometry is the binding constraint. It takes half an hour and it
-          is the same half hour every time. This does it from an address.
+          Sizing a project against a lot means reading a bylaw, finding the zone, applying four
+          different setbacks to four edges, working out which edge is even the front, subtracting
+          any overlays, then deciding whether coverage or geometry binds. Half an hour, every
+          time. This does it from an address in about fifteen seconds.
         </p>
         <div class="steps">
         <div class="step">
           <span class="step__n">01</span>
           <div>
-            <h4>Turn an address into a polygon</h4>
-            <p>BC Geocoder resolves the address, then ParcelMap BC gives the authoritative parcel geometry over WFS, with the District's own ArcGIS as a fallback. Everything downstream works in <code>EPSG:3005</code>, BC Albers, so areas come out in real metres instead of degrees.</p>
+            <span class="step__stage">The source</span>
+            <h4>An address becomes a polygon</h4>
+            <p>BC Geocoder resolves the address, ParcelMap BC returns the authoritative parcel geometry over WFS, and the District's ArcGIS is the fallback. A point query on the centroid gives the zone, then five more layers for development permit overlays. Everything works in <code>EPSG:3005</code> so areas come out in real metres.</p>
           </div>
         </div>
         <div class="step">
           <span class="step__n">02</span>
           <div>
-            <h4>Ask the District what the lot actually is</h4>
-            <p>A point query on the parcel centroid against the zoning FeatureServer returns the zone code. Then five more layers for development permit overlays: natural environment, hillside, stability, erosion, drainage. Anything that overlaps gets subtracted from the buildable area later.</p>
+            <span class="step__stage">The rules</span>
+            <h4>Read the bylaw once, not on every request</h4>
+            <p>Bylaw 561 is a PDF. A regex extractor parses every zone's setbacks out of it into <code>zone_setbacks.json</code>, ahead of time. <b>This is the decision the product rests on.</b> Seconds instead of tens of seconds, nothing per request, and it gives up handling a bylaw written in an unusual format. Zones that will not parse return null with a warning rather than a confident wrong number.</p>
           </div>
         </div>
         <div class="step">
           <span class="step__n">03</span>
           <div>
-            <h4>Read the bylaw once, not on every request</h4>
-            <p>Bylaw 561 is a PDF. A regex extractor parses every zone's setbacks out of it into <code>zone_setbacks.json</code>, ahead of time. <b>This is the decision the product rests on.</b> It answers in seconds instead of tens of seconds, costs nothing per request, and gives up the ability to handle a bylaw written in an unusual format. Zones that do not parse cleanly return null with a warning rather than a confident wrong number.</p>
+            <span class="step__stage">The geometry</span>
+            <h4>Work out which edge is the front</h4>
+            <p>The hard part, and it is not a data problem. Setbacks differ per edge, so the geometry has to know which edge is which. Road centrelines within 60 metres, front is the nearest edge inside 25, flanking is the second road edge sharing a corner, rear is farthest from front, the rest is interior. Irregular lots still catch it out, so the output says when it fell back to a heuristic.</p>
           </div>
         </div>
         <div class="step">
           <span class="step__n">04</span>
           <div>
-            <h4>Work out which edge is the front</h4>
-            <p>This is the hard part, and it is not a data problem. Setbacks differ per edge, so the geometry has to know which edge is which. Road centrelines within 60 metres, front is the nearest edge inside a 25 metre threshold, flanking is the second road-adjacent edge sharing a corner with the front, rear is the edge farthest from the front, everything else is interior. Irregular lots still catch it out, so the output says when it fell back to a heuristic.</p>
+            <span class="step__stage">The render</span>
+            <h4>Intersect the half-planes and draw the answer</h4>
+            <p>Each edge inset by its own setback is an inward half-plane. Intersect them and what remains is the buildable envelope. Shapely for geometry, Matplotlib and contextily for the map, and the result states whether lot coverage or the geometry is binding.</p>
+            <div class="step__shot "><button type="button" class="zoom" data-cap="A generated site plan for 11777 Hare Rd: the parcel outlined in black over a street map, the buildable envelope filled in green, and each setback drawn as a labelled red dashed line. A footer reads parcel 10,095 square metres, buildable envelope 7,798, max footprint 2,019." aria-label="Open full size"><img src="{{IMG:env-build}}" alt="A generated site plan for 11777 Hare Rd: the parcel outlined in black over a street map, the buildable envelope filled in green, and each setback drawn as a labelled red dashed line. A footer reads parcel 10,095 square metres, buildable envelope 7,798, max footprint 2,019." width="900" height="758"></button></div>
+            <p class="step__cap">The generated site plan. Parcel in black, envelope in green, every setback drawn and labelled.</p>
           </div>
         </div>
-        <div class="step">
-          <span class="step__n">05</span>
-          <div>
-            <h4>Intersect the half-planes and draw the answer</h4>
-            <p>Each edge inset by its own setback becomes an inward half-plane. Intersect all of them and what is left is the buildable envelope. Shapely does the geometry, Matplotlib and contextily render the map, and the result says whether lot coverage or the geometry is the binding constraint.</p>
-          <div class="step__shot "><button type="button" class="zoom" data-cap="A generated site plan for 11777 Hare Rd: the parcel outlined in black over a street map, the buildable envelope filled in green, and each setback drawn as a labelled red dashed line, 6.0m front, 10.0m rear, 3.0m side interior, 4.0m side flanking. A footer reads parcel 10,095 square metres, buildable envelope 7,798, max footprint 2,019." aria-label="Open full size"><img src="{{IMG:env-build}}" alt="A generated site plan for 11777 Hare Rd: the parcel outlined in black over a street map, the buildable envelope filled in green, and each setback drawn as a labelled red dashed line, 6.0m front, 10.0m rear, 3.0m side interior, 4.0m side flanking. A footer reads parcel 10,095 square metres, buildable envelope 7,798, max footprint 2,019." width="900" height="758"></button></div>
-          <p class="step__cap">The generated site plan. Parcel in black, envelope in green, every setback drawn and labelled, with the areas computed underneath.</p>
-          </div>
         </div>
         </div>
         <dl class="facts">
@@ -629,46 +643,49 @@
       <div>
         <h3>Safe Family Internet<span class="golinks"><a class="golink" href="https://safefamilyinternet.ca" rel="noopener" aria-label="safefamilyinternet.ca" title="safefamilyinternet.ca">↗</a></span></h3>
         <p class="lede">
-          A whole product built to get non-technical parents to actually change something
-          at home. Identity, the live site, a gated download library of step-by-step guides,
-          and the email pipeline behind it. The hard part was never the technology. It was
-          making a frightening subject simple enough that a tired parent would act on it
-          the same evening.
+          A whole product built to get non-technical parents to change one thing at home tonight.
+          Identity, site, a gated library of step-by-step guides, and the publishing engine behind
+          all of it.
         </p>
         <div class="steps">
         <div class="step">
           <span class="step__n">01</span>
           <div>
-            <h4>Pick one question and answer only that</h4>
-            <p>Parents are not short of warnings. They are short of one thing to do tonight. So everything got organised around a single model: four layers, apps, devices, network and community, in the order you should fix them. Every guide, slide and post is a step inside one of those rings.</p>
-          <div class="step__shot step__shot--dark"><button type="button" class="zoom" data-cap="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." aria-label="Open full size"><img src="{{IMG:sfi-idea}}" alt="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." width="900" height="506"></button></div>
-          <p class="step__cap">The castle model. It is the information architecture for the whole project, not a diagram made afterwards.</p>
+            <span class="step__stage">The source</span>
+            <h4>One model, and everything hangs off it</h4>
+            <p>Parents are not short of warnings. They are short of one thing to do tonight. So everything is organised around four layers, apps, devices, network and community, in the order you should fix them. Every guide, slide and post is a step inside one of those rings.</p>
+            <div class="step__shot step__shot--dark"><button type="button" class="zoom" data-cap="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." aria-label="Open full size"><img src="{{IMG:sfi-idea}}" alt="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." width="900" height="506"></button></div>
+            <p class="step__cap">The castle model. Information architecture, not a diagram drawn afterwards.</p>
           </div>
         </div>
         <div class="step">
           <span class="step__n">02</span>
           <div>
-            <h4>Build an identity a volunteer can use without me</h4>
-            <p>A shield, a wordmark, and a mark that animates from unprotected to protected. Exported as a full matrix, magenta, on black, on white, primary cobalt, at five sizes each, so nobody ever has to ask which file to use or crop one themselves.</p>
-          <div class="step__shot step__shot--dark step__shot--contain"><button type="button" class="zoom" data-cap="The Safe Family Internet shield mark in white and blue on black." aria-label="Open full size"><img src="{{IMG:logo}}" alt="The Safe Family Internet shield mark in white and blue on black." width="700" height="700"></button></div>
-          <p class="step__cap">The primary mark. One of twenty-two exports covering every colourway and size the project needed.</p>
+            <span class="step__stage">The template</span>
+            <h4>An identity a volunteer can use without me</h4>
+            <p>A shield, a wordmark, and a mark that animates from unprotected to protected, exported as a full matrix so nobody has to crop anything. Then a guide template: black phone frame, brand pink on the exact control to tap, numbered steps.</p>
+            <div class="step__shot step__shot--dark step__shot--contain"><button type="button" class="zoom" data-cap="The Safe Family Internet shield mark in white and blue on black." aria-label="Open full size"><img src="{{IMG:logo}}" alt="The Safe Family Internet shield mark in white and blue on black." width="700" height="700"></button></div>
+            <p class="step__cap">The primary mark, one of twenty-two exports covering every colourway and size.</p>
           </div>
         </div>
         <div class="step">
           <span class="step__n">03</span>
           <div>
-            <h4>Ship the site and the gate behind it</h4>
-            <p>A static site on continuous deploy, and a download library gated behind a serverless function that validates the email and consent, adds the address to the campaign platform, and sends the toolkit. Eight branded PDF guides sit behind it, each built from raw phone screenshots by a pipeline rather than laid out by hand.</p>
+            <span class="step__stage">The generation</span>
+            <h4>Raw screenshots in, branded frames out</h4>
+            <p>A folder of phone screenshots becomes eight annotated PDF guides. Separately, a JSON file becomes brand-correct 1080x1350 carousel frames, rendered by headless Chrome straight off the design tokens. Neither step has a designer in it.</p>
           </div>
         </div>
         <div class="step">
           <span class="step__n">04</span>
           <div>
-            <h4>Publish it without a designer in the loop</h4>
-            <p>A JSON file goes in, headless Chrome renders brand-correct 1080x1350 frames from design tokens, and they post as a native Instagram carousel and a LinkedIn multi-image. That engine is why one person could keep a campaign running.</p>
-          <div class="step__shot step__shot--dark"><button type="button" class="zoom" data-cap="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." aria-label="Open full size"><img src="{{IMG:sfi-build}}" alt="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." width="900" height="563"></button></div>
-          <p class="step__cap">One rendered carousel slide. The type, the highlight block and the footer all come from tokens.</p>
+            <span class="step__stage">The publish</span>
+            <h4>Straight to the platforms, and a gate behind it</h4>
+            <p>Native Instagram carousels through the Graph API and multi-image posts through the LinkedIn REST API. No Canva, no scheduler. The guides sit behind a serverless function that validates email and consent, adds the address to the campaign platform, and sends the toolkit.</p>
+            <div class="step__shot step__shot--dark"><button type="button" class="zoom" data-cap="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." aria-label="Open full size"><img src="{{IMG:sfi-build}}" alt="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." width="900" height="563"></button></div>
+            <p class="step__cap">One rendered carousel slide. Type, highlight block and footer all come from tokens.</p>
           </div>
+        </div>
         </div>
         </div>
         <dl class="facts">
