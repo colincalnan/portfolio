@@ -159,6 +159,47 @@
 
 
 
+
+  /* ---------- lightbox ----------
+     Every image on this page is already inlined as a data URI, so opening one
+     full size costs nothing and loads nothing. Native <dialog> because it
+     gives focus trapping, Esc to close and return focus for free, and because
+     a hand-rolled modal that does none of those is the kind of detail this
+     page is arguing about. */
+  .zoom {
+    display: block; width: 100%; padding: 0; border: 0; background: none;
+    cursor: zoom-in; line-height: 0; color: inherit; font: inherit;
+  }
+  .zoom:focus-visible { outline: 2px solid var(--gr-warm); outline-offset: 3px; }
+
+  dialog.lb {
+    padding: 0; border: 0; background: none; max-width: 100vw; max-height: 100vh;
+    width: 100%; height: 100%; color: var(--gr-ink); overflow: auto;
+  }
+  dialog.lb::backdrop { background: rgba(0, 0, 0, .88); }
+  .lb__inner {
+    min-height: 100%; display: grid; place-items: center;
+    padding: clamp(1rem, 4vw, 3rem); gap: 1rem; cursor: zoom-out;
+  }
+  .lb__fig { margin: 0; max-width: min(1400px, 100%); cursor: default; }
+  .lb__fig img {
+    display: block; width: auto; height: auto;
+    max-width: 100%; max-height: 78vh;
+    border: 1px solid var(--gr-rule); background: var(--gr-ground-2);
+  }
+  .lb__cap {
+    font: 400 12.5px/1.65 var(--gr-mono); color: var(--gr-ink-2);
+    margin-top: .9rem; max-width: 70ch; text-wrap: pretty;
+  }
+  .lb__close {
+    position: fixed; top: 1rem; right: 1rem;
+    font: 500 11.5px/1 var(--gr-mono); letter-spacing: .13em; text-transform: uppercase;
+    color: var(--gr-ink); background: var(--gr-ground); border: 1px solid var(--gr-rule);
+    padding: .7rem .9rem; cursor: pointer;
+  }
+  .lb__close:hover { border-color: var(--gr-warm); }
+  .lb__close:focus-visible { outline: 2px solid var(--gr-warm); outline-offset: 3px; }
+
   /* ---------- the flagship lead ----------
      One full-width image at the top of a case study, before the reading
      starts. Used only where the strongest evidence is a picture of the
@@ -331,7 +372,7 @@
       <div>
         <h3>AdvisorAssist</h3>
         <figure class="piece__lead">
-          <div class="shot__frame"><img src="{{IMG:aa-posted}}" alt="Three real financial advisors' LinkedIn posts side by side, each with its own branded card, hashtags and engagement counts." width="1000" height="562"></div>
+          <div class="shot__frame"><button type="button" class="zoom" data-cap="Three real financial advisors' LinkedIn posts side by side, each with its own branded card, hashtags and engagement counts." aria-label="Open full size"><img src="{{IMG:aa-posted}}" alt="Three real financial advisors' LinkedIn posts side by side, each with its own branded card, hashtags and engagement counts." width="1000" height="562"></button></div>
           <figcaption>Three advisors' feeds. Every card generated, branded and published by the pipeline, on a schedule, without them or me touching it.</figcaption>
         </figure>
         <p class="lede">
@@ -350,12 +391,12 @@
         </div>
         <div class="tri">
           <span class="tri__label">Brand</span>
-          <div class="tri__shot tri__shot--contain"><img src="{{IMG:aa-brand}}" alt="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." width="900" height="563"></div>
+          <div class="tri__shot tri__shot--contain"><button type="button" class="zoom" data-cap="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." aria-label="Open full size"><img src="{{IMG:aa-brand}}" alt="The Elite tier pricing banner: the AdvisorAssist mark above the tier name and its feature list." width="900" height="563"></button></div>
           <p>Named, drawn and priced. Logo, tagline, and three tiers, <b>Engage, Elevate, Elite</b>, each with its own rendered banner, because a tier nobody can picture does not sell.</p>
         </div>
         <div class="tri">
           <span class="tri__label">Build</span>
-          <div class="tri__shot tri__shot--dark tri__shot--contain"><img src="{{IMG:aa-build}}" alt="The Pipedream project index for Advisor Assist: five named workflows, an emitter and two listeners among them, with their service icons and last-updated dates." width="900" height="269"></div>
+          <div class="tri__shot tri__shot--dark tri__shot--contain"><button type="button" class="zoom" data-cap="The Pipedream project index for Advisor Assist: five named workflows, an emitter and two listeners among them, with their service icons and last-updated dates." aria-label="Open full size"><img src="{{IMG:aa-build}}" alt="The Pipedream project index for Advisor Assist: five named workflows, an emitter and two listeners among them, with their service icons and last-updated dates." width="900" height="269"></button></div>
           <p>A scheduled emitter fires one event per advisor. Listeners assemble the post, composite it into a template with that advisor's own logo and brand colours, and publish through a webhook. <b>v341.</b></p>
         </div>
         </div>
@@ -377,7 +418,7 @@
       <div>
         <h3>Wines and Tours of the Okanagan</h3>
         <figure class="piece__lead">
-          <div class="shot__frame"><img src="{{IMG:woto-posts}}" alt="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." width="820" height="820"></div>
+          <div class="shot__frame"><button type="button" class="zoom" data-cap="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." aria-label="Open full size"><img src="{{IMG:woto-posts}}" alt="Four generated Instagram posts in a grid: a wine profile card with meter bars for body, tannins, sweetness, acidity and alcohol plus a colour swatch; a bottle inside a gold ring with a WineAlign gold medal and a 93 point score; a gradient tasting-note card; and a weekly winery feature in script over a vineyard at sunrise. All four carry the same Wines of the Okanagan wordmark." width="820" height="820"></button></div>
           <figcaption>Four series, four templates, one wordmark. The profile card is the one I still like: body, tannins, sweetness, acidity and alcohol arrive as numbers in a column and leave as meters, with the bar length and the colour swatch drawn from the field values. Every one of these is a row of Airtable. Nobody laid any of them out.</figcaption>
         </figure>
         <p class="lede">
@@ -396,12 +437,12 @@
         </div>
         <div class="tri">
           <span class="tri__label">Brand</span>
-          <div class="tri__shot tri__shot--dark tri__shot--contain"><img src="{{IMG:woto-brand}}" alt="The Wines of the Okanagan mark: a wine glass with a sun inside it above the stacked wordmark." width="700" height="649"></div>
+          <div class="tri__shot tri__shot--dark tri__shot--contain"><button type="button" class="zoom" data-cap="The Wines of the Okanagan mark: a wine glass with a sun inside it above the stacked wordmark." aria-label="Open full size"><img src="{{IMG:woto-brand}}" alt="The Wines of the Okanagan mark: a wine glass with a sun inside it above the stacked wordmark." width="700" height="649"></button></div>
           <p>A mark, a wordmark, a gradient set and a headline voice. Four post series that look nothing like each other and still read as one account, which is the only way an unattended feed holds together.</p>
         </div>
         <div class="tri">
           <span class="tri__label">Build</span>
-          <div class="tri__shot"><img src="{{IMG:woto-build}}" alt="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." width="700" height="538"></div>
+          <div class="tri__shot"><button type="button" class="zoom" data-cap="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." aria-label="Open full size"><img src="{{IMG:woto-build}}" alt="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." width="700" height="538"></button></div>
           <p>The template behind the profile card, as data. Twenty-eight named layers so a row becomes a frame: <b>wine_name</b>, <b>value_tannins</b>, <b>meter_acidity</b>, <b>colour_colour</b>, <b>wine_image</b>. Airtable in, rendered post out, published on a schedule.</p>
         </div>
         </div>
@@ -433,17 +474,17 @@
         <div class="triad">
         <div class="tri">
           <span class="tri__label">Idea</span>
-          <div class="tri__shot tri__shot--dark tri__shot--contain"><img src="{{IMG:sfi-idea}}" alt="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." width="900" height="506"></div>
+          <div class="tri__shot tri__shot--dark tri__shot--contain"><button type="button" class="zoom" data-cap="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." aria-label="Open full size"><img src="{{IMG:sfi-idea}}" alt="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." width="900" height="506"></button></div>
           <p>Parents are not short of warnings about the internet. They are short of one thing they can actually do tonight. So the whole product answers a single question: what do I change, and in what order.</p>
         </div>
         <div class="tri">
           <span class="tri__label">Brand</span>
-          <div class="tri__shot tri__shot--dark tri__shot--contain"><img src="{{IMG:logo}}" alt="The Safe Family Internet shield mark in white and blue on black." width="900" height="563"></div>
+          <div class="tri__shot tri__shot--dark tri__shot--contain"><button type="button" class="zoom" data-cap="The Safe Family Internet shield mark in white and blue on black." aria-label="Open full size"><img src="{{IMG:logo}}" alt="The Safe Family Internet shield mark in white and blue on black." width="900" height="563"></button></div>
           <p>A shield, a wordmark, and a mark that animates from unprotected to protected. Built so a volunteer could use it without me in the room.</p>
         </div>
         <div class="tri">
           <span class="tri__label">Build</span>
-          <div class="tri__shot tri__shot--dark"><img src="{{IMG:sfi-build}}" alt="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." width="900" height="563"></div>
+          <div class="tri__shot tri__shot--dark"><button type="button" class="zoom" data-cap="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." aria-label="Open full size"><img src="{{IMG:sfi-build}}" alt="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." width="900" height="563"></button></div>
           <p>A static site on continuous deploy, a gated download library, and an email gate through a serverless function. <b>260 sign-ups claimed every seat</b> for one night in a town of 15,000.</p>
         </div>
         </div>
@@ -467,7 +508,7 @@
   <div class="craft">
     <article class="cr" style="--c: var(--gr-accent-4)">
       <span class="cr__cat">Product, with payments</span>
-      <div class="cr__shot "><img src="{{IMG:craft-setlist}}" alt="A searchable set list of two, three and four chord songs for musicians who are starting to" width="900" height="506"></div>
+      <div class="cr__shot"><button type="button" class="zoom" data-cap="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." aria-label="Open full size"><img src="{{IMG:craft-setlist}}" alt="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." width="900" height="506"></button></div>
       <h3>Set List Easy</h3>
       <p>A searchable set list of two, three and four chord songs for musicians who are starting to gig. Accounts, subscriptions and a perform mode. Four builds across its life, ending as a native mobile app.</p>
     </article>
@@ -478,37 +519,37 @@
     </article>
     <article class="cr" style="--c: var(--gr-accent-2)">
       <span class="cr__cat">Design system</span>
-      <div class="cr__shot cr__shot--dark"><img src="{{IMG:craft-boldtalks}}" alt="A presentation system written as tokens first, now a semantic contract with three themes, " width="900" height="506"></div>
+      <div class="cr__shot cr__shot--dark"><button type="button" class="zoom" data-cap="A slide off the Bold Talks system: heavy white condensed capitals filling a deep cobalt field, with a corner label naming the slide type." aria-label="Open full size"><img src="{{IMG:craft-boldtalks}}" alt="A slide off the Bold Talks system: heavy white condensed capitals filling a deep cobalt field, with a corner label naming the slide type." width="900" height="506"></button></div>
       <h3>Bold Talks, and Ground</h3>
       <p>A presentation system written as tokens first, now a semantic contract with three themes, guidance an agent reads, and a check script that fails a build. This page runs on it.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-3)">
       <span class="cr__cat">Screenshot pipeline</span>
-      <div class="cr__shot "><img src="{{IMG:craft-guides}}" alt="A folder of raw phone screenshots goes in, branded annotated PDFs come out. Black phone fr" width="900" height="506"></div>
+      <div class="cr__shot"><button type="button" class="zoom" data-cap="The screenshot pipeline, before and after. On the left a raw iPhone capture of a settings pane, on the right the finished guide step in a phone frame with the toggle ringed in pink." aria-label="Open full size"><img src="{{IMG:craft-guides}}" alt="The screenshot pipeline, before and after. On the left a raw iPhone capture of a settings pane, on the right the finished guide step in a phone frame with the toggle ringed in pink." width="900" height="506"></button></div>
       <h3>Parent guides</h3>
       <p>A folder of raw phone screenshots goes in, branded annotated PDFs come out. Black phone frame, a pink box on the exact thing to tap. Eight guides shipped.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-4)">
       <span class="cr__cat">Publishing engine</span>
-      <div class="cr__shot cr__shot--dark"><img src="{{IMG:craft-carousel}}" alt="A JSON file goes in, headless Chrome renders brand-correct 1080x1350 frames, and they post" width="900" height="506"></div>
+      <div class="cr__shot cr__shot--dark"><button type="button" class="zoom" data-cap="The closing slide of a rendered carousel: a violet to cobalt gradient, a headline in condensed capitals, and the site address in a cyan chip." aria-label="Open full size"><img src="{{IMG:craft-carousel}}" alt="The closing slide of a rendered carousel: a violet to cobalt gradient, a headline in condensed capitals, and the site address in a cyan chip." width="900" height="506"></button></div>
       <h3>Carousel and publishing</h3>
       <p>A JSON file goes in, headless Chrome renders brand-correct 1080x1350 frames, and they post as a native Instagram carousel and a LinkedIn multi-image. No Canva, no scheduler, no designer.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-5)">
       <span class="cr__cat">Video pipeline</span>
-      <div class="cr__shot cr__shot--dark cr__shot--contain"><img src="{{IMG:craft-reels}}" alt="Energy analysis finds the song boundaries in an unattended two hour gig recording and cuts" width="900" height="506"></div>
+      <div class="cr__shot cr__shot--dark cr__shot--contain"><button type="button" class="zoom" data-cap="A poster frame from a cut reel: a dark theatre stage with a burned-in caption bar reading, there is one switch on your child's phone." aria-label="Open full size"><img src="{{IMG:craft-reels}}" alt="A poster frame from a cut reel: a dark theatre stage with a burned-in caption bar reading, there is one switch on your child's phone." width="900" height="506"></button></div>
       <h3>Reels and transcribe</h3>
       <p>Energy analysis finds the song boundaries in an unattended two hour gig recording and cuts it into publishable reels. One of them has 57,288 views.</p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-6)">
       <span class="cr__cat">Agent loop</span>
-      <div class="cr__shot "><img src="{{IMG:craft-jobscout}}" alt="Reads 4,130 job postings across 88 boards, gates them on facts a machine can check, then p" width="900" height="506"></div>
+      <div class="cr__shot"><button type="button" class="zoom" data-cap="The Job Scout report: a headline reading remote creative-AI roles, a stacked funnel bar showing 4,130 postings narrowing to a 224 role shortlist, and rows of filter buttons." aria-label="Open full size"><img src="{{IMG:craft-jobscout}}" alt="The Job Scout report: a headline reading remote creative-AI roles, a stacked funnel bar showing 4,130 postings narrowing to a 224 role shortlist, and rows of filter buttons." width="900" height="506"></button></div>
       <h3>Job Scout</h3>
       <p>Reads 4,130 job postings across 88 boards, gates them on facts a machine can check, then pays a model to read the survivors against a rubric written in prose. It found this application.</p>
     </article>
     <article class="cr" style="--c: var(--gr-warm)">
       <span class="cr__cat">Instrumentation</span>
-      <div class="cr__shot "><img src="{{IMG:craft-metrics}}" alt="Pulls per-post numbers back out of the publishing pipeline and tells me the truth, includi" width="900" height="506"></div>
+      <div class="cr__shot"><button type="button" class="zoom" data-cap="The social metrics report: a bar chart with one bar per post over eight months, most sitting near a dashed median line and a few spiking far above it." aria-label="Open full size"><img src="{{IMG:craft-metrics}}" alt="The social metrics report: a bar chart with one bar per post over eight months, most sitting near a dashed median line and a few spiking far above it." width="900" height="506"></button></div>
       <h3>Social metrics</h3>
       <p>Pulls per-post numbers back out of the publishing pipeline and tells me the truth, including that reach here behaves like a lottery rather than a machine.</p>
     </article>
@@ -541,3 +582,39 @@
     </div>
   </footer>
 </div>
+
+<dialog class="lb" id="lb" aria-label="Image viewer">
+  <div class="lb__inner" data-close>
+    <figure class="lb__fig">
+      <img id="lb-img" src="" alt="">
+      <figcaption class="lb__cap" id="lb-cap"></figcaption>
+    </figure>
+  </div>
+  <button type="button" class="lb__close" data-close>Close &nbsp;esc</button>
+</dialog>
+
+<script>
+  (function () {
+    var lb = document.getElementById('lb');
+    if (!lb || typeof lb.showModal !== 'function') return;   // no dialog support, images stay inline
+    var img = document.getElementById('lb-img');
+    var cap = document.getElementById('lb-cap');
+
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.zoom');
+      if (btn) {
+        var source = btn.querySelector('img');
+        img.src = source.currentSrc || source.src;
+        img.alt = source.alt || '';
+        cap.textContent = btn.dataset.cap || '';
+        lb.showModal();
+        return;
+      }
+      if (e.target.closest('.lb__fig')) return;
+      if (e.target.closest('[data-close]')) lb.close();
+    });
+
+    // Free the memory when it closes. These are data URIs and some are large.
+    lb.addEventListener('close', function () { img.removeAttribute('src'); });
+  })();
+</script>
