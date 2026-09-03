@@ -1,0 +1,47 @@
+<!-- The social card. Rendered to og.png at 1200x630 with:
+       node scripts/portfolio/build-og.mjs
+     Built from the same Ground tokens as the page it advertises, which is the
+     point: the card is the first thing anyone sees of the brand. -->
+<style>
+  {{CSS:theme-night}}
+  {{CSS:ground}}
+  html, body { margin: 0; padding: 0; }
+  body { width: 1200px; height: 630px; overflow: hidden; }
+  .card {
+    width: 1200px; height: 630px; box-sizing: border-box;
+    padding: 72px 80px; display: flex; flex-direction: column;
+    justify-content: space-between; background: var(--gr-ground);
+  }
+  .band { height: 16px; background: var(--gr-blocks); margin-bottom: 56px; }
+  .id { display: flex; gap: 28px; align-items: baseline; margin-bottom: 34px; }
+  .id b { font: 600 19px/1 var(--gr-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gr-ink); }
+  .id span { font: 500 16px/1 var(--gr-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--gr-muted); }
+  h1 {
+    font-family: var(--gr-display); font-weight: 800; text-transform: uppercase;
+    letter-spacing: -.035em; line-height: .9; font-size: 96px; margin: 0;
+    color: var(--gr-ink);
+  }
+  h1 span { color: var(--gr-muted); }
+  .sub {
+    font-size: 25px; line-height: 1.42; color: var(--gr-ink-2);
+    margin: 34px 0 0; max-width: 24ch;
+  }
+  .foot {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    font: 500 17px/1 var(--gr-mono); letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gr-muted);
+  }
+  .foot b { color: var(--gr-accent); font-weight: 500; }
+</style>
+<div class="card">
+  <div>
+    <div class="band"></div>
+    <div class="id"><b>Colin Calnan</b><span>Selected work</span></div>
+    <h1>I build the machine,<br><span>not the posts.</span></h1>
+    <p class="sub">Design the brand. Build the pipeline that renders in it. Publish with nobody in the loop.</p>
+  </div>
+  <div class="foot">
+    <span>colincalnan.github.io/portfolio</span>
+    <span><b>Twenty years</b> building software</span>
+  </div>
+</div>
