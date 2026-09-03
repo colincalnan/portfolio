@@ -160,6 +160,25 @@
 
 
 
+
+  /* ---------- live links ----------
+     Half the argument on this page is that these things are real and running.
+     A link that reads as body copy does not carry that, so it gets a chip:
+     mono, bordered, an arrow, and a hover that lights the accent. */
+  .links { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.6rem 0 0; }
+  .links a {
+    font: 500 12px/1 var(--gr-mono); letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gr-ink); border: 1px solid var(--gr-rule);
+    padding: .7rem .85rem; display: inline-flex; align-items: center; gap: .55rem;
+  }
+  .links a::after { content: "\2197"; color: var(--c, var(--gr-accent)); font-size: 13px; }
+  .links a:hover { border-color: var(--c, var(--gr-accent)); }
+  .links a:focus-visible { outline: 2px solid var(--gr-warm); outline-offset: 3px; }
+  .links__note {
+    font: 400 12px/1.5 var(--gr-mono); color: var(--gr-muted);
+    padding: .7rem 0; text-wrap: pretty;
+  }
+
   /* ---------- lightbox ----------
      Every image on this page is already inlined as a data URI, so opening one
      full size costs nothing and loads nothing. Native <dialog> because it
@@ -237,9 +256,14 @@
   .cr__cat { font: 500 11px/1 var(--gr-mono); letter-spacing: .13em; text-transform: uppercase; color: var(--gr-ink-2); display: flex; align-items: center; gap: .55rem; }
   .cr__cat::before { content: ""; width: 16px; height: 4px; flex: none; background: var(--c); }
   .cr p { margin: 0; font-size: .9375rem; line-height: 1.58; color: var(--gr-ink-2); text-wrap: pretty; }
-  .cr__link { font: 500 11.5px/1 var(--gr-mono); letter-spacing: .1em; text-transform: uppercase; margin-top: auto; padding-top: .25rem; }
-  .cr__link a { border-bottom: 1px solid var(--gr-rule); }
-  .cr__link a::after { content: " \2197"; }
+  .cr__link { margin-top: auto; padding-top: .35rem; }
+  .cr__link a {
+    font: 500 11.5px/1 var(--gr-mono); letter-spacing: .1em; text-transform: uppercase;
+    color: var(--gr-ink); border: 1px solid var(--gr-rule);
+    padding: .6rem .75rem; display: inline-flex; align-items: center; gap: .5rem;
+  }
+  .cr__link a::after { content: "\2197"; color: var(--c); font-size: 12px; }
+  .cr__link a:hover { border-color: var(--c); }
 
   /* ---------- the triad: idea, brand, build ----------
      The claim this page makes is that these three usually live in different
@@ -410,6 +434,7 @@
           <div class="fact"><dt>Status</dt><dd>Ran live. Wound down when the partnership stalled, not when the product did. <b>The publish workflow reached v341.</b></dd></div>
         </dl>
         <ul class="stack"><li>Next.js</li><li>TypeScript</li><li>Pipedream</li><li>Airtable</li><li>Stripe</li><li>Ayrshare</li><li>BannerBear</li><li>OpenAI API</li></ul>
+        <p class="links__note">Nothing to link. The product wound down and the domain went with the partnership.</p>
       </div>
     </article>
 
@@ -457,6 +482,10 @@
           <div class="fact"><dt>Decision</dt><dd>Every field on the card is a <b>named layer</b> rather than baked into the artwork. It costs more up front and it is the reason pointing the machine at a second data source was a configuration rather than a rebuild.</dd></div>
         </dl>
         <ul class="stack"><li>Make.com</li><li>Airtable</li><li>BannerBear</li><li>Instagram Graph API</li><li>API scraping</li></ul>
+        <div class="links">
+          <a href="https://www.instagram.com/winesoftheokanagan/" rel="noopener">Wines of the Okanagan</a>
+          <a href="https://www.instagram.com/toursoftheokanagan/" rel="noopener">Tours of the Okanagan</a>
+        </div>
       </div>
     </article>
 
@@ -499,7 +528,7 @@
           <div class="fact"><dt>Honest gap</dt><dd>Easements have no public endpoint, so the tool says so rather than quietly returning a number that is too big. Same for flag lots, where front-edge detection can misclassify and the output warns.</dd></div>
         </dl>
         <ul class="stack"><li>Python</li><li>FastAPI</li><li>GeoPandas</li><li>Shapely</li><li>Next.js 15</li><li>React 19</li><li>TypeScript</li><li>Railway</li><li>Vercel</li></ul>
-        <p class="cr__link"><a href="https://lakecountry-envelope.vercel.app" rel="noopener">Try it on a Lake Country address</a></p>
+        <div class="links"><a href="https://lakecountry-envelope.vercel.app" rel="noopener">Try it on a Lake Country address</a></div>
       </div>
     </article>
 
@@ -540,6 +569,7 @@
           <div class="fact"><dt>Result</dt><dd><b>260 sign-ups claimed every seat</b>, 38 more on the waitlist, and 48 households ran a home network checkup. Covered by CBC Daybreak and AM1150.</dd></div>
         </dl>
         <ul class="stack"><li>Netlify</li><li>Serverless functions</li><li>Brevo API</li><li>Airtable</li><li>Design system</li></ul>
+        <div class="links"><a href="https://safefamilyinternet.ca" rel="noopener">safefamilyinternet.ca</a></div>
       </div>
     </article>
 
@@ -557,11 +587,13 @@
       <div class="cr__shot"><button type="button" class="zoom" data-cap="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." aria-label="Open full size"><img src="{{IMG:craft-setlist}}" alt="A wide marketing image for Set List Easy: a singer at a microphone under teal and amber stage light, beside a hand holding a phone showing the real song list filtered by chord count." width="900" height="506"></button></div>
       <h3>Set List Easy</h3>
       <p>A searchable set list of two, three and four chord songs for musicians who are starting to gig. Accounts, subscriptions and a perform mode. Four builds across its life, ending as a native mobile app.</p>
+      <p class="cr__link"><a href="https://setlisteasy.com" rel="noopener">setlisteasy.com</a></p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-5)">
       <span class="cr__cat">Live tool, on stage</span>
       <h3>Gig Pulse</h3>
       <p>An iPad app for the gig itself. Tap the energy in the room against each song as you play, then let a model read the history back and tell you which songs earn their place.</p>
+      <p class="cr__link"><a href="https://gigpulse-ai.vercel.app/" rel="noopener">Open it</a></p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-2)">
       <span class="cr__cat">Design system</span>
@@ -574,6 +606,7 @@
       <div class="cr__shot"><button type="button" class="zoom" data-cap="The screenshot pipeline, before and after. On the left a raw iPhone capture of a settings pane, on the right the finished guide step in a phone frame with the toggle ringed in pink." aria-label="Open full size"><img src="{{IMG:craft-guides}}" alt="The screenshot pipeline, before and after. On the left a raw iPhone capture of a settings pane, on the right the finished guide step in a phone frame with the toggle ringed in pink." width="900" height="506"></button></div>
       <h3>Parent guides</h3>
       <p>A folder of raw phone screenshots goes in, branded annotated PDFs come out. Black phone frame, a pink box on the exact thing to tap. Eight guides shipped.</p>
+      <p class="cr__link"><a href="https://downloads.safefamilyinternet.ca" rel="noopener">Download one</a></p>
     </article>
     <article class="cr" style="--c: var(--gr-accent-4)">
       <span class="cr__cat">Publishing engine</span>
