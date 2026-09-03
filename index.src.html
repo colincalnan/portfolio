@@ -376,6 +376,10 @@
       </div>
       <div>
         <h3>Wines and Tours of the Okanagan</h3>
+        <figure class="piece__lead">
+          <div class="shot__frame"><img src="{{IMG:woto-posts}}" alt="Four generated Instagram posts in a grid, each on a different gradient, each carrying the same headline block, wine name, hashtag and Wines of the Okanagan wordmark." width="900" height="900"></div>
+          <figcaption>Four posts, one template, four rows of Airtable. Nobody laid these out.</figcaption>
+        </figure>
         <p class="lede">
           Two Instagram accounts running the same machine on two different data sources.
           One scraped the provincial winery database through its API, generated the imagery
@@ -387,20 +391,23 @@
         <div class="triad">
         <div class="tri">
           <span class="tri__label">Idea</span>
-          <p>Every winery in the province is already in a public database, and every one of them wants to be found. Nobody was turning that into a feed. So the source data was the content, and the only real question was the rendering.</p>
+          <p>Every winery in the province is already in a public database, and every one of them wants to be found. Nobody was turning that into a feed. So the source data became the content, and the only real question left was the rendering.</p>
         </div>
         <div class="tri">
           <span class="tri__label">Brand</span>
-          <p>Two accounts, two names, one visual system underneath. Template families rather than per-post design, which is the only way an unattended feed stays on brand.</p>
+          <div class="tri__shot tri__shot--dark tri__shot--contain"><img src="{{IMG:woto-brand}}" alt="The Wines of the Okanagan mark: a wine glass with a sun inside it above the stacked wordmark." width="700" height="649"></div>
+          <p>A mark, a wordmark, a gradient set and a headline voice, all built so an unattended feed still reads as one thing. Template families rather than per-post design.</p>
         </div>
         <div class="tri">
           <span class="tri__label">Build</span>
-          <p>Scraped the source through its API, generated the imagery and copy, published on a schedule with nobody in the loop. Then pointed the same machine at tour reviews and it worked again.</p>
+          <div class="tri__shot"><img src="{{IMG:woto-build}}" alt="The BannerBear template editor showing the WOTO Profile template at 1000 by 1000, with a layer list of 28 named fields and a rendered preview of a wine profile card." width="700" height="538"></div>
+          <p>The template as data. Twenty-eight named layers, so a row becomes a card: <b>wine_name</b>, <b>value_tannins</b>, <b>meter_acidity</b>, <b>wine_image</b>. Airtable in, rendered post out, published on a schedule.</p>
         </div>
         </div>
         <dl class="facts">
           <div class="fact"><dt>Role</dt><dd>Everything. Scraper, generation, templates, scheduling, both accounts.</dd></div>
           <div class="fact"><dt>Approach</dt><dd>Structured source data in, generated on-brand posts out, published on a schedule with nobody in the loop. A template family rather than a run of one-offs.</dd></div>
+          <div class="fact"><dt>Decision</dt><dd>Every field on the card is a <b>named layer</b> rather than baked into the artwork. It costs more up front and it is the reason pointing the machine at a second data source was a configuration rather than a rebuild.</dd></div>
         </dl>
         <ul class="stack"><li>Make.com</li><li>Airtable</li><li>BannerBear</li><li>Instagram Graph API</li><li>API scraping</li></ul>
       </div>
