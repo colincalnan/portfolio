@@ -362,7 +362,7 @@
   <div class="sec-head">
     <h2 class="display">Selected work</h2>
     <span class="rule"></span>
-    <p>Three, in depth</p>
+    <p>Four, in depth</p>
   </div>
 
   <main class="work">
@@ -457,6 +457,49 @@
           <div class="fact"><dt>Decision</dt><dd>Every field on the card is a <b>named layer</b> rather than baked into the artwork. It costs more up front and it is the reason pointing the machine at a second data source was a configuration rather than a rebuild.</dd></div>
         </dl>
         <ul class="stack"><li>Make.com</li><li>Airtable</li><li>BannerBear</li><li>Instagram Graph API</li><li>API scraping</li></ul>
+      </div>
+    </article>
+
+    <article class="piece" style="--c: var(--gr-accent-2)">
+      <div class="piece__rail">
+        <span class="piece__chip"></span>
+        <span class="piece__cat">Geospatial product</span>
+      </div>
+      <div>
+        <h3>Lake Country Zoning</h3>
+        <figure class="piece__lead">
+          <div class="shot__frame"><button type="button" class="zoom" data-cap="A generated site plan for 11777 Hare Rd: the parcel outlined in black over a street map, the buildable envelope filled in green, and each setback drawn as a labelled red dashed line, 6.0m front, 10.0m rear, 3.0m side interior, 4.0m side flanking. A footer reads parcel 10,095 square metres, buildable envelope 7,798, max footprint 2,019." aria-label="Open full size"><img src="{{IMG:env-build}}" alt="A generated site plan for 11777 Hare Rd: the parcel outlined in black over a street map, the buildable envelope filled in green, and each setback drawn as a labelled red dashed line, 6.0m front, 10.0m rear, 3.0m side interior, 4.0m side flanking. A footer reads parcel 10,095 square metres, buildable envelope 7,798, max footprint 2,019." width="900" height="758"></button></div>
+          <figcaption>One address in. A zoning bylaw, a parcel polygon and five government endpoints later, this comes out. Roughly fifteen seconds.</figcaption>
+        </figure>
+        <p class="lede">
+          A designer sizing a project against a lot has to read a zoning bylaw, find the
+          right zone, apply four different setbacks to four edges, work out which edge is
+          even the front, subtract any development permit overlays, and then decide whether
+          lot coverage or geometry is the binding constraint. It takes half an hour and it
+          is the same half hour every time. This does it from an address.
+        </p>
+        <div class="triad">
+        <div class="tri">
+          <span class="tri__label">Idea</span>
+          <p>The bylaw is already public and the parcel data is already public. Nobody had put them in the same sentence. The work was never getting the data, it was deciding which edge of an irregular lot counts as the front.</p>
+        </div>
+        <div class="tri">
+          <span class="tri__label">Brand</span>
+          <div class="tri__shot tri__shot--contain"><button type="button" class="zoom" data-cap="The Lake Country Zoning app: a heading, one sentence of explanation, a single text field showing an example address and PID, and an Analyze button." aria-label="Open full size"><img src="{{IMG:env-brand}}" alt="The Lake Country Zoning app: a heading, one sentence of explanation, a single text field showing an example address and PID, and an Analyze button." width="900" height="412"></button></div>
+          <p>One field and one button. Everything hard is behind it. A professional tool used between meetings earns nothing by looking like a dashboard.</p>
+        </div>
+        <div class="tri">
+          <span class="tri__label">Build</span>
+          <p>Parcel polygon from ParcelMap BC, zone from the District's GIS, setbacks regex-extracted from the <b>Bylaw 561</b> PDF, overlays from five more endpoints, then the envelope as an intersection of inward half-planes. FastAPI and GeoPandas on Railway, Next.js on Vercel.</p>
+        </div>
+        </div>
+        <dl class="facts">
+          <div class="fact"><dt>Role</dt><dd>Everything. Built for an architectural design practice, whose principal is the primary user.</dd></div>
+          <div class="fact"><dt>Decision</dt><dd>The bylaw is <b>parsed once into JSON</b>, not read by a model at request time. It made the tool answer in seconds instead of tens of seconds, cost nothing to run, and gave up the ability to handle a bylaw written in an unusual format. That trade is why it is a product rather than a demo.</dd></div>
+          <div class="fact"><dt>Honest gap</dt><dd>Easements have no public endpoint, so the tool says so rather than quietly returning a number that is too big. Same for flag lots, where front-edge detection can misclassify and the output warns.</dd></div>
+        </dl>
+        <ul class="stack"><li>Python</li><li>FastAPI</li><li>GeoPandas</li><li>Shapely</li><li>Next.js 15</li><li>React 19</li><li>TypeScript</li><li>Railway</li><li>Vercel</li></ul>
+        <p class="cr__link"><a href="https://lakecountry-envelope.vercel.app" rel="noopener">Try it on a Lake Country address</a></p>
       </div>
     </article>
 
