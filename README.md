@@ -1,27 +1,25 @@
-# Colin Calnan / Selected work
+# Selected work
 
-The portfolio page. One HTML file, no build step at runtime, no external requests.
+Colin Calnan. Published at **https://colincalnan.github.io/portfolio/**
 
-## How it works
+One HTML file. Every image is inlined as a data URI, so the page makes zero external
+requests and works offline.
 
-`index.src.html` is the source of truth. It carries `{{IMG:name}}` tokens. The build inlines every asset in `assets/` as a base64 data URI and writes `index.html`, so the published page loads nothing from anywhere.
+## Building
 
-```
-node ../../scripts/portfolio/build.mjs
-```
-
-Build script lives at `scripts/portfolio/build.mjs` in the parent workspace, not in this repo.
-
-To swap an image, drop a new `<name>.jpg` into `assets/` and rebuild. To resize one from the archive:
+`index.src.html` is the source of truth. It carries `{{IMG:name}}` tokens for the
+images in `assets/` and `{{CSS:name}}` tokens for the design system in
+`projects/ground/`. The build inlines all of it and writes `index.html`.
 
 ```
-sips -s format jpeg -Z 900 <source> --out assets/<name>.jpg
+node scripts/portfolio/build.mjs
 ```
+
+The build script and the design system live in the parent workspace, not in this repo.
 
 ## Design
 
-Built on the Bold Talks design system: near-black ground, cobalt and electric blue, peach, cyan, orange, yellow. Zero radii, no shadows, committed dark, single theme. Bebas Neue cannot load here because the page makes no external requests, so the display role is a heavy tightly tracked uppercase grotesk reaching for the same energy.
-
-## Versioning
-
-`main` is what is published. Do experiments on a branch and merge only what survives.
+Built on Ground, a small design system: semantic tokens, three themes, and a
+guidance document written for an agent to read. This page ships the night theme,
+which is the Bold Talks palette: near-black ground, cobalt and electric blue,
+peach, cyan, orange, yellow. Zero radii, no shadows.
