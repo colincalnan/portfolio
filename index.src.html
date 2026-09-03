@@ -158,6 +158,45 @@
   .stack li { font: 400 12px/1 var(--gr-mono); color: var(--gr-ink-2); border: 1px solid var(--gr-rule); padding: .45rem .6rem; }
 
 
+
+  /* ---------- the flagship lead ----------
+     One full-width image at the top of a case study, before the reading
+     starts. Used only where the strongest evidence is a picture of the
+     output rather than a picture of the machine. */
+  .piece__lead { margin: 0 0 1.75rem; }
+  .piece__lead .shot__frame { border: 1px solid var(--gr-rule); background: var(--gr-panel); line-height: 0; }
+  .piece__lead img { width: 100%; height: auto; }
+  .piece__lead figcaption {
+    font: 400 12.5px/1.65 var(--gr-mono); color: var(--gr-ink-2);
+    margin-top: .8rem; text-wrap: pretty;
+  }
+
+  /* ---------- craft ----------
+     Everything that is real, live and ongoing but is not one of the three
+     case studies. Deliberately subordinate: one image, one line, no facts
+     table, no stack list. A reader should scan this as a practice rather
+     than as eight more case studies.
+     Precedent: rauno.me splits Craft from Projects for exactly this reason. */
+  .craft {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px; background: var(--gr-rule);
+    border-top: 1px solid var(--gr-rule); border-bottom: 1px solid var(--gr-rule);
+    margin-top: 2.25rem;
+  }
+  .cr { background: var(--gr-ground); padding: 1.25rem 1.35rem 1.5rem; display: flex; flex-direction: column; gap: .9rem; }
+  .cr__shot { background: var(--gr-panel); border: 1px solid var(--gr-rule); line-height: 0; }
+  .cr__shot img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 0%; }
+  .cr__shot--dark { background: var(--gr-ground-2); }
+  .cr__shot--contain img { object-fit: contain; padding: 6%; box-sizing: border-box; }
+  .cr h3 {
+    font-family: var(--gr-display); font-weight: 800; text-transform: uppercase;
+    letter-spacing: -.02em; line-height: 1; font-size: 1.25rem;
+    margin: 0; color: var(--gr-ink);
+  }
+  .cr__cat { font: 500 11px/1 var(--gr-mono); letter-spacing: .13em; text-transform: uppercase; color: var(--gr-ink-2); display: flex; align-items: center; gap: .55rem; }
+  .cr__cat::before { content: ""; width: 16px; height: 4px; flex: none; background: var(--c); }
+  .cr p { margin: 0; font-size: .9375rem; line-height: 1.58; color: var(--gr-ink-2); text-wrap: pretty; }
+
   /* ---------- the triad: idea, brand, build ----------
      The claim this page makes is that these three usually live in different
      people. Showing all three for every project is the argument, so it gets a
@@ -233,8 +272,9 @@
   <section class="hero">
     <div class="hero__id">
       <b>Colin Calnan</b>
+      <p class="kicker">Twenty years building software</p>
       <p class="kicker">Lake Country, British Columbia</p>
-      <p class="kicker">Selected work, 2026</p>
+      <p class="kicker"><a href="mailto:colin.calnan@gmail.com">colin.calnan@gmail.com</a></p>
     </div>
 
     <div class="band band--hero hero__band"></div>
@@ -242,10 +282,10 @@
     <h1 class="display">Complexity in the back.<br><span>Simplicity in the front.</span></h1>
 
     <p class="hero__lede">
-      That is the rule I build to. Twenty years of making systems work inside messy
-      organisations, now pointed at generative media and AI tooling. I design the brand,
-      build the pipeline that produces on it, ship it, and then measure whether it changed
-      anything. <b>Template families, not one-offs.</b>
+      That is the rule I build to. I design the brand, build the pipeline that produces on
+      it, ship it, and then measure whether it changed anything. Twenty years of making
+      systems work inside messy organisations, now pointed at generative media.
+      <b>Template families, not one-offs.</b>
     </p>
 
     <figure class="hero__shot">
@@ -276,9 +316,9 @@
   </section>
 
   <div class="sec-head">
-    <h2 class="display">Products</h2>
+    <h2 class="display">Selected work</h2>
     <span class="rule"></span>
-    <p>Shipped to people who were not me</p>
+    <p>Three, in depth</p>
   </div>
 
   <main class="work">
@@ -290,6 +330,10 @@
       </div>
       <div>
         <h3>AdvisorAssist</h3>
+        <figure class="piece__lead">
+          <div class="shot__frame"><img src="{{IMG:aa-posted}}" alt="Three real financial advisors' LinkedIn posts side by side, each with its own branded card, hashtags and engagement counts." width="1000" height="562"></div>
+          <figcaption>Three advisors' feeds. Every card generated, branded and published by the pipeline, on a schedule, without them or me touching it.</figcaption>
+        </figure>
         <p class="lede">
           On-brand social content, generated and published for every customer on a schedule,
           for financial advisors across Canada. An advisor paid through Stripe, connected
@@ -311,7 +355,7 @@
         </div>
         <div class="tri">
           <span class="tri__label">Build</span>
-          <div class="tri__shot tri__shot--dark"><img src="{{IMG:advisorassist}}" alt="The Pipedream listener that reads each advisor's logo and three brand colours off the event and composites them into a template before publishing." width="900" height="563"></div>
+          <div class="tri__shot tri__shot--dark tri__shot--contain"><img src="{{IMG:aa-build}}" alt="The Pipedream project index for Advisor Assist: five named workflows, an emitter and two listeners among them, with their service icons and last-updated dates." width="900" height="269"></div>
           <p>A scheduled emitter fires one event per advisor. Listeners assemble the post, composite it into a template with that advisor's own logo and brand colours, and publish through a webhook. <b>v341.</b></p>
         </div>
         </div>
@@ -362,89 +406,6 @@
       </div>
     </article>
 
-    <article class="piece" style="--c: var(--gr-accent-4)">
-      <div class="piece__rail">
-        <span class="piece__chip"></span>
-        <span class="piece__cat">Product, with payments</span>
-      </div>
-      <div>
-        <h3>Set List Easy</h3>
-        <p class="lede">
-          A searchable, filterable set list of two, three and four chord songs for musicians
-          who are starting to gig. The problem is real and specific: you can play six chords
-          and you need two hours of material by Friday. Built, rebuilt, and taken to a mobile
-          app, because the interesting question kept changing and the content model kept
-          being right.
-        </p>
-        <div class="triad">
-        <div class="tri">
-          <span class="tri__label">Idea</span>
-          <p>You can play six chords and you have a two hour gig on Friday. Every song list online is organised by artist or by decade. None of them are organised by the only thing that matters at that moment, which is how hard it is to play.</p>
-        </div>
-        <div class="tri">
-          <span class="tri__label">Brand</span>
-          <div class="tri__shot tri__shot--contain"><img src="{{IMG:setlisteasy}}" alt="The Set List Easy logo and wordmark, a guitar pick mark beside the name." width="900" height="563"></div>
-          <p>A pick and a wordmark, plus the whole kit around it: favicons, social tiles, ad creative. Built to look like a product because it charged like one.</p>
-        </div>
-        <div class="tri">
-          <span class="tri__label">Build</span>
-          <div class="tri__shot "><img src="{{IMG:sle-build}}" alt="The Set List Easy home screen: songs filtered by chord count, with a search and filter bar above them." width="900" height="563"></div>
-          <p>Search and filter over a curated content model, accounts, subscriptions and a perform mode for on stage. Four builds across its life, ending as a native mobile app with a real test suite.</p>
-        </div>
-        </div>
-        <dl class="facts">
-          <div class="fact"><dt>Role</dt><dd>Everything. Product, content model, design, build, payments, brand.</dd></div>
-          <div class="fact"><dt>Approach</dt><dd>Accounts and subscriptions from the start, so it had to be a product rather than a demo. Four builds across the life of it, ending in a native mobile app with a real test suite.</dd></div>
-        </dl>
-        <ul class="stack"><li>Next.js</li><li>TypeScript</li><li>Ionic</li><li>Capacitor</li><li>Airtable</li><li>Supabase</li><li>Stripe</li><li>OAuth</li><li>Vitest</li><li>Cypress</li></ul>
-      </div>
-    </article>
-
-    <article class="piece" style="--c: var(--gr-accent-5)">
-      <div class="piece__rail">
-        <span class="piece__chip"></span>
-        <span class="piece__cat">Live tool, on stage</span>
-      </div>
-      <div>
-        <h3>Gig Pulse</h3>
-        <p class="lede">
-          An iPad app for the gig itself. Tap the energy in the room against each song as you
-          play, build up a history across nights, then let a model read the history back and
-          tell you which songs earn their place and where the set sags. Dark and high contrast
-          because the only place it gets used is a dark room, mid-set, at arm's length.
-        </p>
-        <div class="triad">
-        <div class="tri">
-          <span class="tri__label">Idea</span>
-          <p>Every musician thinks they know which songs land. Nobody writes it down, because you cannot take notes with a guitar on. Make it one tap, and the set list stops being a hunch.</p>
-        </div>
-        <div class="tri">
-          <span class="tri__label">Brand</span>
-          <p>Dark and high contrast, because the only place it gets used is a dark room, mid-set, at arm's length. That constraint decided most of the design before anything was drawn.</p>
-        </div>
-        <div class="tri">
-          <span class="tri__label">Build</span>
-          <p>A progressive web app so it installs without a store, with the model provider behind an abstraction rather than wired straight in. Every decision tested at a real gig that week.</p>
-        </div>
-        </div>
-        <dl class="facts">
-          <div class="fact"><dt>Role</dt><dd>Everything, and I am the user. Every design decision was tested at a real gig that week.</dd></div>
-          <div class="fact"><dt>Approach</dt><dd>Progressive web app so it installs without a store. Model provider behind an abstraction rather than wired straight in, so swapping one is a config change.</dd></div>
-        </dl>
-        <ul class="stack"><li>React 19</li><li>TypeScript</li><li>Vite</li><li>Tailwind</li><li>PWA</li><li>Multi-provider AI</li></ul>
-      </div>
-    </article>
-
-  </main>
-
-  <div class="sec-head">
-    <h2 class="display">Systems</h2>
-    <span class="rule"></span>
-    <p>The machines behind the work</p>
-  </div>
-
-  <main class="work">
-
     <article class="piece" style="--c: var(--gr-accent-1)">
       <div class="piece__rail">
         <span class="piece__chip"></span>
@@ -462,6 +423,7 @@
         <div class="triad">
         <div class="tri">
           <span class="tri__label">Idea</span>
+          <div class="tri__shot tri__shot--dark tri__shot--contain"><img src="{{IMG:sfi-idea}}" alt="The castle model: four concentric rings labelled apps, devices, network and community around a child at the centre, with a numbered legend." width="900" height="506"></div>
           <p>Parents are not short of warnings about the internet. They are short of one thing they can actually do tonight. So the whole product answers a single question: what do I change, and in what order.</p>
         </div>
         <div class="tri">
@@ -471,7 +433,8 @@
         </div>
         <div class="tri">
           <span class="tri__label">Build</span>
-          <p>A static site on continuous deploy, a gated download library, and an email gate through a serverless function into the campaign platform. <b>260 sign-ups claimed every seat</b> for one night in a town of 15,000.</p>
+          <div class="tri__shot tri__shot--dark"><img src="{{IMG:sfi-build}}" alt="A rendered carousel slide: a yellow highlight block reading Lake Country BC above heavy white capitals, What one town just proved." width="900" height="563"></div>
+          <p>A static site on continuous deploy, a gated download library, and an email gate through a serverless function. <b>260 sign-ups claimed every seat</b> for one night in a town of 15,000.</p>
         </div>
         </div>
         <dl class="facts">
@@ -483,217 +446,63 @@
       </div>
     </article>
 
-    <article class="piece" style="--c: var(--gr-accent-2)">
-      <div class="piece__rail">
-        <span class="piece__chip"></span>
-        <span class="piece__cat">Design system</span>
-      </div>
-      <div>
-        <h3>Bold Talks, and Ground</h3>
-        <p class="lede">
-          A presentation system written as tokens first, then a deck built on top of it so
-          the talk could not drift from the brand. Eight ground colours, one condensed
-          display face, and two rules that settle most arguments before they start: no
-          radii, no shadows. It has since become <b>Ground</b>, which turns the same
-          decisions into something an agent can build against: semantic tokens so a page
-          never names a colour, three themes it can flip between, a guidance document
-          written as prose, and a check script that fails a build. The page you are
-          reading is the first thing built on it.
-        </p>
-        <div class="triad">
-        <div class="tri">
-          <span class="tri__label">Idea</span>
-          <p>A brand nobody can apply is not a brand. Write the decisions down as something a machine can check, and the rules survive contact with a deadline.</p>
-        </div>
-        <div class="tri">
-          <span class="tri__label">Brand</span>
-          <div class="swatches">
-            <span class="sw" style="background:var(--gr-ground)"><span>ground</span></span>
-            <span class="sw" style="background:var(--gr-accent-6)"><span>cobalt</span></span>
-            <span class="sw" style="background:var(--gr-accent-2)"><span>electric</span></span>
-            <span class="sw" style="background:var(--gr-accent-5)"><span>violet</span></span>
-            <span class="sw" style="background:var(--gr-accent-3)"><span>peach</span></span>
-            <span class="sw" style="background:var(--gr-accent-1)"><span>cyan</span></span>
-            <span class="sw" style="background:var(--gr-accent-4)"><span>orange</span></span>
-            <span class="sw" style="background:var(--gr-warm)"><span>yellow</span></span>
-          </div>
-          <p>Eight grounds, one display face, and two rules that settle most arguments before they start: no radii, no shadows. Drawn here from the live token file, not pasted in.</p>
-        </div>
-        <div class="tri">
-          <span class="tri__label">Build</span>
-          <div class="tri__shot tri__shot--dark"><img src="{{IMG:slide}}" alt="A deck title slide set in heavy condensed capitals, white on near-black, built from the token file rather than styled by hand." width="900" height="563"></div>
-          <p>Semantic tokens so a page never names a colour, three themes it can flip between, guidance written as prose an agent reads, and a check script that fails a build.</p>
-        </div>
-        </div>
-        <dl class="facts">
-          <div class="fact"><dt>Role</dt><dd>Designed the system, built the deck that consumes it, then rebuilt it as a token contract three surfaces now share.</dd></div>
-          <div class="fact"><dt>Approach</dt><dd>Judgment written as prose an agent reads, reusable mechanics in the stylesheet, and anything a machine can decide turned into a check that can fail on its own.</dd></div>
-          <div class="fact"><dt>Result</dt><dd>Sized in rem against a fixed canvas so type holds on a projector. Reused since across guides, carousels, the site and this page. <b>Fourteen checks</b> that each fail a build, from contrast to whether every number carries its source.</dd></div>
-        </dl>
-        <ul class="stack"><li>Slidev</li><li>CSS custom properties</li><li>Semantic tokens</li><li>Node</li><li>Agent-readable guidance</li></ul>
-      </div>
-    </article>
-
-    <article class="piece" style="--c: var(--gr-accent-3)">
-      <div class="piece__rail">
-        <span class="piece__chip"></span>
-        <span class="piece__cat">Generative media pipeline</span>
-      </div>
-      <div>
-        <h3>Parent guides</h3>
-        <p class="lede">
-          Illustrated step-by-step guides for locking down a phone, a console or a router,
-          built from screenshots I captured myself on the actual devices. A pipeline takes
-          the raw captures, redacts anything personal, drops them into a black phone frame,
-          highlights the exact control to tap in brand pink, and lays out a print-ready PDF.
-          Every guide in the library comes off the same line.
-        </p>
-        <div class="triad">
-        <div class="tri">
-          <span class="tri__label">Idea</span>
-          <p>Screenshots of settings screens are how parents actually learn this, and every guide online is a wall of prose. Annotate the real screen and the instruction disappears into the picture.</p>
-        </div>
-        <div class="tri">
-          <span class="tri__label">Brand</span>
-          <p>One template: black phone frame, a pink box on the exact thing to tap, step numbers, attribution footer. The pink box is not decoration, it is the instruction.</p>
-        </div>
-        <div class="tri">
-          <span class="tri__label">Build</span>
-          <div class="tri__shot "><img src="{{IMG:guide}}" alt="A page from a parent guide: a phone screenshot in a black frame with a pink callout box marking the setting to tap." width="900" height="563"></div>
-          <p>A folder of raw phone screenshots goes in, branded annotated PDFs come out. The redaction and tap-ring steps are fragile, so every output is checked by eye before it ships.</p>
-        </div>
-        </div>
-        <dl class="facts">
-          <div class="fact"><dt>Role</dt><dd>Built the pipeline and shot every screenshot. No stock, no borrowed assets, all first-party.</dd></div>
-          <div class="fact"><dt>Approach</dt><dd>Scripted image composition and layout, then automated publishing to the download site and the email templates that deliver them.</dd></div>
-          <div class="fact"><dt>Result</dt><dd>Eight published guides and <b>over 400 framed captures</b> that regenerate from source instead of being rebuilt by hand. The template family is the product, not any single guide.</dd></div>
-        </dl>
-        <ul class="stack"><li>Python</li><li>Pillow</li><li>OCR redaction</li><li>PDF generation</li><li>Brevo templates</li></ul>
-      </div>
-    </article>
-
-    <article class="piece" style="--c: var(--gr-accent-4)">
-      <div class="piece__rail">
-        <span class="piece__chip"></span>
-        <span class="piece__cat">Agent tooling</span>
-      </div>
-      <div>
-        <h3>Carousel and publishing system</h3>
-        <p class="lede">
-          I write a topic on the command line and get back a finished, on-brand carousel,
-          then publish it straight to the channel without opening a browser. Brand-locked
-          template families rather than bespoke posts, because ten posts that ship well beat
-          one that is perfect and late. Two separate brand identities run through the same
-          machine without ever bleeding into each other.
-        </p>
-        <div class="triad">
-        <div class="tri">
-          <span class="tri__label">Idea</span>
-          <p>The reason good organisations post badly is that every post needs a designer. Take the designer out of the loop without taking the design out of the post.</p>
-        </div>
-        <div class="tri">
-          <span class="tri__label">Brand</span>
-          <p>Seven slide types and a token system rather than per-post design. Constraints are what make an unattended feed stay on brand.</p>
-        </div>
-        <div class="tri">
-          <span class="tri__label">Build</span>
-          <div class="tri__shot "><img src="{{IMG:carousel}}" alt="A rendered carousel slide: heavy condensed capitals on a coloured ground with a caption beneath." width="900" height="563"></div>
-          <p>A JSON file goes in, headless Chrome renders brand-correct 1080x1350 frames, and they post as a native Instagram carousel and a LinkedIn multi-image. No Canva, no Buffer, no designer.</p>
-        </div>
-        </div>
-        <dl class="facts">
-          <div class="fact"><dt>Role</dt><dd>Designed the templates and built the generator, the scheduler and the publishing layer.</dd></div>
-          <div class="fact"><dt>Approach</dt><dd>Model-driven layout against fixed brand constraints, published through the platform APIs directly, with per-brand credentials kept apart.</dd></div>
-          <div class="fact"><dt>Result</dt><dd>A running creator practice under my own name, publishing on a schedule rather than in bursts.</dd></div>
-        </dl>
-        <ul class="stack"><li>Node</li><li>Claude</li><li>Meta Graph API</li><li>LinkedIn API</li><li>Buffer GraphQL</li></ul>
-      </div>
-    </article>
-
-    <article class="piece" style="--c: var(--gr-accent-5)">
-      <div class="piece__rail">
-        <span class="piece__chip"></span>
-        <span class="piece__cat">Video and audio</span>
-      </div>
-      <div>
-        <h3>Reels and the transcribe pipeline</h3>
-        <p class="lede">
-          A short-form video series about things I have actually built, written to a fixed
-          script structure so the series holds together instead of drifting. Underneath it,
-          a command that takes any video URL and returns a clean, structured transcript,
-          which is how research turns into scripts without a manual step in between.
-        </p>
-        <div class="triad">
-        <div class="tri">
-          <span class="tri__label">Idea</span>
-          <p>There is already a camera on the speaker stand at every gig. The footage is not the problem. Finding the six good minutes inside two hours is the problem.</p>
-        </div>
-        <div class="tri">
-          <span class="tri__label">Brand</span>
-          <p>Vertical, captioned, cut on the beat, and consistent enough that a feed of them reads as one thing rather than a folder of clips.</p>
-        </div>
-        <div class="tri">
-          <span class="tri__label">Build</span>
-          <div class="tri__shot tri__shot--dark"><img src="{{IMG:reel}}" alt="A frame from a cut reel: a vertical video still from a live performance." width="900" height="563"></div>
-          <p>Energy analysis finds the song boundaries in an unattended two hour recording and cuts it into publishable reels. <b>One of them has 57,288 views.</b></p>
-        </div>
-        </div>
-        <dl class="facts">
-          <div class="fact"><dt>Role</dt><dd>Wrote the script framework, shot and cut the series, built the transcription tool.</dd></div>
-          <div class="fact"><dt>Approach</dt><dd>Local speech-to-text so nothing leaves the machine, then a model pass to structure the output into something a writer can use.</dd></div>
-          <div class="fact"><dt>Result</dt><dd>Research to publishable script in one command. As generative tools spread, the differentiator is craft and judgment rather than raw output, so every script carries one deliberate design decision.</dd></div>
-        </dl>
-        <ul class="stack"><li>yt-dlp</li><li>faster-whisper</li><li>Claude CLI</li><li>Python</li></ul>
-      </div>
-    </article>
-
-    <article class="piece" style="--c: var(--gr-warm)">
-      <div class="piece__rail">
-        <span class="piece__chip"></span>
-        <span class="piece__cat">Measurement</span>
-      </div>
-      <div>
-        <h3>Social metrics tracker</h3>
-        <p class="lede">
-          Pulls per-post numbers from the scheduler into a flat data file and renders a
-          local report. It reports medians rather than averages, on purpose: reach on a
-          personal account is lottery-shaped, a handful of posts carry twenty times the
-          typical one, and a mean describes none of them. The median says what a normal post
-          does. A separate count says how often the lottery pays.
-        </p>
-        <dl class="facts">
-          <div class="fact"><dt>Role</dt><dd>Built the sync, the data contract and the report.</dd></div>
-          <div class="fact"><dt>Approach</dt><dd>Data file as the source of truth, the view generated from it, so the report rebuilds instead of being maintained.</dd></div>
-          <div class="fact"><dt>Result</dt><dd>Told me which register works on which platform. That finding now governs what gets posted where, and it overturned what I assumed.</dd></div>
-        </dl>
-        <ul class="stack"><li>Node</li><li>Buffer API</li><li>Generated HTML</li><li>JSON contracts</li></ul>
-      </div>
-    </article>
-
-    <article class="piece" style="--c: var(--gr-accent-6)">
-      <div class="piece__rail">
-        <span class="piece__chip"></span>
-        <span class="piece__cat">Research tool</span>
-      </div>
-      <div>
-        <h3>Job Scout</h3>
-        <p class="lede">
-          Built in an afternoon. It reads every open posting across twenty company job
-          boards, throws out anything hybrid, on-site or junior before scoring, ranks what
-          survives against a tuned term model, and renders a report. Search engines block
-          automation, so it goes to the applicant tracking systems directly, where the full
-          job description is available and nothing gets rate-limited.
-        </p>
-        <dl class="facts">
-          <div class="fact"><dt>Role</dt><dd>Designed the gates and the scoring model, built the fetcher and the report.</dd></div>
-          <div class="fact"><dt>Approach</dt><dd>Deterministic scoring with an explainable breakdown per posting, so a result can always be interrogated rather than trusted.</dd></div>
-          <div class="fact"><dt>Result</dt><dd><b>1,783 postings read, 83 kept.</b> The hybrid filter alone removed 573. It independently surfaced the two roles I had already found by hand, in the top six.</dd></div>
-        </dl>
-        <ul class="stack"><li>Node</li><li>Greenhouse, Lever, Ashby APIs</li><li>Scoring model</li><li>Generated HTML</li></ul>
-      </div>
-    </article>
-
   </main>
+
+  <div class="sec-head">
+    <h2 class="display">Craft</h2>
+    <span class="rule"></span>
+    <p>Things I keep building</p>
+  </div>
+
+  <div class="craft">
+    <article class="cr" style="--c: var(--gr-accent-4)">
+      <span class="cr__cat">Product, with payments</span>
+      <div class="cr__shot "><img src="{{IMG:craft-setlist}}" alt="A searchable set list of two, three and four chord songs for musicians who are starting to" width="900" height="506"></div>
+      <h3>Set List Easy</h3>
+      <p>A searchable set list of two, three and four chord songs for musicians who are starting to gig. Accounts, subscriptions and a perform mode. Four builds across its life, ending as a native mobile app.</p>
+    </article>
+    <article class="cr" style="--c: var(--gr-accent-5)">
+      <span class="cr__cat">Live tool, on stage</span>
+      <h3>Gig Pulse</h3>
+      <p>An iPad app for the gig itself. Tap the energy in the room against each song as you play, then let a model read the history back and tell you which songs earn their place.</p>
+    </article>
+    <article class="cr" style="--c: var(--gr-accent-2)">
+      <span class="cr__cat">Design system</span>
+      <div class="cr__shot cr__shot--dark"><img src="{{IMG:craft-boldtalks}}" alt="A presentation system written as tokens first, now a semantic contract with three themes, " width="900" height="506"></div>
+      <h3>Bold Talks, and Ground</h3>
+      <p>A presentation system written as tokens first, now a semantic contract with three themes, guidance an agent reads, and a check script that fails a build. This page runs on it.</p>
+    </article>
+    <article class="cr" style="--c: var(--gr-accent-3)">
+      <span class="cr__cat">Screenshot pipeline</span>
+      <div class="cr__shot "><img src="{{IMG:craft-guides}}" alt="A folder of raw phone screenshots goes in, branded annotated PDFs come out. Black phone fr" width="900" height="506"></div>
+      <h3>Parent guides</h3>
+      <p>A folder of raw phone screenshots goes in, branded annotated PDFs come out. Black phone frame, a pink box on the exact thing to tap. Eight guides shipped.</p>
+    </article>
+    <article class="cr" style="--c: var(--gr-accent-4)">
+      <span class="cr__cat">Publishing engine</span>
+      <div class="cr__shot cr__shot--dark"><img src="{{IMG:craft-carousel}}" alt="A JSON file goes in, headless Chrome renders brand-correct 1080x1350 frames, and they post" width="900" height="506"></div>
+      <h3>Carousel and publishing</h3>
+      <p>A JSON file goes in, headless Chrome renders brand-correct 1080x1350 frames, and they post as a native Instagram carousel and a LinkedIn multi-image. No Canva, no scheduler, no designer.</p>
+    </article>
+    <article class="cr" style="--c: var(--gr-accent-5)">
+      <span class="cr__cat">Video pipeline</span>
+      <div class="cr__shot cr__shot--dark cr__shot--contain"><img src="{{IMG:craft-reels}}" alt="Energy analysis finds the song boundaries in an unattended two hour gig recording and cuts" width="900" height="506"></div>
+      <h3>Reels and transcribe</h3>
+      <p>Energy analysis finds the song boundaries in an unattended two hour gig recording and cuts it into publishable reels. One of them has 57,288 views.</p>
+    </article>
+    <article class="cr" style="--c: var(--gr-accent-6)">
+      <span class="cr__cat">Agent loop</span>
+      <div class="cr__shot "><img src="{{IMG:craft-jobscout}}" alt="Reads 4,130 job postings across 88 boards, gates them on facts a machine can check, then p" width="900" height="506"></div>
+      <h3>Job Scout</h3>
+      <p>Reads 4,130 job postings across 88 boards, gates them on facts a machine can check, then pays a model to read the survivors against a rubric written in prose. It found this application.</p>
+    </article>
+    <article class="cr" style="--c: var(--gr-warm)">
+      <span class="cr__cat">Instrumentation</span>
+      <div class="cr__shot "><img src="{{IMG:craft-metrics}}" alt="Pulls per-post numbers back out of the publishing pipeline and tells me the truth, includi" width="900" height="506"></div>
+      <h3>Social metrics</h3>
+      <p>Pulls per-post numbers back out of the publishing pipeline and tells me the truth, including that reach here behaves like a lottery rather than a machine.</p>
+    </article>
+  </div>
 
   <section class="close">
     <h2 class="display">The part software cannot do</h2>
