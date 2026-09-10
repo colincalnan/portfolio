@@ -38,7 +38,9 @@ peach, cyan, orange, yellow. Zero radii, no shadows.
 
 ## Build pages
 
-`builds/` holds one live page per build: what it is, how it works, the media, and what it still gets wrong. Plain HTML sharing `builds/builds.css`, which is the Bold Talks structure in the teal palette from the loops tutorial (cream and teal in light, deep teal in dark). Unlike the main page, running text has no max-width, by choice.
+`builds/` holds one live page per build: what it is, how it works, the media, and what it still gets wrong. Plain HTML sharing `builds/builds.css`: Bold Talks structure in a teal palette (cool mineral ground in light, deep teal in dark, Bold Talks signal yellow and violet as accents). Unlike the main page, running text has no max-width, by choice.
+
+Every build page has a social card. Add `builds/<slug>/og.json` and run `node scripts/portfolio/build-og-builds.mjs <slug>` to render `builds/<slug>/og.png` from `builds/og.src.html`, then point the page's `og:image` at it.
 
 - `builds/foot-stomper/`: wearable BLE-MIDI kick drum
 - `builds/gig-splitter/`: gig video to per-song reels

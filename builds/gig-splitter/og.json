@@ -1,0 +1,14 @@
+{
+  "title": "Gig Splitter",
+  "kicker": "Build / music and AI",
+  "sub": "Two hours of gig video in. A captioned reel per song out, named by what I played.",
+  "stack": "Python · Whisper · Claude · ffmpeg",
+  "status": "Running, six gigs so far",
+  "live": true,
+  "image": "../../assets/build-splitter.jpg",
+  "position": "60% 40%",
+  "method": [
+    "Built with Claude Code",
+    ""
+  ]
+}

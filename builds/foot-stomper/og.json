@@ -1,0 +1,14 @@
+{
+  "title": "Foot Stomper",
+  "kicker": "Build / music hardware",
+  "sub": "A kick drum I wear on my foot. Tap or stomp, and a bass drum plays through the PA.",
+  "stack": "ESP32-S3 · Accelerometer · Bluetooth MIDI",
+  "status": "Bench-proven, not played live yet",
+  "live": false,
+  "image": "media/device-armed.jpg",
+  "position": "50% 45%",
+  "method": [
+    "Spec first",
+    ", built with Claude Code"
+  ]
+}

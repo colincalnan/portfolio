@@ -1,36 +1,39 @@
 /* Build pages
-   Bold Talks structure (Ground), in the teal palette from the loops tutorial:
-   cream and deep teal ink in light, deep teal ground in dark. Follows the
-   reader's system setting.
+   Bold Talks structure (Ground) in a teal palette: cool mineral ground and
+   deep teal ink in light, deep teal ground in dark, with Bold Talks signal
+   yellow and violet as the accents. Follows the reader's system setting.
+   (Moved off the loops-tutorial cream and amber on 2026-09-10, because that
+   pair read as Anthropic's default look.)
 
    Deliberate divergence from Ground's measure rule, Colin's call on
    2026-09-10: no max-width on paragraphs or any running text. Text runs the
    full width of its column. */
 
 :root {
-  --ground: #EFEEE7;
-  --ground-2: #FBFAF6;
-  --surface: #F5F3EC;
-  --rule: #DAD7CC;
-  --rule-soft: #E6E3DA;
-  --ink: #1A2529;
-  --ink-2: #3B4A4E;
-  --muted: #4C5A5A;
-  --accent: #B26A08;
-  --accent-ink: #8F5406;
-  --teal: #1C7F74;
-  --teal-fill: #1C7F74;
-  --warm: #C08A2E;
-  --code-bg: #0C1719;
-  --code-text: #E9E4D8;
-  --code-dim: #7E948F;
-  --code-accent: #F2A93B;
+  --ground: #EEF3F1;
+  --ground-2: #F8FBFA;
+  --surface: #E4ECEA;
+  --rule: #CCDAD7;
+  --rule-soft: #DDE7E5;
+  --ink: #0E2426;
+  --ink-2: #34504E;
+  --muted: #4A6361;
+  --signal: #FFCC1A;      /* Bold Talks yellow. Fills and marks only on this ground, never text */
+  --on-signal: #0E2426;
+  --accent-ink: #0A6A62;  /* links and small emphasis, 5.8:1 on --ground */
+  --teal: #0F766E;
+  --teal-fill: #0F766E;
+  --focus: #0E2426;
+  --code-bg: #0C1B1D;
+  --code-text: #E8F1EF;
+  --code-dim: #7F9895;
+  --code-accent: #FFD21F;
   --code-teal: #52C3B6;
-  --chart-a: #008A7C;   /* gestures, validated against --ground */
-  --chart-b: #B8690A;   /* shuffle */
+  --chart-a: #008A7C;     /* gestures. Pair validated against --ground: CVD and contrast pass */
+  --chart-b: #6D3FD1;     /* shuffle, Bold Talks violet */
   --blocks: linear-gradient(110deg,
-    #1C7F74 0%, #1C7F74 28%, #B26A08 28%, #B26A08 48%,
-    #0F5A50 48%, #0F5A50 68%, #A8321A 68%, #A8321A 88%, #1C7F74 88%);
+    #0F766E 0%, #0F766E 28%, #FFCC1A 28%, #FFCC1A 48%,
+    #0B4F4A 48%, #0B4F4A 68%, #6D3FD1 68%, #6D3FD1 88%, #0F766E 88%);
 
   --display: "Helvetica Neue", "Arial Narrow", Inter, system-ui, sans-serif;
   --body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -41,25 +44,25 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --ground: #0E1A1D;
-    --ground-2: #13262B;
-    --surface: #183036;
-    --rule: #26454C;
-    --rule-soft: #1D383E;
-    --ink: #E9E4D8;
-    --ink-2: #BFCFCC;
-    --muted: #9DB0AD;
-    --accent: #F2A93B;
-    --accent-ink: #F2A93B;
-    --teal: #45BBAE;
+    --ground: #0A1A1C;
+    --ground-2: #0F2426;
+    --surface: #143033;
+    --rule: #22444A;
+    --rule-soft: #1A363B;
+    --ink: #E8F1EF;
+    --ink-2: #B9CDCA;
+    --muted: #95ABA8;
+    --signal: #FFD21F;
+    --accent-ink: #FFD21F;
+    --teal: #3FC1B0;
     --teal-fill: #2FA396;
-    --warm: #F2A93B;
-    --code-bg: #0A1417;
+    --focus: #FFD21F;
+    --code-bg: #071315;
     --chart-a: #2FA396;
-    --chart-b: #C97F1E;
+    --chart-b: #9F7BF0;
     --blocks: linear-gradient(110deg,
-      #45BBAE 0%, #45BBAE 28%, #F2A93B 28%, #F2A93B 48%,
-      #1C7F74 48%, #1C7F74 68%, #C7452F 68%, #C7452F 88%, #45BBAE 88%);
+      #3FC1B0 0%, #3FC1B0 28%, #FFD21F 28%, #FFD21F 48%,
+      #1C7F74 48%, #1C7F74 68%, #9F7BF0 68%, #9F7BF0 88%, #3FC1B0 88%);
   }
 }
 
@@ -75,8 +78,8 @@ body {
 img, video { display: block; max-width: 100%; height: auto; }
 a { color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
 a:hover { border-bottom-color: var(--accent-ink); }
-:focus-visible { outline: 2px solid var(--warm); outline-offset: 3px; }
-::selection { background: var(--warm); color: var(--ground); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+::selection { background: var(--signal); color: var(--on-signal); }
 
 .strip { height: 12px; background: var(--blocks); }
 
@@ -116,14 +119,14 @@ b, strong { font-weight: 700; }
 .facts dt { font: 500 11.5px/1.6 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); }
 .facts dd { margin: 0.2rem 0 0; font-size: 16px; }
 .status { display: inline-flex; align-items: center; gap: 0.55rem; }
-.status::before { content: ""; width: 10px; height: 10px; background: var(--accent); flex: none; }
+.status::before { content: ""; width: 10px; height: 10px; background: var(--signal); flex: none; }
 .status--live::before { background: var(--teal-fill); }
 
 /* ---- the rail ---- */
 .sec { display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); gap: 0 clamp(1rem, 3vw, 2.5rem); align-items: start; }
 .sec > .kicker { padding-top: 0.7rem; display: flex; gap: 0.6rem; align-items: flex-start; }
 .sec > .kicker::before { content: ""; width: 10px; height: 10px; margin-top: 0.15rem; flex: none; background: var(--teal-fill); }
-.sec--warm > .kicker::before { background: var(--accent); }
+.sec--warm > .kicker::before { background: var(--signal); }
 @media (max-width: 760px) { .sec { grid-template-columns: 1fr; gap: 0.8rem; } }
 .body { min-width: 0; }
 .body > h2 + p, .body > h2 + .lede { margin-top: 1.2rem; }
