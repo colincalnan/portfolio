@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gig Splitter</title>
+<meta name="description" content="One command turns a two-hour gig recording into a file per song and a 30-second chorus reel for each. Built by Colin Calnan.">
+<meta property="og:title" content="Gig Splitter">
+<meta property="og:description" content="A two-hour gig video in, a reel per song out, named by what was played.">
+<meta property="og:image" content="https://colincalnan.github.io/portfolio/builds/gig-splitter/media/reel-poster.jpg">
+<link rel="stylesheet" href="../builds.css">
+</head>
+<body>
+<div class="strip" aria-hidden="true"></div>
+<main class="shell">
+
+  <header>
+    <p class="crumb"><a href="../../">Colin Calnan</a> &nbsp;/&nbsp; Builds &nbsp;/&nbsp; Music and AI</p>
+    <h1 class="display">Gig Splitter</h1>
+    <p class="lede">I record every gig on a phone clipped to the speaker stand. One command turns that two-hour video into a file per song, named by what I actually played, and a 30-second chorus reel for each one.</p>
+    <dl class="facts">
+      <div><dt>Status</dt><dd><span class="status status--live">Running. Used on six gigs so far</span></dd></div>
+      <div><dt>Built</dt><dd>May 2026. The first working version in one night</dd></div>
+      <div><dt>Stack</dt><dd>Python, librosa, ffmpeg, Whisper, Claude</dd></div>
+      <div><dt>In</dt><dd>One portrait video of a whole gig, 1080 by 1920</dd></div>
+      <div><dt>Out</dt><dd>A file per song, a reel per song, editable captions</dd></div>
+    </dl>
+  </header>
+
+  <div class="pair">
+    <figure class="plate">
+      <div class="plate__frame"><video id="reel" src="media/reel-dancing-in-the-dark.mp4" poster="media/reel-poster.jpg" width="540" height="960" controls playsinline muted loop preload="metadata" aria-label="A 30 second reel of Colin playing Dancing in the Dark at Predator Ridge, cut and captioned by the script"></video></div>
+      <figcaption>A reel it cut: Dancing in the Dark, Predator Ridge, May 2026. It picked the window and burned the captions in. I didn't edit it.</figcaption>
+    </figure>
+    <figure class="plate">
+      <div class="plate__frame"><img src="../../assets/gig-reels.jpg" width="2057" height="1200" loading="lazy" alt="Three frames from cut reels, each from a different gig: a covered winery patio, a barn door open onto a vineyard, and a sunlit courtyard. Same setup every time, one phone on a stand."></div>
+      <figcaption>Three gigs, one setup: a phone on the speaker stand, recording the whole set. The input costs nothing, because it happens every gig anyway.</figcaption>
+    </figure>
+  </div>
+
+  <hr>
+
+  <section class="sec" aria-labelledby="how">
+    <p class="kicker">How it works</p>
+    <div class="body">
+      <h2 class="display" id="how">Two hours in, a folder of reels out.</h2>
+      <p class="dim">Run as <code>python split_gig.py ~/Movies/Gigs/&lt;gig&gt;/IMG_xxxx.MOV</code>. Every step skips work already on disk, so a rerun picks up where it stopped.</p>
+      <ol class="steps">
+        <li class="step"><div>
+          <h3>Find the songs by how loud they are</h3>
+          <p>ffmpeg pulls the audio out and librosa measures its loudness, smoothed over 15 seconds so a quiet verse doesn't split a song in half. Anything above a threshold for more than 90 seconds is a song. Anything below is me talking.</p>
+          <figure class="plate plate--wide">
+            <div class="plate__frame"><img src="../../assets/gig-energy.png" width="2400" height="600" loading="lazy" alt="The energy analysis for one gig: a jagged line of loudness across 120 minutes, a red dashed threshold across the middle, and 23 shaded blue bands, one per detected song, with the quiet gaps between them left white."></div>
+            <figcaption>One gig, 120 minutes. Each shaded band is a song it found. The white gaps are me talking between them.</figcaption>
+          </figure>
+        </div></li>
+        <li class="step"><div>
+          <h3>Cut each song out without re-encoding</h3>
+          <p>ffmpeg stream-copies each band to its own file, so the cut is fast and nothing loses quality.</p>
+        </div></li>
+        <li class="step"><div>
+          <h3>Name the song from garbled lyrics</h3>
+          <p>Whisper transcribes a minute of each song, and Claude names it from the transcript, knowing the words will be wrong but the phrases close. If the minute turns out to be banter, it tries later in the song.</p>
+          <div class="code">
+            <div class="code__head"><span>Predator Ridge, reels folder</span><span>real output, one bug included</span></div>
+<pre>song_02_Van_Morrison_-_Bright_Side_of_the_Road_reel.mp4
+song_03_The_Beatles_-_All_You_Need_Is_Love_reel.mp4
+song_04_Creedence_Clearwater_Revival_-_Have_You_Ever_Seen_the_Rain_reel.mp4
+song_07_Sting_-_Englishman_in_New_York_reel.mp4
+song_09_Van_Morrison_-_Brown_Eyed_Girl_reel.mp4
+song_10_Bruce_Springsteen_-_Dancing_in_the_Dark_reel.mp4
+song_11_Hall_Oates_-_Maneater_reel.mp4
+<span class="s">song_13_Me_by_Ben_E_King_-_Stand_reel.mp4</span>
+song_21_ACDC_-_Highway_to_Hell_reel.mp4
+song_26_ABBA_-_Dancing_Queen_reel.mp4</pre>
+          </div>
+          <p class="evidence">Ten of the 23 reels from 8 May 2026. Song 13 is "Stand By Me", and it's explained under "Still gets wrong".</p>
+        </div></li>
+        <li class="step"><div>
+          <h3>Find the chorus</h3>
+          <p>A second Whisper pass gets word timings for 90 seconds of the song. The reel starts two seconds before the phrase that repeats most, which is almost always the chorus, the bit people know. No repeat, and it starts a quarter of the way in.</p>
+          <div class="code">
+            <div class="code__head"><span>split_gig.py</span><span>find_chorus()</span></div>
+<pre><span class="k">def</span> find_chorus(transcript: str) -&gt; str:
+    words = transcript.lower().split()
+    best_phrase, best_score = <span class="s">""</span>, 0
+    <span class="k">for</span> n <span class="k">in</span> range(8, 3, -1):
+        seen = {}
+        <span class="k">for</span> i <span class="k">in</span> range(len(words) - n):
+            phrase = <span class="s">" "</span>.join(words[i:i+n])
+            seen[phrase] = seen.get(phrase, 0) + 1
+        <span class="k">for</span> phrase, count <span class="k">in</span> seen.items():
+            score = count * len(phrase)
+            <span class="k">if</span> count &gt; 1 <span class="k">and</span> score &gt; best_score:
+                best_phrase, best_score = phrase, score
+    <span class="k">return</span> best_phrase</pre>
+          </div>
+        </div></li>
+        <li class="step"><div>
+          <h3>Cut the reel</h3>
+          <p>30 seconds at 1080 by 1920, karaoke captions burned in from a subtitle file, and the captions saved as editable JSON next to it so a wrong word can be fixed and re-burned without rerunning anything.</p>
+          <figure class="plate">
+            <div class="plate__frame"><img src="../../assets/gig-files.png" width="624" height="486" loading="lazy" alt="A folder listing of the output: song_02_Bryan_Adams_-_Summer_of_69_reel.mp4, song_04_Creedence_Clearwater_Revival_-_Have_You_Ever_Seen_the_Rain_reel.mp4 and so on, each mp4 paired with its own captions json file."></div>
+            <figcaption>The output folder from another gig. Every reel has its captions beside it, and the folder reads as the set list.</figcaption>
+          </figure>
+        </div></li>
+      </ol>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="sec" aria-labelledby="hard">
+    <p class="kicker">The hard parts</p>
+    <div class="body">
+      <h2 class="display" id="hard">What fought back.</h2>
+      <ul class="items">
+        <li><h3>Shazam can't recognise a live cover</h3><p>The first version used it, and it failed on every song, because it matches studio recordings and a live acoustic cover isn't one. It was gone the same night. Reading the lyrics and letting Claude name the song is the decision the whole tool rests on.</p></li>
+        <li><h3>I had the loudness backwards</h3><p>My first guess was that the crowd chatting between songs would be louder than me. It was the other way round, so songs are the loud parts.</p></li>
+        <li><h3>A truncated cache hid half the gig</h3><p>A cut-short audio cache meant only 15 of 28 songs were found on the first real run. It now checks the cached audio's length against the video before trusting it.</p></li>
+        <li><h3>Knowing which job to hand back</h3><p>Since late May I run it with captions off and caption in InShot. The script finds, cuts and names the songs. The words on screen I do myself.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="sec sec--warm" aria-labelledby="wrong">
+    <p class="kicker">Still gets wrong</p>
+    <div class="body">
+      <h2 class="display" id="wrong">Where it breaks.</h2>
+      <ul class="items">
+        <li><h3>"Stand By Me"</h3><p>Claude is asked to reply as <code>"Song Title" by Artist</code>, and the parser splits on the first " by ". So "Stand By Me" by Ben E. King becomes <code>Me_by_Ben_E_King_-_Stand</code>. It has happened at four of the six gigs, including the Predator Ridge folder above.</p></li>
+        <li><h3>One threshold doesn't fit every room</h3><p>At Cadence in August the default threshold welded songs together into one 9 minute 47 second segment. I fixed it by trying other values and splitting two songs by hand, and got one of those splits wrong.</p></li>
+        <li><h3>No model looks at the picture</h3><p>The models only hear and read. The reel window comes from the lyrics and the framing is a fixed ffmpeg filter. Letting a model choose the best frame for each song is the next layer.</p></li>
+        <li><h3>A filter that does nothing</h3><p>Each reel gets a blurred copy of the video behind it, to fill the frame. My footage is already portrait, so the blur never shows.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="sec" aria-labelledby="runs">
+    <p class="kicker">Runs</p>
+    <div class="body">
+      <h2 class="display" id="runs">Six gigs so far.</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Gig</th><th scope="col">What happened</th></tr></thead>
+          <tbody>
+            <tr><td>8 May 2026</td><td>Predator Ridge. 28 songs found, 23 reels cut. The truncated-cache bug turned up here.</td></tr>
+            <tr><td>May 2026</td><td>Britannia Brewing.</td></tr>
+            <tr><td>29 May</td><td>Ex Nihilo. The first run with captions switched off.</td></tr>
+            <tr><td>7 Jun</td><td>Folktale Fine Cider. "Stand By Me" again.</td></tr>
+            <tr><td>22 Jun</td><td>Ex Nihilo. 26 of 26 songs found.</td></tr>
+            <tr><td>19 Aug</td><td>Cadence. The threshold failed and two songs were split by hand.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="evidence">From the output folders and the project history. The August runs took about 75 minutes for 26 reels.</p>
+      <ul class="chips"><li>Python</li><li>librosa</li><li>ffmpeg</li><li>Whisper</li><li>Claude Sonnet</li><li>Gradio</li><li>Docker</li></ul>
+    </div>
+  </section>
+
+  <hr>
+
+  <footer class="foot">
+    <span>Colin Calnan &middot; Lake Country, BC</span>
+    <span><a href="../foot-stomper/">Foot Stomper</a> &nbsp;&middot;&nbsp; <a href="../../">All work</a></span>
+  </footer>
+
+</main>
+<script>
+(function () {
+  var v = document.getElementById("reel");
+  if (!v || !window.matchMedia) return;
+  if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+    var p = v.play();
+    if (p && p.catch) p.catch(function () {});
+  }
+})();
+</script>
+</body>
+</html>

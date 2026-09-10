@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Foot Stomper</title>
+<meta name="description" content="A kick drum I wear on my foot. An M5StickS3 on the instep feels a tap or a stomp and sends a bass drum over Bluetooth MIDI. Built by Colin Calnan.">
+<meta property="og:title" content="Foot Stomper">
+<meta property="og:description" content="A kick drum I wear on my foot, measured rather than guessed.">
+<meta property="og:image" content="https://colincalnan.github.io/portfolio/builds/foot-stomper/media/wazinator-at-predator-ridge.jpg">
+<link rel="stylesheet" href="../builds.css">
+</head>
+<body>
+<div class="strip" aria-hidden="true"></div>
+<main class="shell">
+
+  <header>
+    <p class="crumb"><a href="../../">Colin Calnan</a> &nbsp;/&nbsp; Builds &nbsp;/&nbsp; Music hardware</p>
+    <h1 class="display">Foot Stomper</h1>
+    <p class="lede">A kick drum I wear on my foot. A small board strapped to my instep feels a tap or a stomp and plays a bass drum through the PA, so I can keep time at a gig without standing on one leg for two hours.</p>
+    <dl class="facts">
+      <div><dt>Status</dt><dd><span class="status">Working on the bench, not played live yet</span></dd></div>
+      <div><dt>Built</dt><dd>August 2026. First port to a working kick in one evening</dd></div>
+      <div><dt>Hardware</dt><dd>M5StickS3: ESP32-S3, BMI270 accelerometer, 250 mAh battery</dd></div>
+      <div><dt>Sends</dt><dd>Bluetooth MIDI, note 35 on channel 10, to bs-16i on an iPad</dd></div>
+      <div><dt>How</dt><dd>Spec first, built with Claude Code, measured at every step</dd></div>
+    </dl>
+  </header>
+
+  <hr>
+
+  <section class="sec" aria-labelledby="why">
+    <p class="kicker">Why</p>
+    <div class="body">
+      <h2 class="display" id="why">A stomp pedal was wrecking my hip.</h2>
+      <p>The kick drum in my solo set came from a Wazinator stomp box under my right foot. That means a whole gig standing on my left leg while the right one keeps time, and my left hip and back started paying for it. I wanted the beat without the stance.</p>
+      <figure class="plate">
+        <div class="plate__frame"><img src="media/wazinator-at-predator-ridge.jpg" width="700" height="560" alt="Colin's legs at a gig, right shoe resting on a small wooden stomp box on the carpet, weight on the left leg, mic stand and cables beside him."></div>
+        <figcaption>Predator Ridge, May 2026. The old way: the stomp box under the right foot, all the weight on the left. A still from my own gig footage.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="sec" aria-labelledby="how">
+    <p class="kicker">How it works</p>
+    <div class="body">
+      <h2 class="display" id="how">Feel the foot, send a kick.</h2>
+      <ol class="steps">
+        <li class="step"><div><h3>Strap it to the top of the foot</h3><p>An M5StickS3 sits on the instep, held firmly by the laces. It has an accelerometer, a 250 mAh battery and a small screen. Firm turns out to be the whole game, which is the next section.</p></div></li>
+        <li class="step"><div><h3>Watch for a jump away from normal</h3><p>The firmware reads acceleration about 188 times a second and keeps a slow-moving baseline of where the foot usually sits. When a reading jumps more than <code>2.0 g</code> away from that baseline, it watches for 12 ms to catch the true peak, fires once, then ignores everything for 120 ms so the impact's ringing can't double-hit.</p></div></li>
+        <li class="step"><div><h3>Turn force into volume</h3><p>The size of the peak sets the MIDI velocity, from 71 to 127, so a light tap plays quieter than a stomp.</p></div></li>
+        <li class="step"><div><h3>Send it over Bluetooth</h3><p>A BLE-MIDI note 35 (acoustic bass drum) on channel 10, written by hand on the chip's built-in Bluetooth stack after the usual libraries failed.</p></div></li>
+        <li class="step"><div><h3>Play it through the PA</h3><p>bs-16i on the iPad plays the kick from a soundfont, out a 3.5 mm cable into the Yamaha StagePas. The screen shows PAIRING, ARMED or OFF, and the front button arms and disarms it, so walking around between songs never fires a beat.</p></div></li>
+      </ol>
+
+      <div class="code">
+        <div class="code__head"><span>detector.h</span><span>the whole detector, one sample at a time</span></div>
+<pre><span class="k">float</span> exc = mag - s-&gt;baseline;
+<span class="k">if</span> (exc &lt; 0.0f) exc = -exc;
+
+<span class="k">if</span> (s-&gt;tracking) {
+    <span class="k">if</span> (exc &gt; s-&gt;peak) s-&gt;peak = exc;
+    <span class="k">if</span> ((uint32_t)(us - s-&gt;track_start_us) &gt;= c-&gt;peak_window_us) {
+        s-&gt;tracking = false;
+        s-&gt;refract_until_us = us + c-&gt;refractory_us;
+        <span class="k">if</span> (out_peak) *out_peak = s-&gt;peak;
+        <span class="k">return</span> true;
+    }
+    <span class="k">return</span> false;                   <span class="c">// baseline deliberately frozen here</span>
+}
+
+<span class="k">if</span> ((int32_t)(us - s-&gt;refract_until_us) &lt; 0) {
+    <span class="k">return</span> false;                   <span class="c">// still ringing from the last gesture</span>
+}
+
+s-&gt;baseline += c-&gt;baseline_alpha * (mag - s-&gt;baseline);
+
+<span class="k">if</span> (exc &gt; c-&gt;threshold_g) {
+    s-&gt;tracking = true;
+    s-&gt;peak = exc;
+    s-&gt;track_start_us = us;
+}
+<span class="k">return</span> false;</pre>
+      </div>
+      <p class="evidence">From det_feed() in detector.h. The baseline freezes during a gesture, otherwise the gesture drags the baseline up behind it and shrinks its own peak.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="sec" aria-labelledby="proof">
+    <p class="kicker">The proof</p>
+    <div class="body">
+      <h2 class="display" id="proof">Measured, not felt.</h2>
+      <div class="stats">
+        <div class="stat"><b>39 / 40</b><span>Gestures detected with the board on the instep. It was 5 of 40 in a sock.</span></div>
+        <div class="stat"><b>0</b><span>False triggers across 51 seconds of recorded shuffling and weight shifts.</span></div>
+        <div class="stat"><b>2 h 15 m</b><span>Battery, measured. A three-hour gig needs more, so that's still open.</span></div>
+      </div>
+      <p class="evidence">Project status notes, 3 Sep 2026. Detection counts from the Phase 3 detector replayed against the recorded captures.</p>
+
+      <p>The first mount was inside a sock, and no amount of tuning could make it work. This is why.</p>
+
+      <div class="chart">
+        <svg viewBox="0 0 900 310" role="img" aria-labelledby="chart-t chart-d">
+<title id="chart-t">Peak movement per event, three recordings</title>
+<desc id="chart-d">Dot strip of peak excursion from 1 g. Instep gestures run 2.02 to 5.44 g, all above the 2.0 g threshold. Sock gestures run 0.55 to 5.28 g, many below it. Shuffle peaks run 0.31 to 1.43 g, all below it, overlapping the light sock taps.</desc>
+<line class="grid" x1="220.0" y1="38" x2="220.0" y2="268"/>
+<text class="tick" x="220.0" y="290" text-anchor="middle">0 g</text>
+<line class="grid" x1="328.3" y1="38" x2="328.3" y2="268"/>
+<text class="tick" x="328.3" y="290" text-anchor="middle">1 g</text>
+<line class="grid" x1="436.7" y1="38" x2="436.7" y2="268"/>
+<text class="tick" x="436.7" y="290" text-anchor="middle">2 g</text>
+<line class="grid" x1="545.0" y1="38" x2="545.0" y2="268"/>
+<text class="tick" x="545.0" y="290" text-anchor="middle">3 g</text>
+<line class="grid" x1="653.3" y1="38" x2="653.3" y2="268"/>
+<text class="tick" x="653.3" y="290" text-anchor="middle">4 g</text>
+<line class="grid" x1="761.7" y1="38" x2="761.7" y2="268"/>
+<text class="tick" x="761.7" y="290" text-anchor="middle">5 g</text>
+<line class="grid" x1="870.0" y1="38" x2="870.0" y2="268"/>
+<text class="tick" x="870.0" y="290" text-anchor="middle">6 g</text>
+<line class="axis" x1="220" y1="268" x2="870" y2="268"/>
+<text class="row" x="0" y="72">On the instep</text><text class="rowsub" x="0" y="90">laces, 40 gestures</text>
+<circle class="dot-a" cx="439.3" cy="63" r="6"><title>Instep gesture, 2.02 g</title></circle>
+<circle class="dot-a" cx="439.9" cy="75" r="6"><title>Instep gesture, 2.03 g</title></circle>
+<circle class="dot-a" cx="445.6" cy="87" r="6"><title>Instep gesture, 2.08 g</title></circle>
+<circle class="dot-a" cx="463.4" cy="63" r="6"><title>Instep gesture, 2.25 g</title></circle>
+<circle class="dot-a" cx="490.2" cy="75" r="6"><title>Instep gesture, 2.49 g</title></circle>
+<circle class="dot-a" cx="490.5" cy="87" r="6"><title>Instep gesture, 2.50 g</title></circle>
+<circle class="dot-a" cx="511.5" cy="63" r="6"><title>Instep gesture, 2.69 g</title></circle>
+<circle class="dot-a" cx="522.5" cy="75" r="6"><title>Instep gesture, 2.79 g</title></circle>
+<circle class="dot-a" cx="524.7" cy="87" r="6"><title>Instep gesture, 2.81 g</title></circle>
+<circle class="dot-a" cx="531.5" cy="63" r="6"><title>Instep gesture, 2.88 g</title></circle>
+<circle class="dot-a" cx="541.8" cy="75" r="6"><title>Instep gesture, 2.97 g</title></circle>
+<circle class="dot-a" cx="547.0" cy="87" r="6"><title>Instep gesture, 3.02 g</title></circle>
+<circle class="dot-a" cx="547.8" cy="63" r="6"><title>Instep gesture, 3.03 g</title></circle>
+<circle class="dot-a" cx="563.3" cy="75" r="6"><title>Instep gesture, 3.17 g</title></circle>
+<circle class="dot-a" cx="569.5" cy="87" r="6"><title>Instep gesture, 3.23 g</title></circle>
+<circle class="dot-a" cx="569.6" cy="63" r="6"><title>Instep gesture, 3.23 g</title></circle>
+<circle class="dot-a" cx="570.0" cy="75" r="6"><title>Instep gesture, 3.23 g</title></circle>
+<circle class="dot-a" cx="574.3" cy="87" r="6"><title>Instep gesture, 3.27 g</title></circle>
+<circle class="dot-a" cx="575.0" cy="63" r="6"><title>Instep gesture, 3.28 g</title></circle>
+<circle class="dot-a" cx="588.5" cy="75" r="6"><title>Instep gesture, 3.40 g</title></circle>
+<circle class="dot-a" cx="598.3" cy="87" r="6"><title>Instep gesture, 3.49 g</title></circle>
+<circle class="dot-a" cx="600.0" cy="63" r="6"><title>Instep gesture, 3.51 g</title></circle>
+<circle class="dot-a" cx="612.6" cy="75" r="6"><title>Instep gesture, 3.62 g</title></circle>
+<circle class="dot-a" cx="613.7" cy="87" r="6"><title>Instep gesture, 3.63 g</title></circle>
+<circle class="dot-a" cx="613.7" cy="63" r="6"><title>Instep gesture, 3.63 g</title></circle>
+<circle class="dot-a" cx="626.3" cy="75" r="6"><title>Instep gesture, 3.75 g</title></circle>
+<circle class="dot-a" cx="626.4" cy="87" r="6"><title>Instep gesture, 3.75 g</title></circle>
+<circle class="dot-a" cx="640.9" cy="63" r="6"><title>Instep gesture, 3.89 g</title></circle>
+<circle class="dot-a" cx="648.2" cy="75" r="6"><title>Instep gesture, 3.95 g</title></circle>
+<circle class="dot-a" cx="658.5" cy="87" r="6"><title>Instep gesture, 4.05 g</title></circle>
+<circle class="dot-a" cx="668.8" cy="63" r="6"><title>Instep gesture, 4.14 g</title></circle>
+<circle class="dot-a" cx="684.8" cy="75" r="6"><title>Instep gesture, 4.29 g</title></circle>
+<circle class="dot-a" cx="698.7" cy="87" r="6"><title>Instep gesture, 4.42 g</title></circle>
+<circle class="dot-a" cx="698.8" cy="63" r="6"><title>Instep gesture, 4.42 g</title></circle>
+<circle class="dot-a" cx="710.5" cy="75" r="6"><title>Instep gesture, 4.53 g</title></circle>
+<circle class="dot-a" cx="711.2" cy="87" r="6"><title>Instep gesture, 4.53 g</title></circle>
+<circle class="dot-a" cx="716.7" cy="63" r="6"><title>Instep gesture, 4.59 g</title></circle>
+<circle class="dot-a" cx="776.0" cy="75" r="6"><title>Instep gesture, 5.13 g</title></circle>
+<circle class="dot-a" cx="779.8" cy="87" r="6"><title>Instep gesture, 5.17 g</title></circle>
+<circle class="dot-a" cx="809.0" cy="63" r="6"><title>Instep gesture, 5.44 g</title></circle>
+<text class="row" x="0" y="152">In the sock</text><text class="rowsub" x="0" y="170">sock, 31 events over 0.5 g</text>
+<circle class="dot-a" cx="279.8" cy="143" r="6"><title>Sock gesture, 0.55 g</title></circle>
+<circle class="dot-a" cx="280.1" cy="155" r="6"><title>Sock gesture, 0.55 g</title></circle>
+<circle class="dot-a" cx="289.9" cy="167" r="6"><title>Sock gesture, 0.64 g</title></circle>
+<circle class="dot-a" cx="290.1" cy="143" r="6"><title>Sock gesture, 0.65 g</title></circle>
+<circle class="dot-a" cx="301.8" cy="155" r="6"><title>Sock gesture, 0.76 g</title></circle>
+<circle class="dot-a" cx="305.5" cy="167" r="6"><title>Sock gesture, 0.79 g</title></circle>
+<circle class="dot-a" cx="305.6" cy="143" r="6"><title>Sock gesture, 0.79 g</title></circle>
+<circle class="dot-a" cx="316.4" cy="155" r="6"><title>Sock gesture, 0.89 g</title></circle>
+<circle class="dot-a" cx="317.7" cy="167" r="6"><title>Sock gesture, 0.90 g</title></circle>
+<circle class="dot-a" cx="321.1" cy="143" r="6"><title>Sock gesture, 0.93 g</title></circle>
+<circle class="dot-a" cx="326.7" cy="155" r="6"><title>Sock gesture, 0.99 g</title></circle>
+<circle class="dot-a" cx="331.2" cy="167" r="6"><title>Sock gesture, 1.03 g</title></circle>
+<circle class="dot-a" cx="338.6" cy="143" r="6"><title>Sock gesture, 1.09 g</title></circle>
+<circle class="dot-a" cx="341.2" cy="155" r="6"><title>Sock gesture, 1.12 g</title></circle>
+<circle class="dot-a" cx="346.6" cy="167" r="6"><title>Sock gesture, 1.17 g</title></circle>
+<circle class="dot-a" cx="350.1" cy="143" r="6"><title>Sock gesture, 1.20 g</title></circle>
+<circle class="dot-a" cx="356.0" cy="155" r="6"><title>Sock gesture, 1.25 g</title></circle>
+<circle class="dot-a" cx="365.0" cy="167" r="6"><title>Sock gesture, 1.34 g</title></circle>
+<circle class="dot-a" cx="371.1" cy="143" r="6"><title>Sock gesture, 1.40 g</title></circle>
+<circle class="dot-a" cx="376.4" cy="155" r="6"><title>Sock gesture, 1.44 g</title></circle>
+<circle class="dot-a" cx="382.2" cy="167" r="6"><title>Sock gesture, 1.50 g</title></circle>
+<circle class="dot-a" cx="385.9" cy="143" r="6"><title>Sock gesture, 1.53 g</title></circle>
+<circle class="dot-a" cx="387.1" cy="155" r="6"><title>Sock gesture, 1.54 g</title></circle>
+<circle class="dot-a" cx="388.5" cy="167" r="6"><title>Sock gesture, 1.56 g</title></circle>
+<circle class="dot-a" cx="401.7" cy="143" r="6"><title>Sock gesture, 1.68 g</title></circle>
+<circle class="dot-a" cx="410.3" cy="155" r="6"><title>Sock gesture, 1.76 g</title></circle>
+<circle class="dot-a" cx="413.1" cy="167" r="6"><title>Sock gesture, 1.78 g</title></circle>
+<circle class="dot-a" cx="442.9" cy="143" r="6"><title>Sock gesture, 2.06 g</title></circle>
+<circle class="dot-a" cx="443.1" cy="155" r="6"><title>Sock gesture, 2.06 g</title></circle>
+<circle class="dot-a" cx="487.7" cy="167" r="6"><title>Sock gesture, 2.47 g</title></circle>
+<circle class="dot-a" cx="792.0" cy="143" r="6"><title>Sock gesture, 5.28 g</title></circle>
+<text class="row" x="0" y="232">Shuffling</text><text class="rowsub" x="0" y="250">sock, 51 s, no gestures</text>
+<circle class="dot-b" cx="253.9" cy="223" r="6"><title>Shuffle peak, 0.31 g</title></circle>
+<circle class="dot-b" cx="256.6" cy="235" r="6"><title>Shuffle peak, 0.34 g</title></circle>
+<circle class="dot-b" cx="257.3" cy="247" r="6"><title>Shuffle peak, 0.34 g</title></circle>
+<circle class="dot-b" cx="257.6" cy="223" r="6"><title>Shuffle peak, 0.35 g</title></circle>
+<circle class="dot-b" cx="257.9" cy="235" r="6"><title>Shuffle peak, 0.35 g</title></circle>
+<circle class="dot-b" cx="260.6" cy="247" r="6"><title>Shuffle peak, 0.37 g</title></circle>
+<circle class="dot-b" cx="263.5" cy="223" r="6"><title>Shuffle peak, 0.40 g</title></circle>
+<circle class="dot-b" cx="271.6" cy="235" r="6"><title>Shuffle peak, 0.48 g</title></circle>
+<circle class="dot-b" cx="280.2" cy="247" r="6"><title>Shuffle peak, 0.56 g</title></circle>
+<circle class="dot-b" cx="282.3" cy="223" r="6"><title>Shuffle peak, 0.57 g</title></circle>
+<circle class="dot-b" cx="284.5" cy="235" r="6"><title>Shuffle peak, 0.59 g</title></circle>
+<circle class="dot-b" cx="286.0" cy="247" r="6"><title>Shuffle peak, 0.61 g</title></circle>
+<circle class="dot-b" cx="290.6" cy="223" r="6"><title>Shuffle peak, 0.65 g</title></circle>
+<circle class="dot-b" cx="291.9" cy="235" r="6"><title>Shuffle peak, 0.66 g</title></circle>
+<circle class="dot-b" cx="314.3" cy="247" r="6"><title>Shuffle peak, 0.87 g</title></circle>
+<circle class="dot-b" cx="316.9" cy="223" r="6"><title>Shuffle peak, 0.89 g</title></circle>
+<circle class="dot-b" cx="318.6" cy="235" r="6"><title>Shuffle peak, 0.91 g</title></circle>
+<circle class="dot-b" cx="318.8" cy="247" r="6"><title>Shuffle peak, 0.91 g</title></circle>
+<circle class="dot-b" cx="325.0" cy="223" r="6"><title>Shuffle peak, 0.97 g</title></circle>
+<circle class="dot-b" cx="333.3" cy="235" r="6"><title>Shuffle peak, 1.05 g</title></circle>
+<circle class="dot-b" cx="339.6" cy="247" r="6"><title>Shuffle peak, 1.10 g</title></circle>
+<circle class="dot-b" cx="358.1" cy="223" r="6"><title>Shuffle peak, 1.27 g</title></circle>
+<circle class="dot-b" cx="365.8" cy="235" r="6"><title>Shuffle peak, 1.35 g</title></circle>
+<circle class="dot-b" cx="375.0" cy="247" r="6"><title>Shuffle peak, 1.43 g</title></circle>
+<line class="thr" x1="436.7" y1="30" x2="436.7" y2="268"/>
+<text class="thrlabel" x="444.7" y="26">2.0 g: fires above this line</text>
+</svg>
+        <div class="legend"><span>A deliberate tap or stomp</span><span class="b">Shuffling on the spot, no gestures</span></div>
+      </div>
+      <p class="evidence">Peak movement per event, measured as excursion from 1 g, events at least 150 ms apart. All three recorded 31 Aug 2026 in one session, raw files in the project's captures folder.</p>
+
+      <p>On the instep every gesture lands to the right of the line and the shuffling sits well to the left of it. In the sock, the foot's own padding soaks up the light taps: 27 of the 31 sock events fall under the line, and 19 of them are no bigger than the biggest shuffle peak. No threshold separates those two groups. That's a mechanical limit, so the fix was the mount, not the code, and the rule I kept is to verify a mount by measuring it, never by how it feels.</p>
+
+      <details class="numbers">
+        <summary>Show the numbers</summary>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th scope="col">Recording</th><th scope="col">Events</th><th scope="col" class="num">Smallest</th><th scope="col" class="num">Largest</th></tr></thead>
+            <tbody>
+              <tr><td>Instep gestures</td><td>40</td><td class="num">2.02 g</td><td class="num">5.44 g</td></tr>
+              <tr><td>Sock gestures</td><td>31 over 0.5 g</td><td class="num">0.55 g</td><td class="num">5.28 g</td></tr>
+              <tr><td>Sock shuffle</td><td>24 peaks over 0.3 g</td><td class="num">0.31 g</td><td class="num">1.43 g</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="sec" aria-labelledby="hard">
+    <p class="kicker">The hard parts</p>
+    <div class="body">
+      <h2 class="display" id="hard">What fought back.</h2>
+      <ul class="items">
+        <li><h3>The Bluetooth libraries crash-looped</h3><p>The usual BLE-MIDI and NimBLE libraries either wouldn't compile or sent the board into a crash loop. Version 1.2 dropped both and wrote BLE-MIDI by hand on the chip's built-in stack. Every version is pinned exactly now, because a core update is its own piece of work.</p></li>
+        <li><h3>Speed costs battery</h3><p>A kick has to land within about 10 ms, which needs a short Bluetooth connection interval, and the chip can't light-sleep with a live link. Slowing the sensor loop to save power dropped detection from 9 in 10 to 6 in 10, because a tap's peak only lasts one or two samples. Reverted.</p></li>
+        <li><h3>The battery estimate was out by three times</h3><p>I guessed 6 to 9 hours. Measured, it's 2 hours 15 minutes. That's the whole argument for measuring.</p></li>
+        <li><h3>Heel-down didn't make the cut</h3><p>Dropping a heel looks exactly like a step, so the gestures are tap and stomp only, and the button disarms it for walking.</p></li>
+        <li><h3>Hardware I ruled out</h3><p>An ESP32-C6 board (same power limit, no accelerometer), the M5 Capsule (same battery), and a battery base that weighs 90 g, which is a brick on a foot.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="sec sec--warm" aria-labelledby="open">
+    <p class="kicker">Still open</p>
+    <div class="body">
+      <h2 class="display" id="open">What it can't do yet.</h2>
+      <ul class="items">
+        <li><h3>Last a full set</h3><p>A three-hour gig needs about 25% less power draw. A small battery add-on is the likely fix.</p></li>
+        <li><h3>Go on in seconds</h3><p>It laces on right now, every time. A clip mount is on the way, and M5Stack confirmed it fits.</p></li>
+        <li><h3>Sound right</h3><p>The kick is too reverby. The plan is to sample my old stomp box so the new one sounds the same.</p></li>
+        <li><h3>Both feet</h3><p>A second unit for the other foot.</p></li>
+        <li><h3>A real gig</h3><p>It has been to one gig and stayed in the bag. The first full set with it is the next test.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="sec" aria-labelledby="time">
+    <p class="kicker">Timeline</p>
+    <div class="body">
+      <h2 class="display" id="time">Six versions in one evening.</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">When</th><th scope="col">Version</th><th scope="col">What changed</th></tr></thead>
+          <tbody>
+            <tr><td>24 Aug 2026</td><td>First design</td><td>A different board and a separate accelerometer with a hardware tap interrupt. Never built.</td></tr>
+            <tr><td>27 Aug, 17:40</td><td>v1.0</td><td>Ported to the M5StickS3 with the standard BLE-MIDI libraries.</td></tr>
+            <tr><td>27 Aug, 18:45</td><td>v1.1</td><td>Flicker-free display. Crash loop.</td></tr>
+            <tr><td>27 Aug, 18:53</td><td>v1.2</td><td>BLE-MIDI written by hand on the built-in stack.</td></tr>
+            <tr><td>27 Aug, 19:23</td><td>v1.4</td><td>On-screen checkpoints. The first version that worked.</td></tr>
+            <tr><td>27 Aug, 22:04</td><td>v1.6</td><td>Power management, and the note moved from 36 to 35.</td></tr>
+            <tr><td>28&ndash;31 Aug</td><td>Power</td><td>Radio, mic and screen trimmed. First real battery number: 2 h 15 m.</td></tr>
+            <tr><td>31 Aug&ndash;3 Sep</td><td>Detection</td><td>The baseline detector with velocity, a recorded test set, a replay harness, and the sock mount retired.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="chips"><li>ESP32-S3</li><li>M5StickS3</li><li>BMI270</li><li>BLE-MIDI</li><li>Arduino C++</li><li>bs-16i</li><li>Claude Code</li></ul>
+    </div>
+  </section>
+
+  <hr>
+
+  <footer class="foot">
+    <span>Colin Calnan &middot; Lake Country, BC</span>
+    <span><a href="../gig-splitter/">Gig Splitter</a> &nbsp;&middot;&nbsp; <a href="../../">All work</a></span>
+  </footer>
+
+</main>
+</body>
+</html>

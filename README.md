@@ -35,3 +35,10 @@ Built on Ground, a small design system: semantic tokens, three themes, and a
 guidance document written for an agent to read. This page ships the night theme,
 which is the Bold Talks palette: near-black ground, cobalt and electric blue,
 peach, cyan, orange, yellow. Zero radii, no shadows.
+
+## Build pages
+
+`builds/` holds one live page per build: what it is, how it works, the media, and what it still gets wrong. Plain HTML sharing `builds/builds.css`, which is the Bold Talks structure in the teal palette from the loops tutorial (cream and teal in light, deep teal in dark). Unlike the main page, running text has no max-width, by choice.
+
+- `builds/foot-stomper/`: wearable BLE-MIDI kick drum
+- `builds/gig-splitter/`: gig video to per-song reels
