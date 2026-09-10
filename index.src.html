@@ -441,7 +441,11 @@
   .bd:hover { text-decoration: none; background: var(--gr-ground-2); }
   .bd:focus-visible { outline: 2px solid var(--gr-warm); outline-offset: -2px; }
   .bd .plate { margin: 0; }
-  .bd .plate img { max-height: 280px; }
+  /* Every card image the same shape, so the row reads as one object. The plate
+     rule elsewhere never crops; here uniformity wins, and each card sets where
+     its crop lands with --pos. */
+  .bd .plate__frame { padding: .8rem; }
+  .bd .plate img { width: 100%; height: auto; max-height: none; aspect-ratio: 4 / 3; object-fit: cover; object-position: var(--pos, 50% 50%); }
   .bd h3 {
     font-family: var(--gr-display); font-weight: 800; text-transform: uppercase;
     letter-spacing: -.03em; line-height: .95; font-size: clamp(1.9rem, 3.4vw, 2.7rem); margin: 0;
@@ -527,21 +531,21 @@
 
   <div class="builds">
     <a class="bd" href="builds/foot-stomper/" style="--c: var(--gr-accent-4)">
-      <div class="plate"><div class="plate__frame"><img loading="lazy" decoding="async" src="{{IMG:build-stomper}}" width="1200" height="1200" alt="The foot stomper in Colin's fingers, a small grey board with a blue button, its screen reading FOOT TRIG, ARMED in green, tap counter at 1."></div></div>
+      <div class="plate"><div class="plate__frame"><img loading="lazy" decoding="async" src="{{IMG:build-stomper}}" style="--pos: 50% 45%" width="1200" height="1200" alt="The foot stomper in Colin's fingers, a small grey board with a blue button, its screen reading FOOT TRIG, ARMED in green, tap counter at 1."></div></div>
       <span class="cr__cat">Music hardware &middot; August 2026</span>
       <h3>Foot Stomper</h3>
       <p>A kick drum I wear on my foot, because a stomp box was wrecking my hip. An accelerometer on the instep feels a tap or a stomp and sends a bass drum over Bluetooth MIDI. It catches 39 of 40 taps with zero false triggers, measured, and it's still on the bench.</p>
       <span class="bd__go">Read the build &rarr;</span>
     </a>
     <a class="bd" href="builds/gig-splitter/" style="--c: var(--gr-accent-1)">
-      <div class="plate"><div class="plate__frame"><img loading="lazy" decoding="async" src="{{IMG:build-splitter}}" width="1080" height="860" alt="Colin playing acoustic guitar at a mic in a bright function room, filmed from the phone clipped to his speaker stand."></div></div>
+      <div class="plate"><div class="plate__frame"><img loading="lazy" decoding="async" src="{{IMG:build-splitter}}" style="--pos: 60% 40%" width="1080" height="860" alt="Colin playing acoustic guitar at a mic in a bright function room, filmed from the phone clipped to his speaker stand."></div></div>
       <span class="cr__cat">Music and AI &middot; May 2026</span>
       <h3>Gig Splitter</h3>
       <p>Two hours of gig video in, a captioned reel per song out, named by what I played. Loudness finds the songs, Whisper hears the lyrics, Claude names the song, and the most repeated line picks the chorus. Run on six gigs, and the page shows where it still breaks.</p>
       <span class="bd__go">Read the build &rarr;</span>
     </a>
     <a class="bd" href="builds/bold-talks/" style="--c: var(--gr-warm)">
-      <div class="plate"><div class="plate__frame"><img loading="lazy" decoding="async" src="{{IMG:build-boldtalks}}" width="1600" height="1076" alt="The top of a build page in the teal theme: a pale teal-grey page, a teal, yellow and violet stripe, and the huge title FOOT STOMPER."></div></div>
+      <div class="plate"><div class="plate__frame"><img loading="lazy" decoding="async" src="{{IMG:build-boldtalks}}" style="--pos: 0% 0%" width="1600" height="1076" alt="The top of a build page in the teal theme: a pale teal-grey page, a teal, yellow and violet stripe, and the huge title FOOT STOMPER."></div></div>
       <span class="cr__cat">Design system &middot; June 2026</span>
       <h3>Bold Talks</h3>
       <p>The design system every page here is built on. It started with Shawn Kanungo's keynote slides and became a design.md an AI agent reads before it builds anything, inspired by Vercel's. Pages in minutes, not hours.</p>
