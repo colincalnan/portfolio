@@ -22,6 +22,7 @@
       <div><dt>Status</dt><dd><span class="status status--live">Running. Used on six gigs so far</span></dd></div>
       <div><dt>Built</dt><dd>May 2026. The first working version in one night</dd></div>
       <div><dt>Stack</dt><dd>Python, librosa, ffmpeg, Whisper, Claude</dd></div>
+      <div><dt>How</dt><dd>Built in Claude Code, every commit</dd></div>
       <div><dt>In</dt><dd>One portrait video of a whole gig, 1080 by 1920</dd></div>
       <div><dt>Out</dt><dd>A file per song, a reel per song, editable captions</dd></div>
     </dl>
@@ -105,6 +106,22 @@ song_26_ABBA_-_Dancing_Queen_reel.mp4</pre>
           </figure>
         </div></li>
       </ol>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class="sec" aria-labelledby="ai">
+    <p class="kicker">How AI was used</p>
+    <div class="body">
+      <h2 class="display" id="ai">Built with Claude, and runs on it too.</h2>
+      <ul class="items">
+        <li><h3>Built in Claude Code</h3><p>All 17 commits carry Claude as co-author, from the first one on 9 May, the night it was built.</p></li>
+        <li><h3>A model that listens</h3><p>Whisper transcribes a minute of each song to identify it, and a 90-second window with word timings to find the chorus and time the captions.</p></li>
+        <li><h3>A model that names the song</h3><p>Claude Sonnet gets the garbled lyrics, is told the words will be wrong but the phrases close, and answers in one fixed format. That format is also where the "Stand By Me" bug comes from.</p></li>
+        <li><h3>Plain code where plain code is enough</h3><p>Finding the songs is loudness and a threshold. Finding the chorus is counting repeated phrases. No model in either, so they're free, fast and predictable.</p></li>
+        <li><h3>What stayed mine</h3><p>Playing the gig, picking which reels are worth posting, and the captions, which I do by hand in InShot.</p></li>
+      </ul>
     </div>
   </section>
 

@@ -417,6 +417,57 @@
     .piece__chip { width: 40px; flex: none; }
     .fact { grid-template-columns: 1fr; gap: .3rem; }
   }
+
+  /* ---------- builds ----------
+     Each build has a live page of its own under builds/. These cards are the
+     front door: one image, the thing in a sentence, and the way in. The whole
+     card is the link, because a reader who is interested should not have to
+     hunt for where to click. */
+  .builds {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1px; background: var(--gr-rule);
+    border-top: 1px solid var(--gr-rule); border-bottom: 1px solid var(--gr-rule);
+    margin-top: 2.25rem;
+  }
+  .bd {
+    background: var(--gr-ground); padding: 1.35rem 1.35rem 1.6rem;
+    display: flex; flex-direction: column; gap: .95rem;
+    color: var(--gr-ink); text-decoration: none;
+  }
+  .bd:hover { text-decoration: none; background: var(--gr-ground-2); }
+  .bd:focus-visible { outline: 2px solid var(--gr-warm); outline-offset: -2px; }
+  .bd .plate { margin: 0; }
+  .bd .plate img { max-height: 280px; }
+  .bd h3 {
+    font-family: var(--gr-display); font-weight: 800; text-transform: uppercase;
+    letter-spacing: -.03em; line-height: .95; font-size: clamp(1.9rem, 3.4vw, 2.7rem); margin: 0;
+  }
+  .bd p { margin: 0; font-size: 1rem; line-height: 1.6; color: var(--gr-ink-2); text-wrap: pretty; }
+  .bd__go {
+    margin-top: auto; align-self: flex-start;
+    font: 500 11.5px/1 var(--gr-mono); letter-spacing: .12em; text-transform: uppercase;
+    border: 1px solid var(--gr-rule); padding: .7rem .8rem; color: var(--gr-ink);
+  }
+  .bd:hover .bd__go { border-color: var(--c); color: var(--c); }
+
+  /* ---------- how I build ----------
+     The AI claim, made the way the rest of the page makes claims: with the
+     count beside it. Prose on the left, the ledger on the right. */
+  .how {
+    display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem); margin-top: 2.25rem; align-items: start;
+  }
+  .how p { margin: 0 0 1rem; font-size: 1.0625rem; line-height: 1.68; color: var(--gr-ink-2); text-wrap: pretty; }
+  .how p b { color: var(--gr-ink); font-weight: 600; }
+  .how p.how__lead { font-size: clamp(1.15rem, 1.9vw, 1.4rem); line-height: 1.45; color: var(--gr-ink); }
+  .ledger { width: 100%; border-collapse: collapse; font-size: .96875rem; border-top: 1px solid var(--gr-rule); }
+  .ledger th, .ledger td { text-align: left; padding: .7rem .9rem .7rem 0; border-bottom: 1px solid var(--gr-rule-soft); vertical-align: top; }
+  .ledger th { font: 500 11.5px/1.4 var(--gr-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gr-ink-2); border-bottom-color: var(--gr-rule); }
+  .ledger td { color: var(--gr-ink-2); }
+  .ledger td:first-child { color: var(--gr-ink); }
+  .ledger .n { font-family: var(--gr-mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; color: var(--gr-ink); padding-right: 0; }
+  .how .ledger__note { font: 400 12px/1.65 var(--gr-mono); color: var(--gr-ink-2); margin: .9rem 0 0; text-wrap: pretty; }
+  @media (max-width: 900px) { .how { grid-template-columns: 1fr; } }
 </style>
 
 <div class="shell">
@@ -436,7 +487,9 @@
       Design the brand. Build the pipeline that renders in it. Publish on a schedule with
       nobody in the loop. Those three usually belong to three different people. I do all
       three, in text, images and video, on work that shipped and that other people used.
-      Four of them are below, then the smaller things I keep building.
+      <b>Since 2025 I build it with AI, in Claude Code</b>, and every piece below says
+      exactly how. Two builds with live pages of their own come first, then four case
+      studies, then the smaller things I keep building.
     </p>
 
         <div class="stats">
@@ -457,6 +510,58 @@
       </div>
     </div>
   </section>
+
+  <div class="sec-head">
+    <h2 class="display">Builds</h2>
+    <span class="rule"></span>
+    <p>Live pages, kept up to date</p>
+  </div>
+
+  <div class="builds">
+    <a class="bd" href="builds/foot-stomper/" style="--c: var(--gr-accent-4)">
+      <div class="plate"><div class="plate__frame"><img loading="lazy" decoding="async" src="{{IMG:build-stomper}}" width="700" height="560" alt="Colin's legs at a gig, right shoe on a small wooden stomp box, weight on the left leg, a mic stand beside him."></div></div>
+      <span class="cr__cat">Music hardware &middot; August 2026</span>
+      <h3>Foot Stomper</h3>
+      <p>A kick drum I wear on my foot, because the stomp box in this picture was wrecking my hip. An accelerometer on the instep feels a tap or a stomp and sends a bass drum over Bluetooth MIDI. It catches 39 of 40 taps with zero false triggers, measured, and it's still on the bench.</p>
+      <span class="bd__go">Read the build &rarr;</span>
+    </a>
+    <a class="bd" href="builds/gig-splitter/" style="--c: var(--gr-accent-1)">
+      <div class="plate"><div class="plate__frame"><img loading="lazy" decoding="async" src="{{IMG:build-splitter}}" width="1080" height="860" alt="Colin playing acoustic guitar at a mic in a bright function room, filmed from the phone clipped to his speaker stand."></div></div>
+      <span class="cr__cat">Music and AI &middot; May 2026</span>
+      <h3>Gig Splitter</h3>
+      <p>Two hours of gig video in, a captioned reel per song out, named by what I played. Loudness finds the songs, Whisper hears the lyrics, Claude names the song, and the most repeated line picks the chorus. Run on six gigs, and the page shows where it still breaks.</p>
+      <span class="bd__go">Read the build &rarr;</span>
+    </a>
+  </div>
+
+  <div class="sec-head">
+    <h2 class="display">How I build</h2>
+    <span class="rule"></span>
+    <p>With AI, on the record</p>
+  </div>
+
+  <div class="how">
+    <div>
+      <p class="how__lead">I build in Claude Code, Anthropic's coding agent in the terminal. It writes most of the code. I decide what gets built, write the spec first, and do the measuring, because an agent can't wear a sensor on its foot or stand in front of a room with a guitar.</p>
+      <p>The pattern is the same every time. <b>A spec and a CLAUDE.md</b> so the agent knows the rules before it writes a line. <b>Work in phases</b>, each with a status file that says what is done and what isn't. <b>Real data first</b>, a whole gig recording or a session of accelerometer captures, so every change gets tested against the real thing rather than my memory of it. And <b>every commit carries Claude as a co-author</b>, which is why I can give you the numbers beside this.</p>
+      <p>How a thing is built is a separate question from whether it uses AI when it runs, so each piece says both. The gig splitter uses Whisper and Claude every time it runs. The foot stomper uses none: it's firmware, a threshold and a timer.</p>
+    </div>
+    <div>
+      <table class="ledger">
+        <thead><tr><th scope="col">Build</th><th scope="col" class="n">Commits with Claude</th></tr></thead>
+        <tbody>
+          <tr><td>Foot Stomper</td><td class="n">34 of 34</td></tr>
+          <tr><td>Gig Splitter</td><td class="n">17 of 17</td></tr>
+          <tr><td>Lake Country Zoning</td><td class="n">29 of 30</td></tr>
+          <tr><td>This portfolio</td><td class="n">every one</td></tr>
+          <tr><td>Home network checkup</td><td class="n">13 of 17</td></tr>
+          <tr><td>Gig Pulse</td><td class="n">7 of 15</td></tr>
+          <tr><td>Safe Family Internet site</td><td class="n">8 of 29</td></tr>
+        </tbody>
+      </table>
+      <p class="ledger__note">Counted from each project's git history, 10 Sep 2026. The foot stomper's first six firmware versions came out of a single claude.ai conversation, the night before the repository existed. Advisor Assist and Wines of the Okanagan were built in 2022 and 2023, before Claude Code, and Set List Easy was built without it.</p>
+    </div>
+  </div>
 
   <div class="sec-head">
     <h2 class="display">Selected work</h2>
@@ -526,6 +631,7 @@
         </div>
         </div>
         <dl class="facts">
+          <div class="fact"><dt>AI</dt><dd>Built in 2022 and 2023, before Claude Code existed.</dd></div>
           <div class="fact"><dt>Role</dt><dd>Built the product. A partner brought the advisor relationships.</dd></div>
           <div class="fact"><dt>Decision</dt><dd>Copy was generated <b>in batch, against a calendar</b>, rather than per post at publish time. It cost a month of lead time and it is why the pipeline could run for every advisor every month without a model in the hot path.</dd></div>
           <div class="fact"><dt>Status</dt><dd>Ran live, posting to advisors' own feeds on a schedule.</dd></div>
@@ -589,6 +695,7 @@
         </div>
         </div>
         <dl class="facts">
+          <div class="fact"><dt>AI</dt><dd>Built in 2023, before Claude Code existed.</dd></div>
           <div class="fact"><dt>Role</dt><dd>Everything. Brand, scraper, templates, generation, scheduling, both accounts.</dd></div>
           <div class="fact"><dt>Decision</dt><dd>Every field on the card is a <b>named layer</b> rather than baked into the artwork. It costs more up front, and it is the reason a new kind of post was a new template rather than a new build.</dd></div>
         </dl>
@@ -677,6 +784,7 @@
         </div>
         </div>
         <dl class="facts">
+          <div class="fact"><dt>AI</dt><dd>Built mostly in Claude Code. The carousel maker runs as a Claude Code skill: type the words, get the slides.</dd></div>
           <div class="fact"><dt>Role</dt><dd>Everything. Brand, copy, design, build, deploy, and the talk it all supports.</dd></div>
           <div class="fact"><dt>Result</dt><dd><b>260 sign-ups claimed every seat</b>, 38 more on the waitlist, and 48 households ran a home network checkup. Covered by CBC Daybreak and AM1150.</dd></div>
         </dl>
@@ -692,7 +800,7 @@
         <span class="piece__cat">Video pipeline</span>
       </div>
       <div>
-        <h3>Colin Calnan Music<span class="golinks"><a class="golink" href="https://www.instagram.com/colincalnanmusic" rel="noopener" aria-label="Opens instagram.com/colincalnanmusic in a new tab" title="instagram.com/colincalnanmusic" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
+        <h3>Colin Calnan Music<span class="golinks"><a class="golink golink--wide" href="builds/gig-splitter/" aria-label="Opens the Gig Splitter build page" title="Gig Splitter build page"><span class="golink__t">Build</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a><a class="golink" href="https://www.instagram.com/colincalnanmusic" rel="noopener" aria-label="Opens instagram.com/colincalnanmusic in a new tab" title="instagram.com/colincalnanmusic" target="_blank"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></span></h3>
         <p class="piece__one">A two hour recording of a gig goes in on Saturday morning. Twenty three captioned clips come out, named after the songs, ready to post.</p>
         <figure class="plate plate--lead">
           <div class="plate__frame"><button type="button" class="zoom" data-cap="Three frames from cut reels, each from a different gig: a covered winery patio, a barn door open onto a vineyard, and a sunlit courtyard. Same setup every time, one phone on a stand." aria-label="Open full size"><img loading="lazy" decoding="async" src="{{IMG:gig-reels}}" alt="Three frames from cut reels, each from a different gig: a covered winery patio, a barn door open onto a vineyard, and a sunlit courtyard. Same setup every time, one phone on a stand." width="2057" height="1200"></button></div>
@@ -750,6 +858,7 @@
         </div>
         </div>
         <dl class="facts">
+          <div class="fact"><dt>AI</dt><dd>Built in Claude Code, <b>17 of 17 commits</b>. When it runs, Whisper hears the lyrics and Claude names the song. Finding the songs and the chorus is plain code.</dd></div>
           <div class="fact"><dt>Role</dt><dd>Everything, and I am the only user. Every decision got tested at a real gig that week.</dd></div>
           <div class="fact"><dt>Decision</dt><dd>It finds songs from <b>loudness alone</b>, not from listening to the words. Cruder, and it means it works on a talk, a set, or anything else with pauses in it, for nothing per run.</dd></div>
         </dl>

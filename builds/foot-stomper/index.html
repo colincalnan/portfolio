@@ -247,6 +247,22 @@ s-&gt;baseline += c-&gt;baseline_alpha * (mag - s-&gt;baseline);
 
   <hr>
 
+  <section class="sec" aria-labelledby="ai">
+    <p class="kicker">How AI was used</p>
+    <div class="body">
+      <h2 class="display" id="ai">Claude wrote the code. I wore the sensor.</h2>
+      <ul class="items">
+        <li><h3>The first night, in a chat</h3><p>Versions 1.0 to 1.6 came out of one claude.ai conversation on 27 August. Each version was downloaded straight from the chat, flashed to the board, and what the board did went back into the conversation for the next one. Two crash loops later, v1.4 worked.</p></li>
+        <li><h3>Then a real project, in Claude Code</h3><p>On 28 August it became a repository run spec-first in Claude Code: a CLAUDE.md with the rules, a spec and a status file for each phase, and a reproducible build from the command line. All 34 commits carry Claude as co-author.</p></li>
+        <li><h3>Real data, so changes get tested on real feet</h3><p>I recorded the accelerometer with the board on my foot: taps, stomps, shuffling and walking. A replay harness runs the detector over those recordings on the laptop, so a change can be checked against real movement without strapping it on every time. The chart above comes from those files.</p></li>
+        <li><h3>What stayed mine</h3><p>What it's for, what counts as a miss or a false trigger, wearing it, and recording every capture. An agent can write a detector. It can't stand on a stage in the thing.</p></li>
+        <li><h3>AI when it runs</h3><p>None. It's firmware on a small chip: a baseline, a threshold and a timer.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <hr>
+
   <section class="sec" aria-labelledby="hard">
     <p class="kicker">The hard parts</p>
     <div class="body">
