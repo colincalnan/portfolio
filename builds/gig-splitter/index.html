@@ -116,7 +116,7 @@ song_26_ABBA_-_Dancing_Queen_reel.mp4</pre>
     <div class="body">
       <h2 class="display" id="ai">Built with Claude, and runs on it too.</h2>
       <ul class="items">
-        <li><h3>Built in Claude Code</h3><p>All 17 commits carry Claude as co-author, from the first one on 9 May, the night it was built.</p></li>
+        <li><h3>Built in Claude Code</h3><p>All 17 commits carry Claude as co-author, from the first one on 9 May, the night it was built. It came before I packaged the method as my <a href="https://github.com/colincalnan/sdd" rel="noopener" target="_blank">spec-driven development skill</a>, so there's no specs folder behind this one.</p></li>
         <li><h3>A model that listens</h3><p>Whisper transcribes a minute of each song to identify it, and a 90-second window with word timings to find the chorus and time the captions.</p></li>
         <li><h3>A model that names the song</h3><p>Claude Sonnet gets the garbled lyrics, is told the words will be wrong but the phrases close, and answers in one fixed format. That format is also where the "Stand By Me" bug comes from.</p></li>
         <li><h3>Plain code where plain code is enough</h3><p>Finding the songs is loudness and a threshold. Finding the chorus is counting repeated phrases. No model in either, so they're free, fast and predictable.</p></li>

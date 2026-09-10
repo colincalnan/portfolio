@@ -765,6 +765,10 @@ img { display: block; max-width: 100%; height: auto; }
   .ledger td:first-child { color: var(--gr-ink); }
   .ledger .n { font-family: var(--gr-mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; color: var(--gr-ink); padding-right: 0; }
   .how .ledger__note { font: 400 12px/1.65 var(--gr-mono); color: var(--gr-ink-2); margin: .9rem 0 0; text-wrap: pretty; }
+  .how__specs { border: 1px solid var(--gr-rule); background: var(--gr-ground-2); margin: 0 0 1.4rem; }
+  .how .how__specs-head { font: 500 11.5px/1.4 var(--gr-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gr-ink-2); margin: 0; padding: .7rem 1rem; border-bottom: 1px solid var(--gr-rule-soft); }
+  .how__specs pre { margin: 0; padding: .9rem 1rem 1rem; font: 400 13px/1.65 var(--gr-mono); color: var(--gr-ink); overflow-x: auto; }
+  .how a { color: var(--gr-accent-1); }
   @media (max-width: 900px) { .how { grid-template-columns: 1fr; } }
 </style>
 
@@ -785,7 +789,7 @@ img { display: block; max-width: 100%; height: auto; }
       Design the brand. Build the pipeline that renders in it. Publish on a schedule with
       nobody in the loop. Those three usually belong to three different people. I do all
       three, in text, images and video, on work that shipped and that other people used.
-      <b>Since 2025 I build it with AI, in Claude Code</b>, and every piece below says
+      <b>I build with AI coding agents, spec first</b>, and every piece below says
       exactly how. Two builds with live pages of their own come first, then four case
       studies, then the smaller things I keep building.
     </p>
@@ -835,29 +839,46 @@ img { display: block; max-width: 100%; height: auto; }
   <div class="sec-head">
     <h2 class="display">How I build</h2>
     <span class="rule"></span>
-    <p>With AI, on the record</p>
+    <p>Spec-driven, with AI, on the record</p>
   </div>
 
   <div class="how">
     <div>
-      <p class="how__lead">I build in Claude Code, Anthropic's coding agent in the terminal. It writes most of the code. I decide what gets built, write the spec first, and do the measuring, because an agent can't wear a sensor on its foot or stand in front of a room with a guitar.</p>
-      <p>The pattern is the same every time. <b>A spec and a CLAUDE.md</b> so the agent knows the rules before it writes a line. <b>Work in phases</b>, each with a status file that says what is done and what isn't. <b>Real data first</b>, a whole gig recording or a session of accelerometer captures, so every change gets tested against the real thing rather than my memory of it. And <b>every commit carries Claude as a co-author</b>, which is why I can give you the numbers beside this.</p>
-      <p>How a thing is built is a separate question from whether it uses AI when it runs, so each piece says both. The gig splitter uses Whisper and Claude every time it runs. The foot stomper uses none: it's firmware, a threshold and a timer.</p>
+      <p class="how__lead">I build with spec-driven development. I packaged the method as a skill any coding agent can run, and it's public: <a href="https://github.com/colincalnan/sdd" rel="noopener" target="_blank">github.com/colincalnan/sdd</a>. The agent writes most of the code. I own what gets built and what counts as done.</p>
+      <p><b>A constitution before any code.</b> Every repo starts with a mission (what it is, who it's for, how we'll know it worked), a tech stack with the rules the agent must never break, and a roadmap of phases that each ship on their own.</p>
+      <p><b>An intent interview before every phase.</b> What's wanted, the constraints, what failure looks like, what success looks like, and what it touches. If any of the five is missing the agent stops and asks, rather than filling the gap with a guess.</p>
+      <p><b>A dated spec, then the code.</b> Requirements, a plan in task groups, and a validation file that says how done gets proven, with checks the agent can run itself. Done means validated, not merely written. The rule underneath all of it: I stay in the loop the whole way, rather than turning up at the end to approve a diff.</p>
+      <p>How a thing is built is a separate question from whether it uses AI when it runs, so each piece says both. The gig splitter runs Whisper and Claude every time. The foot stomper runs none: it's firmware, a threshold and a timer.</p>
     </div>
     <div>
+      <div class="how__specs">
+        <p class="how__specs-head">Foot Stomper, the specs folder</p>
+<pre>specs/
+  mission.md
+  tech-stack.md
+  roadmap.md
+  method.md
+  2026-08-28-project-scaffold/
+  2026-08-28-sampling-and-power/
+  2026-08-31-adaptive-detection/
+    requirements.md
+    plan.md
+    validation.md
+    STATUS.md</pre>
+      </div>
       <table class="ledger">
-        <thead><tr><th scope="col">Build</th><th scope="col" class="n">Commits with Claude</th></tr></thead>
+        <thead><tr><th scope="col">Build</th><th scope="col">Built with</th></tr></thead>
         <tbody>
-          <tr><td>Foot Stomper</td><td class="n">34 of 34</td></tr>
-          <tr><td>Gig Splitter</td><td class="n">17 of 17</td></tr>
-          <tr><td>Lake Country Zoning</td><td class="n">29 of 30</td></tr>
-          <tr><td>This portfolio</td><td class="n">every one</td></tr>
-          <tr><td>Home network checkup</td><td class="n">13 of 17</td></tr>
-          <tr><td>Gig Pulse</td><td class="n">7 of 15</td></tr>
-          <tr><td>Safe Family Internet site</td><td class="n">8 of 29</td></tr>
+          <tr><td>Foot Stomper</td><td>Claude Code and the SDD skill, 34 of 34 commits co-authored</td></tr>
+          <tr><td>Gig Splitter</td><td>Claude Code, 17 of 17, before SDD was a skill</td></tr>
+          <tr><td>Lake Country Zoning</td><td>Claude Code, 29 of 30</td></tr>
+          <tr><td>Home network checkup</td><td>Claude Code, 13 of 17</td></tr>
+          <tr><td>This portfolio</td><td>Claude Code, every commit</td></tr>
+          <tr><td>Gig Pulse</td><td>VS Code with GitHub Copilot</td></tr>
+          <tr><td>Set List Easy</td><td>VS Code with GitHub Copilot</td></tr>
         </tbody>
       </table>
-      <p class="ledger__note">Counted from each project's git history, 10 Sep 2026. The foot stomper's first six firmware versions came out of a single claude.ai conversation, the night before the repository existed. Advisor Assist and Wines of the Okanagan were built in 2022 and 2023, before Claude Code, and Set List Easy was built without it.</p>
+      <p class="ledger__note">Commit counts from each project's git history, 10 Sep 2026. The foot stomper's first six firmware versions came out of one claude.ai conversation, the night before the repository existed. Advisor Assist and Wines of the Okanagan were built in 2022 and 2023, before any of these tools.</p>
     </div>
   </div>
 
@@ -1082,7 +1103,7 @@ img { display: block; max-width: 100%; height: auto; }
         </div>
         </div>
         <dl class="facts">
-          <div class="fact"><dt>AI</dt><dd>Built mostly in Claude Code. The carousel maker runs as a Claude Code skill: type the words, get the slides.</dd></div>
+          <div class="fact"><dt>AI</dt><dd>Built with Claude Code alongside other tools. The carousel maker runs as a Claude Code skill: type the words, get the slides.</dd></div>
           <div class="fact"><dt>Role</dt><dd>Everything. Brand, copy, design, build, deploy, and the talk it all supports.</dd></div>
           <div class="fact"><dt>Result</dt><dd><b>260 sign-ups claimed every seat</b>, 38 more on the waitlist, and 48 households ran a home network checkup. Covered by CBC Daybreak and AM1150.</dd></div>
         </dl>
