@@ -27,6 +27,10 @@
     </dl>
     <div class="pair">
       <figure class="plate">
+        <div class="plate__frame"><video id="tapping" src="media/tapping.mp4" poster="media/tapping-poster.jpg" width="720" height="1280" controls playsinline muted loop preload="metadata" aria-label="Colin tapping the armed foot stomper on his desk. The tap counter on its screen climbs from 44 to 54, and each tap plays a kick drum."></video></div>
+        <figcaption>Armed and counting. Every tap is a kick, and the counter climbs from 44 to 54. Unmute for the drum, which is coming out of a phone speaker here, so it sounds rougher than it does through the PA.</figcaption>
+      </figure>
+      <figure class="plate">
         <div class="plate__frame"><img src="media/device-pairing.jpg" width="1200" height="1200" alt="The foot stomper held in Colin's fingers, a small grey M5StickS3 with a blue button, its screen reading FOOT TRIG, PAIRING in yellow, and a tap counter at 0."></div>
         <figcaption>Pairing. It advertises itself as FootTrigger and waits for the iPad. Counter at zero.</figcaption>
       </figure>
@@ -336,5 +340,15 @@ s-&gt;baseline += c-&gt;baseline_alpha * (mag - s-&gt;baseline);
   </footer>
 
 </main>
+<script>
+(function () {
+  var v = document.getElementById("tapping");
+  if (!v || !window.matchMedia) return;
+  if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+    var p = v.play();
+    if (p && p.catch) p.catch(function () {});
+  }
+})();
+</script>
 </body>
 </html>
