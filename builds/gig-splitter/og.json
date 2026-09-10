@@ -1,14 +1,18 @@
 {
+  "page_title": "Gig Splitter: two-hour gig videos into reels | Colin Calnan",
+  "description": "One command turns a full gig recording into a file per song and a captioned 30-second chorus reel, named by Whisper and Claude.",
   "title": "Gig Splitter",
   "kicker": "Build / music and AI",
   "sub": "Two hours of gig video in. A captioned reel per song out, named by what I played.",
+  "cta": "Read the build",
   "stack": "Python · Whisper · Claude · ffmpeg",
-  "status": "Running, six gigs so far",
-  "live": true,
-  "image": "../../assets/build-splitter.jpg",
-  "position": "60% 40%",
   "method": [
     "Built with Claude Code",
     ""
-  ]
+  ],
+  "status": "Running, six gigs so far",
+  "live": true,
+  "image": "../../assets/build-splitter.jpg",
+  "image_alt": "The Gig Splitter card: Colin playing guitar at Predator Ridge beside the title and a Read the build button.",
+  "position": "60% 40%"
 }

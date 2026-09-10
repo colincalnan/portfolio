@@ -1,14 +1,18 @@
 {
+  "page_title": "Foot Stomper: a kick drum I wear on my foot | Colin Calnan",
+  "description": "An M5StickS3 on the instep feels a tap or a stomp and sends a kick drum over Bluetooth MIDI. Measured on real captures, built spec first.",
   "title": "Foot Stomper",
   "kicker": "Build / music hardware",
   "sub": "A kick drum I wear on my foot. Tap or stomp, and a bass drum plays through the PA.",
+  "cta": "Read the build",
   "stack": "ESP32-S3 · Accelerometer · Bluetooth MIDI",
+  "method": [
+    "Spec first",
+    ", Claude Code"
+  ],
   "status": "Bench-proven, not played live yet",
   "live": false,
   "image": "media/device-armed.jpg",
-  "position": "50% 45%",
-  "method": [
-    "Spec first",
-    ", built with Claude Code"
-  ]
+  "image_alt": "The Foot Stomper card: the device in hand, screen reading FOOT TRIG, ARMED, beside the title and a Read the build button.",
+  "position": "50% 45%"
 }
