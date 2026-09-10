@@ -9,11 +9,11 @@
   body { width: 1200px; height: 630px; overflow: hidden; }
   .card {
     width: 1200px; height: 630px; box-sizing: border-box;
-    padding: 72px 80px; display: flex; flex-direction: column;
+    padding: 60px 80px 56px; display: flex; flex-direction: column;
     justify-content: space-between; background: var(--gr-ground);
   }
-  .band { height: 16px; background: var(--gr-blocks); margin-bottom: 56px; }
-  .id { display: flex; gap: 28px; align-items: baseline; margin-bottom: 34px; }
+  .band { height: 16px; background: var(--gr-blocks); margin-bottom: 44px; }
+  .id { display: flex; gap: 28px; align-items: baseline; margin-bottom: 28px; }
   .id b { font: 600 19px/1 var(--gr-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gr-ink); }
   .id span { font: 500 16px/1 var(--gr-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--gr-muted); }
   h1 {
@@ -24,7 +24,15 @@
   h1 span { color: var(--gr-muted); }
   .sub {
     font-size: 25px; line-height: 1.42; color: var(--gr-ink-2);
-    margin: 34px 0 0; max-width: 24ch;
+    margin: 30px 0 0;
+  }
+  /* The call to action, as a Bold Talks yellow label box. Link inspectors and
+     people both look for one on the image. */
+  .cta {
+    display: inline-flex; align-items: center; gap: 14px; margin-top: 30px;
+    background: var(--gr-warm); color: var(--gr-ground);
+    font: 700 18px/1 var(--gr-mono); letter-spacing: .12em; text-transform: uppercase;
+    padding: 17px 22px;
   }
   .foot {
     display: flex; justify-content: space-between; align-items: flex-end;
@@ -39,6 +47,7 @@
     <div class="id"><b>Colin Calnan</b><span>Selected work</span></div>
     <h1>I build the machine,<br><span>not the posts.</span></h1>
     <p class="sub">Design the brand. Build the pipeline that renders in it. Publish with nobody in the loop.</p>
+    <div class="cta">See the work &rarr;</div>
   </div>
   <div class="foot">
     <span>colincalnan.github.io/portfolio</span>

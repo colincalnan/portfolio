@@ -1,0 +1,18 @@
+{
+  "page_title": "Bold Talks: the design system my agents use | Colin Calnan",
+  "description": "Inspired by Shawn Kanungo's slides and Vercel's design.md: the design system an AI agent reads before building any page of mine.",
+  "title": "Bold Talks",
+  "kicker": "Build / design system",
+  "sub": "The design system my agents read before they build. Pages in minutes, not hours.",
+  "cta": "Read the build",
+  "stack": "design.md · Tokens · Themes · Claude Code",
+  "method": [
+    "Designed with AI",
+    ""
+  ],
+  "status": "In use on every page I publish",
+  "live": true,
+  "image": "media/in-use-teal.jpg",
+  "image_alt": "The Bold Talks card: a light card with the title, a Read the build button, and a screenshot of a teal build page made with the system.",
+  "position": "0% 0%"
+}
